@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <table id="tabella"></table>
+  <script>
+        var ctr=0;
+        var i=0;
+        var j=0;
+        var somma="";
+        
+        var m= new Array();
+        for(i=0;i<10;i++){
+            m[i]=new Array();
+        }
+        
+        for(i=0;i<10;i++){
+            for(j=0;j<10;j++){
+                m[i][j]=parseInt(Math.random()*2);
+            }
+        }
+        
+        for(i=0;i<10;i++){
+            somma+="<tr>";
+            for(j=0;j<10;j++){
+                somma+="<td style=\"padding:5px;\"onclick=\"colora(";
+                somma+=ctr;
+                somma+=") id=\"";
+                somma+=ctr
+                somma+="\">";
+                somma+=m[i][j];
+                somma+="</td>";
+                ctr++;
+            }
+            somma+="</tr>";
+        }
+        document.getElementById("tabella").innerHTML=somma;
+        
+        function colora(ctr){
+            document.getElementById(ctr).style.backgroundcolor="red";
+        }
+  </script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<title>matrice</title>
+		<style>
+			td{
+				width:50px;
+				height:50px;
+				text-align:center;
+			}
+		
+		
+		
+		</style>
+	</head>
+	<body>
+		<h1>MATRICE</h1>
+		Inserire dimensione matrice:
+		<input type="number" name="dimensione" id="numero"></input>
+		<button id="button" onclick="carica()">Carica</button>
+		<button id="button" onclick="visualizza()">Visualizza</button><br>
+		 <h2>Colore tabella</h2>
+		 
+		 <FORM name="arcobaleno">
+			<input type="radio" name="colore" id="rosso" value="red"></input>
+			<label for="rosso">Rosso</label><BR>
+			<input type="radio" name="colore" id="verde" value="green"></input>
+			<label for="verde">Verde</label><BR>
+			<input type="radio" name="colore" id="blu" value="blue"></input>
+			<label for="blu">Verde</label><BR>
+		</FORM>
+		<button onclick="cambiacolore()" id="button">CambiaColore</button>
+		
+		<p id="stampa"></p>
+		<script>
+		
+			var m = new Array();
+			var i,j;
+			var dimensione;
+			function carica(){
+				dimensione = document.getElementById("numero").value;
+				for(i=0;i<dimensione;i++){
+					m[i] = new Array();	
+				}
+				for(i=0;i<dimensione;i++){
+					for(j=0;j<dimensione;j++){
+						m[i][j] = parseInt(Math.random() * 101 + 0);
+					}
+				}
+			}
+			function visualizza(){
+				var temp="";
+				temp+="<table border=1px solid black id=\"vecione\">";
+				for(i=0;i<dimensione;i++){
+					temp+="<tr>"
+					for(j=0;j<dimensione;j++){
+						temp+="<td>"+m[i][j]+"</td>"
+					}
+					temp+="</tr>"
+				}
+				temp+="</table>"
+				document.getElementById("stampa").innerHTML = temp;
+			}
+			function cambiacolore(){
+				var color = document.forms.arcobaleno.colore.value;
+				console.log(color);
+				document.getElementById("vecione").style.backgroundColor=color;
+			
+			}
+			
+		
+		</script>
+	</body>
+</html>
