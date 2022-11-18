@@ -12,37 +12,43 @@
     <label for="Modello">Marca</label>
     <input id="Modello" type="text">
     
+    <table>
+      <tr>
+        <td>
+        <br/>
+        Modello<br/></td>
+        <td><input name="marca" id="marca_fiat" type="radio" value="Fiat"></td>
+        <td><label for="marca_fiat">Fiat<br/></label></td>
+        <td><input name="marca" id="marca_lancia" type="radio" value="Lancia"></td>
+        <td><label for="marca_lancia">Lancia<br/></label></td>
+        <td><input name="marca" id="marca_alfa_romeo" type="radio" value="Alfa Romeo"></td>
+        <td><label for="marca_alfa_romeo">Alfa Romeo<br/></label></td>
+      </tr>
+      <tr>
+        <br/>
+        Alimentazione<br/>
+        <input name="alimentazione" id="alimentazione_elettrica" value="elettrica" type="radio">
+        <label for="alimentazione_elettrica">elettrica<br/></label>
+        <input name="alimentazione" id="alimentazione_diesel" value="diesel" type="radio">
+        <label for="alimentazione_diesel">diesel<br/></label>
+        <input name="alimentazione" id="alimentazione_benzina" value="benzina" type="radio">
+        <label for="alimentazione_benzina">benzina<br/></label>
+        <input name="alimentazione" id="alimentazione_gpl" value="gpl" type="radio">
+        <label for="alimentazione_gpl">gpl<br/></label>
+      </tr>
     <br/>
-    Modello
-    <input name="marca" id="marca_fiat" type="radio" value="Fiat">
-    <label for="marca_fiat">Fiat</label>
-    <input name="marca" id="marca_lancia" type="radio" value="Lancia">
-    <label for="marca_lancia">Lancia</label>
-    <input name="marca" id="marca_alfa_romeo" type="radio" value="Alfa Romeo">
-    <label for="marca_alfa_romeo">Alfa Romeo</label>
-
-    <br/>
-    Alimentazione
-    <input name="alimentazione" id="alimentazione_elettrica" value="elettrica" type="radio">
-    <label for="alimentazione_elettrica">elettrica</label>
-    <input name="alimentazione" id="alimentazione_diesel" value="diesel" type="radio">
-    <label for="alimentazione_diesel">diesel</label>
-    <input name="alimentazione" id="alimentazione_benzina" value="benzina" type="radio">
-    <label for="alimentazione_benzina">benzina</label>
-    <input name="alimentazione" id="alimentazione_gpl" value="gpl" type="radio">
-    <label for="alimentazione_gpl">gpl</label>
-
-    <br/>
-    Colore
+    Colore<br/>
     <input name="colore" id="colore_bianco" value="bianco" type="radio">
-    <label for="colore_bianco">bianco</label>
+    <label for="colore_bianco">bianco<br/></label>
     <input name="colore" id="colore_nero" value="nero" type="radio">
-    <label for="colore_nero">nero</label>
+    <label for="colore_nero">nero<br/></label>
     <input name="colore" id="colore_rosso" value="rosso" type="radio">
-    <label for="colore_rosso">rosso</label>
+    <label for="colore_rosso">rosso<br/></label>
     <input name="colore" id="colore_grigio" value="grigio" type="radio">
-    <label for="colore_grigio">grigio</label>
-  </div>
+    <label for="colore_grigio">grigio<br/></label>
+
+    </tr>
+  </table>
   <br/>
   <input type="button" value="visualizzare" id="button_visualizza" onclick="visualizzare()">
   <div id="visualizzazione">
