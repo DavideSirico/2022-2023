@@ -14,7 +14,5 @@ class Maiuscolo{
             }
             somma += numero;
         }
-
     }
-
 }
