@@ -8,6 +8,13 @@ ai fini di debug si consiglia di visualizzare nella console del browser il conte
 <html>
   <head>
     <title>scacchiera</title>
+    <style>
+      td{
+        cursor: pointer;
+        width: 10px;
+        height: 10px;
+      }
+    </style>
   </head>
   <body>
     <div id="tabella">
@@ -23,9 +30,11 @@ ai fini di debug si consiglia di visualizzare nella console del browser il conte
       {
         for( let j = 0; j < m[0].length; j++)
         {
-          m[i][j] = 0;
+          m[i][j] = parseInt(Math.random()*2);
         }
       }
+
+      
 
       var dummy = "<table border=\"solid black 1px\">";
       for ( let i = 0; i < m.length; i++)
@@ -38,7 +47,11 @@ ai fini di debug si consiglia di visualizzare nella console del browser il conte
           dummy += i;
           dummy += ",";
           dummy += j;
-          dummy += ")\" bgcolor = \"white\">";
+          dummy += ")\" bgcolor = \"";
+          if(m[i][j] == 1)
+            dummy += "black\">";
+          else
+            dummy += "white\">"; 
         }
         dummy += "</tr>";
       }

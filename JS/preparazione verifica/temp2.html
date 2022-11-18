@@ -24,9 +24,9 @@
             for(j=0;j<10;j++){
                 somma+="<td style=\"padding:5px;\"onclick=\"colora(";
                 somma+=ctr;
-                somma+=") id=\"";
+                somma+=')\" id="';
                 somma+=ctr
-                somma+="\">";
+                somma+='">';
                 somma+=m[i][j];
                 somma+="</td>";
                 ctr++;
@@ -36,8 +36,16 @@
         document.getElementById("tabella").innerHTML=somma;
         
         function colora(ctr){
-            document.getElementById(ctr).style.backgroundcolor="red";
+            ctr = String(ctr);
+            document.getElementById(ctr).style.backgroundColor="red";
         }
-  </script>
+        
+        </script>
+        <style>
+            td{
+                cursor: pointer;
+            }
+        </style>
+  
   </body>
 </html>
