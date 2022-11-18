@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>auto</title>
+</head>
+
+<body>
+  <h1>Auto</h1>
+  <div id="inserimento">
+
+    <label for="Modello">Marca</label>
+    <input id="Modello" type="text">
+    
+    <br/>
+    Modello
+    <input name="marca" id="marca_fiat" type="radio" value="Fiat">
+    <label for="marca_fiat">Fiat</label>
+    <input name="marca" id="marca_lancia" type="radio" value="Lancia">
+    <label for="marca_lancia">Lancia</label>
+    <input name="marca" id="marca_alfa_romeo" type="radio" value="Alfa Romeo">
+    <label for="marca_alfa_romeo">Alfa Romeo</label>
+
+    <br/>
+    Alimentazione
+    <input name="alimentazione" id="alimentazione_elettrica" value="elettrica" type="radio">
+    <label for="alimentazione_elettrica">elettrica</label>
+    <input name="alimentazione" id="alimentazione_diesel" value="diesel" type="radio">
+    <label for="alimentazione_diesel">diesel</label>
+    <input name="alimentazione" id="alimentazione_benzina" value="benzina" type="radio">
+    <label for="alimentazione_benzina">benzina</label>
+    <input name="alimentazione" id="alimentazione_gpl" value="gpl" type="radio">
+    <label for="alimentazione_gpl">gpl</label>
+
+    <br/>
+    Colore
+    <input name="colore" id="colore_bianco" value="bianco" type="radio">
+    <label for="colore_bianco">bianco</label>
+    <input name="colore" id="colore_nero" value="nero" type="radio">
+    <label for="colore_nero">nero</label>
+    <input name="colore" id="colore_rosso" value="rosso" type="radio">
+    <label for="colore_rosso">rosso</label>
+    <input name="colore" id="colore_grigio" value="grigio" type="radio">
+    <label for="colore_grigio">grigio</label>
+  </div>
+  <br/>
+  <input type="button" value="visualizzare" id="button_visualizza" onclick="visualizzare()">
+  <div id="visualizzazione">
+    
+  </div>
+  <script>
+    function visualizzare()
+    {
+      let modello = document.getElementById("Modello").value;
+      let marca = checked_marca();
+      let alimentazione = checked_alimentazione();
+      let colore = checked_colore();
+      document.getElementById("visualizzazione").innerHTML = marca + " " + modello + " " + alimentazione + " di colore " + colore;
+    }
+    function checked_marca()
+    {
+      let marca = document.getElementsByName("marca");
+      for(let i = 0; i < marca.length; i++)
+      {
+        if(marca[i].checked)
+        {
+          return marca[i].value;
+        }
+      }
+    }
+    function checked_alimentazione()
+    {
+      let alimentazione = document.getElementsByName("alimentazione");
+      for(let i = 0; i < alimentazione.length; i++)
+      {
+        if(alimentazione[i].checked)
+        {
+          return alimentazione[i].value;
+        }
+      }
+    }
+    function checked_colore()
+    {
+      let colore = document.getElementsByName("colore");
+      for(let i = 0; i < colore.length; i++)
+      {
+        if(colore[i].checked)
+        {
+          return colore[i].value;
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!-- create una matrice 10X10 in JS
+inizializzata random con 0 e 1
+-A video visualizzare una tabella HTML 10X10 quadrata di caselle bianche
+-Facendo click su una casella la casella diventerà nera solo se il suo corrispondente valore in matrice e’ uguale a 1
+PS
+ai fini di debug si consiglia di visualizzare nella console del browser il contenuto della matrice js -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>scacchiera</title>
+  </head>
+  <body>
+    <div id="tabella">
+    </div>
+    <script>
+      //create a matrix 10x10
+      const DIM = 10;
+      let m = new Array(DIM);
+      for (let i = 0; i < m.length; i++) {
+        m[i] = new Array(DIM);
+      }
+      for( let i = 0; i < m.length; i++)
+      {
+        for( let j = 0; j < m[0].length; j++)
+        {
+          m[i][j] = 0;
+        }
+      }
+
+      var dummy = "<table border=\"solid black 1px\">";
+      for ( let i = 0; i < m.length; i++)
+      {
+        dummy += "<tr>";
+        for( let j = 0; j < m[0].length; j++)
+        {
+          dummy += "<td";
+          dummy += " onclick=\"changeM(";
+          dummy += i;
+          dummy += ",";
+          dummy += j;
+          dummy += ")\" bgcolor = \"white\">";
+        }
+        dummy += "</tr>";
+      }
+      dummy += "</table>";
+
+      document.getElementById("tabella").innerHTML = dummy;
+      function changeM(i,j)
+      {
+        if(m[i][j] == 0)
+        {
+          m[i][j] = 1;
+          document.getElementsByTagName("td")[i*10+j].style.backgroundColor = "black";
+        } else {
+          m[i][j] = 0;
+          document.getElementsByTagName("td")[i*10+j].style.backgroundColor = "white";
+        }
+        console.table(m);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+STARTPGM = 0xee00
+STARTDATI = 0x80
+RESETVECT = 0xfffe
+.area DATA (ABS)
+.org STARTDATI
+VETT:	.byte 6
+	.byte 7
+	.byte 8
+ENDVETT:
+N: .blkb 1
+.area PROGRAMMA (ABS)
+.org STARTPGM
+MAIN:
+MOV #1,N
+LDX #0
+LDA #1
+LOOP:
+	STA VETT,X
+	INCA
+	INCA
+	INCA
+	INCX
+	CBEQX #5,FINE
+	BRA LOOP
+FINE: BRA FINE
+.area RESET (ABS)
+.org RESETVECT
+.word MAIN

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>table</title>
+</head>
+
+<body>
+  <div id="tabella">
+  </div>
+  <script>
+    //create a matrix 20x20
+    const DIM = 20;
+    let m = new Array(DIM);
+    let somma_oriz = new Array(DIM);
+    let somma_vert =  new Array(DIM);
+
+    for (let i = 0; i < m.length; i++) {
+      m[i] = new Array(DIM);
+    }
+    for( let i = 0; i < m.length; i++)
+    {
+      for( let j = 0; j < m[0].length; j++)
+      {
+        m[i][j] = parseInt(Math.random()*51+100);
+      }
+    }
+    
+    for( let i = 0; i < m.length; i++)
+    {
+      somma_oriz[i] = 0;
+      for( let j = 0; j < m[0].length; j++)
+      {
+        somma_oriz[i] += m[i][j];
+      }
+    }
+    for( let i = 0; i < m.length; i++)
+    {
+      somma_vert[i] = 0;
+      for( let j = 0; j < m[0].length; j++)
+      {
+        somma_vert[i] += m[j][i];
+      }
+    }
+
+
+    var dummy = "<table border=\"solid black 1px\">";
+    for ( let i = 0; i < m.length; i++)
+    {
+      dummy += "<tr>";
+      for( let j = 0; j < m[0].length + 1; j++)
+      {
+        dummy += "<td";
+        if(j == m[0].length)
+        {
+          if(somma_oriz[i]>2500)
+          {
+            dummy += " bgcolor = \"red\">";
+            dummy += somma_oriz[i];
+          } else 
+          {
+            dummy += ">";
+            dummy += somma_oriz[i];
+          }
+        } else 
+        {
+          dummy += ">";
+          dummy += m[i][j];
+        }
+        dummy += "</td>";  
+      }
+      dummy += "</tr>"
+    }
+
+    dummy += "<tr>";
+    for( let i = 0; i < m.length; i++)
+    {
+      dummy += "<td";
+      if(somma_vert[i]>2500)
+      {
+        dummy += " bgcolor=\"red\">";
+        dummy += somma_vert[i];
+      } else 
+      {
+        dummy += ">";
+        dummy += somma_vert[i];
+      }
+      dummy += "</td>";
+    }
+    dummy += "</tr>"
+
+
+    dummy += "</table>";
+    console.table(somma_oriz);
+    console.table(somma_vert);
+    console.table(m);
+
+    document.getElementById("tabella").innerHTML = dummy;
+  </script>
+</body>
+
+</html>

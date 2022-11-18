@@ -1,0 +1,97 @@
+<!-- es> 221105_Rubrica_cognome_nome
+
+Realizzare sito HTML+CSS+JS che realizzi una rubrica telefonica
+per memorizzare le seguenti informazioni : Nome, Cognome, Num. Telefonico
+Il sito si presentera' come una sola pagina divisa in quattro sezioni
+
+Navbar (in alto)
+che permette di selezionare le Form : Inserisci, Modifica, Cancella, Cerca
+
+Form (Sottostante la Navbar)
+dove, in base alla selezione della Navbar,
+verranno visualizzate le Form corrispondenti per : Inserisci, Modifica, Cancella, Cerca
+
+Visualizzazioni (sottostante la Form)
+Dove verra' mostrato
+-l'esito delle operazioni di : Inserisci, Modifica , Cancella
+-l'elenco dei risultati di : Cerca
+
+Footer (in basso)
+con il vostro nome cognome ed email -->
+<!DOCTYPE htlm>
+<html>
+    <head>zrz
+        <title>Rubrica</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="script.js"></script>
+    </head>
+
+    <body>
+        <div class="topbar">
+            <ul>
+                <li><button onclick="change('inserisci')">Inserisci</button></li>
+                <li><button onclick="change('modifica')">Modifica</button></li>
+                <li><button onclick="change('cancella')">Cancella</></li>
+                <li><button onclick="change('cerca')">Cerca</button></li>
+            </ul>
+        </div>
+        <div class="form">
+            
+            <div id="inserisci" style="display: none">
+                <label for="nome">Nome</label>
+                <input type="text" id="nomeInserisci">
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognomeInserisci">
+                <label for="numero">Numero di telefono</label>
+                <input type="text" id="numeroInserisci">
+                <button onclick="inserisci()">Submit</button>
+            </div>
+
+            <div id="modifica" style="display: none">
+                <p>Da Trovare</p>
+                <label for="nome">Nome</label>
+                <input type="text" id="nomeModifica">
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognomeModifica">
+                <label for="numero">Numero</label>
+                <input type="text" id="numeroModifica">
+                <button onclick="modifica()">Submit</button>
+
+                </br>
+                <p>Da cambiare in </p>
+                <label for="nome">Nome</label>
+                <input type="text" id="nomeModifica">
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognomeModifica">
+                <label for="numero">Numero</label>
+                <input type="text" id="numeroModifica">
+                <button onclick="modifica()">Submit</button>
+            </div>
+
+            <div id="cancella" style="display: none">
+                <label for="nome">Nome</label>
+                <input type="text" id="nomeCancella">
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognomeCancella">
+                <label for="numero">Numero</label>
+                <input type="text" id="numeroCancella">
+                <button onclick="cancella()">Submit</button>
+            </div>
+            <div id="cerca" style="display: none">
+                <label for="nome">Nome</label>
+                <input type="text" id="nomeCerca">
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognomeCerca">
+                <label for="numero">Numero</label>
+                <input type="text" id="numeroCerca">
+                <button onclick="cerca()">Submit</button>
+            </div>
+        </div>
+        <div class="visualizza">
+
+        </div>
+        <div class="footer">
+            Davide Sirico <a href="mailto:dsirico@fermimn.edu.it">dsirico@fermimn.edu.it</a>
+        </div>
+    </body>
+</html>

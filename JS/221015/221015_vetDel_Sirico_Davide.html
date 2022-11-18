@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="elenco"></p>
+
+        Nome: <input id="nome" type="text">
+        <button onclick="aggiungi()">Aggiungi</button>
+        <button onclick="eliminaElemento()">Elimina elemento</button><br>
+        <button onclick="stampa()">Stampa</button>
+        <button onclick="cancellaTutto()">Cancella</button>
+        <button onclick="eliminaPrimo()">Elimina primo</button>
+        <button onclick="eliminaUltimo()">Elimina ultimo</button>
+
+        <script>
+            var nomi = [];
+            function aggiungi() {
+                var nome = document.getElementById("nome").value;
+                //console.log(nome);
+                nomi[nomi.length] = nome;
+            }
+            function stampa() {
+                document.getElementById("elenco").innerHTML = "";
+                for(var i in nomi) {
+                    document.getElementById("elenco").innerHTML += nomi[i] + "<br>";
+                }
+            }
+            function eliminaElemento(){
+                var nome = document.getElementById("nome").value;
+                var posizione = -1;
+                for(var i in nomi) {
+                    if(nomi[i] == nome) {
+                        posizione = i;
+                    }
+                }
+                console.log(posizione);
+                if(posizione != -1){
+                   nomi.splice(posizione, 1);
+                }
+            }
+            function cancellaTutto() {
+                nomi = [];
+            }
+            function eliminaUltimo(){
+                nomi.pop(); 
+            }
+            function eliminaPrimo(){
+                nomi.splice(0,1);
+            }
+        </script>
+    </body>
+</html>

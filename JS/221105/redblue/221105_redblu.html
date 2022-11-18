@@ -1,0 +1,26 @@
+<!-- 221105_redblu.html
+inserire questo testo "Prova di Javascript in 10 minuti" in un paragrafo con tag P
+mediante un bottone rosso/blu il testo deve colorarsi di rosso/blu -->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>redblue</title>
+  </head>
+  <body>
+    <p id="P">Prova di Javascript in 10 minuti</p>
+    <button onclick="change()">Rosso/Blu</button>
+    <script>
+      function change(){
+        current = document.getElementById("P").style.color;
+        console.log(current);
+        if(current == "red"){
+          document.getElementById("P").style.color = "blue"
+        } else {
+          document.getElementById("P").style.color = "red";
+        }
+      }
+    </script>
+  </body>
+</html>

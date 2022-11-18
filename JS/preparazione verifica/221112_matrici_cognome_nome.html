@@ -1,0 +1,112 @@
+<!-- Scrivere una pagina HTML scritta in HTML+CSS+JS
+che:
+
+-permetta di acquisire in INPUT un numero N
+
+-mediante un pulsante denominato "NUOVA"
+ generi dinamicamente mediante javascript
+ una matrice N*N valorizzata con numeri casuali da
+ 10 a 100
+ (senza visualizzazione)
+
+-mediante un pulsante visualizza
+ visualizzi il contenuto della matrice
+ come una TABLE HTML
+
+-mediante un pulsante denomimato "TRASPOSTA"
+ effettui la trasposizione delle celle della matrice
+ (senza visualizzazione)
+
+Nota
+----
+per generare un numero casuale in javascript
+var x=Math.random(); // genera un numero fra 0 e <1 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>matrice</title>
+  </head>
+  <body>
+    <div id="input">
+      <label for="n">N: </label>
+      <input type="text" id="n">
+      <input type="button" id="nuova" onclick="nuova()" value="NUOVA">
+      <input type="button" id="visualizza" onclick="visualizza()" value="VISUALIZZA">
+      <input type="button" id="trasposta" onclick="trasposta()" value="TRASPOSTA">
+    </div>
+    <div id="box_visual">
+    </div>
+
+    <script>
+      let m;
+      function nuova()
+      {
+        let n = document.getElementById("n").value;
+        console.log("N: " + n);
+        m = new Array(n);
+        for (let i = 0; i < n; i++) {
+          m[i] = new Array(n);
+        }
+        
+        for( let i = 0; i < n; i++)
+        {
+          for( let j = 0; j < n; j++)
+          {
+            m[i][j] = parseInt(Math.random() * 91 + 10);
+          }
+        }
+        console.log("Row: " + m.length);
+        console.log("Col: " + m[0].length);
+        console.table(m);
+      }
+      function visualizza()
+      {
+        let dummy;
+        dummy = "<table border=\"solid black 1px\">";
+        for( let i = 0; i < m.length; i++)
+        {
+          dummy += "<tr>";
+          for( let j = 0; j < m[0].length; j++)
+          {
+            dummy += "<td>";
+            dummy += m[i][j];
+            dummy += "</td>";
+          }
+          dummy += "</tr>";
+        }
+        dummy += "</table>";
+        document.getElementById("box_visual").innerHTML = dummy;
+      }
+      function trasposta()
+      {
+        let m_temp = new Array(m.length);
+        for (let i = 0; i < m.length; i++) {
+          m_temp[i] = new Array(m.length);
+        }
+        for( let i = 0; i < m.length; i++)
+        {
+          for( let j = 0; j < m[0].length; j++)
+          {
+            m_temp[i][j] = m[j][i];
+          }
+        }
+        m = m_temp;
+        console.table(m);
+        for( let i = 0; i < m.length; i++)
+        {
+          dummy += "<tr>";
+          for( let j = 0; j < m[0].length; j++)
+          {
+            dummy += "<td>";
+            dummy += m[i][j];
+            dummy += "</td>";
+          }
+          dummy += "</tr>";
+        }
+        dummy += "</table>";
+        document.getElementById("box_visual").innerHTML = dummy;
+      }
+    </script>
+  </body>
+</html>

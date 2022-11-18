@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- Gioco dell'impiccato -->
+<html>
+<head>
+    <title>Gioco dell'impiccato</title>
+</head>
+<body>
+    <h1>Gioco dell'impiccato</h1>
+    <p>Vite: <span id="vite">6</span></p>
+    <input type="text" id="parola_completa"></input>
+    <button id="send" onclick="Invia()">Invia</button>
+    
+
+    <p id="lettere"></p>
+    <table>
+        <tr>
+            <td><button onclick="check('q')">q</button></td>
+            <td><button onclick="check('w')">w</button></td>
+            <td><button onclick="check('e')">e</button></td>
+            <td><button onclick="check('r')">r</button></td>
+            <td><button onclick="check('t')">t</button></td>
+            <td><button onclick="check('y')">y</button></td>
+            <td><button onclick="check('u')">u</button></td>
+            <td><button onclick="check('i')">i</button></td>
+            <td><button onclick="check('o')">o</button></td>
+            <td><button onclick="check('p')">p</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button onclick="check('a')">a</button></td>
+            <td><button onclick="check('s')">s</button></td>
+            <td><button onclick="check('d')">d</button></td>
+            <td><button onclick="check('f')">f</button></td>
+            <td><button onclick="check('g')">g</button></td>
+            <td><button onclick="check('h')">h</button></td>
+            <td><button onclick="check('j')">j</button></td>
+            <td><button onclick="check('k')">k</button></td>
+            <td><button onclick="check('l')">l</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><button onclick="check('z')">z</button></td>
+            <td><button onclick="check('x')">x</button></td>
+            <td><button onclick="check('c')">c</button></td>
+            <td><button onclick="check('v')">v</button></td>
+            <td><button onclick="check('b')">b</button></td>
+            <td><button onclick="check('n')">n</button></td>
+            <td><button onclick="check('m')">m</button></td>
+        </tr>
+    </table>
+    <script>
+        var vite = 6;
+        var parolaDaIndovinare = "supercalifrastilistichespiralidoso";
+        for(i in parolaDaIndovinare) {
+            document.getElementById("lettere").innerHTML += "_ ";
+        }
+        function Invia() {
+            parola = document.getElementById("parola_completa").value;
+            
+            if(parolaDaIndovinare === parola) {
+                document.getElementById("lettere").innerHTML = parola;
+                alert("Hai vinto!");
+            } else {
+                alert("Hai perso!");
+            }
+        }
+        function check(lettera){
+            var current = document.getElementById("lettere").innerHTML;
+            var flag=0;
+            for(i in parolaDaIndovinare) {
+                if(parolaDaIndovinare[i] === lettera) {
+                    current = current.substring(0, i*2) + lettera + current.substring(i*2 + 1);
+                } else {
+                    flag++;
+                }
+            }
+            if(flag == parolaDaIndovinare.length) {
+                vite--;
+            }
+            document.getElementById("vite").innerHTML = vite;
+            document.getElementById("lettere").innerHTML = current;
+            if(current.indexOf("_") === -1) {
+                alert("Hai vinto!");
+            }
+            if(vite === 0) {
+                alert("Hai perso!");
+            }
+        }
+    </script>
+</body>
+

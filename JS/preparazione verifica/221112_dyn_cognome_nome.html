@@ -1,0 +1,79 @@
+<!-- Scrivere una pagina HTML scritta in HTML+CSS+JS
+divisa in due blocchi
+
+Blocco Digitazione
+------------------
+contenente
+-un radio button con due opzioni:HTML e CSS
+-due pulsanti GET PUT
+-una finestra di digitazione che permetta di inserire
+ codice HTML o CSS
+
+Blocco Visualizzazione
+----------------------
+Dove verra' visualizzata la pagina risultante
+
+Funzionalità
+------------
+L'utente potra':
+
+Mediante il radio button
+selezionare se operare sull'HTML o sul CSS
+
+Premendo il pulsante GET
+visualizzare il codice HTML o CSS  contenuto nel
+blocco visualizzazione
+
+Premendo il pulsante PUT
+modificare il codice HTML o CSS del blocco visualizzazione -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>dyn</title>
+  </head>
+  <body>
+    <div id="digitazione">
+      <input type="radio" id="selected_html" name="css_html" value="html">
+      <label for="selected_html">HTML</label>
+      <input type="radio" id="selected_css" name="css_html" value="css">
+      <label for="selected_css">CSS</label>
+      <br/>
+      <input type="button" id="get" onclick="get()" value="GET">
+      <input type="button" id="put" onclick="put()" value="PUT">
+      <br/>
+      <textarea id="textarea"></textarea>
+    </div>
+
+    <p id="visualizzazione"></p>
+
+    <script>
+      let text_html = "";
+      let text_css = "";
+      let css_or_html = "";
+      function get()
+      {
+        css_or_html = document.getElementById("selected_html").checked ? "html" : "css";
+        text = document.getElementById("textarea").value;
+        if(css_or_html == "html")
+        {
+          text_html = text;
+        } else
+        {
+          text_css = text;
+        }
+      }
+      function put()
+      {
+        if(css_or_html=="html")
+        {
+          document.getElementById("visualizzazione").innerHTML = text_html;
+        }
+        else
+        {
+          document.getElementById("visualizzazione").style = text_css;
+        }
+      }
+    </script>
+  </body>
+</html>

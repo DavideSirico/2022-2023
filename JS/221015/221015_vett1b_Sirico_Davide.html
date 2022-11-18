@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="1"></p>
+        <script>
+            var v = [];
+            var dummy = "";
+            var c = 0;
+            for(var i=0;i<10;i++){
+                v[i]=c;
+                c+=10;
+            }
+            
+            dummy="<table border=\"solid black 1px\">";
+            dummy+="<tr><td>Index</td><td>Value</td></tr>";
+            for(var i in v){
+                dummy+="<tr><td>"+i+"</td><td>"+v[i]+"</td></tr>";
+            }
+            dummy+="</table>";
+            
+            document.getElementById("1").innerHTML=dummy;
+            
+        </script>
+    </body>
+</html>
