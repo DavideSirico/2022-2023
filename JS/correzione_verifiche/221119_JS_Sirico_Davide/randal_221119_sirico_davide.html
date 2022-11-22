@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	</head>
+	<body>
+		
+		<div>
+			Opzioni di stile
+			<form id="form1">
+			<table>
+				<tr>
+					<td>Font: </td>
+					<td>Font Color: </td>
+					<td>Background Color: </td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="font" id="font1" value="Arial">
+						<label for="font1">Arial</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="color" id="color1" value="black">
+						<label for="color1">black</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="bgcolor" id="bgcolor1" value="white">
+						<label for="bgcolor1">white</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="font" id="font2" value="Comic Sans MS">
+						<label for="font2">Comic Sans</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="color" id="color2" value="white">
+						<label for="color2">white</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="bgcolor" id="bgcolor2" value="black">
+						<label for="bgcolor2">black</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="font" id="font3" value="Courier New">
+						<label for="font3">Courier New</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="color" id="color3" value="red">
+						<label for="color3">red</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="bgcolor" id="bgcolor3" value="aqua">
+						<label for="bgcolor3">aqua</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="font" id="font4" value="Impact">
+						<label for="font4">Impact</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="color" id="color4" value="navy">
+						<label for="color4">navy</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="bgcolor" id="bgcolor4" value="red">
+						<label for="bgcolor4">red</label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="font" id="font5" value="Palatino">
+						<label for="font5">Paladino</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="color" id="color5" value="maroon">
+						<label for="color5">maroon</label>
+					</td>
+					
+					<td>
+						<input type="radio" name="bgcolor" id="bgcolor5" value="yellow">
+						<label for="bgcolor5">yellow</label>
+					</td>
+				</tr>
+			</table>
+			<label for="fontsize">Font Size</label>
+			<input type="text" id="sizefont" name="sizefont"><br />
+			<input type="button" onclick="applica()" id="button" value="Applica">
+			</form>
+		</div>
+		
+		<p id="visualizza">
+		O dove sei stato, Lord Randal, figlio mio?
+O dove sei stato, mio bellissimo giovane uomo?
+Sono stato nel bosco sacro; madre, prepara il mio letto presto,
+ho cacciato e sono stanco e vorrei coricarmi.
+
+E chi hai incontrato, Lord Randal, figlio mio?
+E chi hai incontrato, mio bellissimo giovane uomo?
+Ho incontrato il mio vero amore; madre, prepara il mio letto presto,
+ho cacciato e sono stanco e vorrei coricarmi.
+
+E che cosa ti ha dato, Lord Randal, figlio mio?
+E che cosa ti ha dato, mio bellissimo giovane uomo?
+Mi ha dato anguille fritte in una padella; madre, prepara il mio letto presto,
+ho cacciato e sono stanco e vorrei coricarmi.
+
+E chi ha mangiato gli avanzi, Lord Randal, figlio mio?
+E chi ha mangiato gli avanzi, mio bellissimo giovane uomo?
+I miei cani e i miei falchi; madre, prepara il mio letto presto,
+ho cacciato e sono stanco e vorrei coricarmi.
+
+E cosa ne è stato di loro, Lord Randal, figlio mio?
+E cosa ne è stato di loro, mio bellissimo giovane uomo?
+Hanno disteso le zampe e sono morti; madre, prepara il mio letto presto,
+ho cacciato e sono stanco e vorrei coricarmi.
+
+Ho paura che tu sia stato avvelenato, Lord Randal, figlio mio!
+Ho paura che tu sia stato avvelenato, mio bellissimo giovane uomo!
+Sì, sono stato avvelenato; madre, prepara il mio letto presto,
+sento male al cuore e vorrei coricarmi.
+
+Cosa lasci a tua madre, Lord Randal, figlio mio?
+Cosa lasci a tua madre, mio bellissimo giovane uomo?
+Lascio a mia madre ventiquattro mucche; madre, prepara il mio letto presto,
+sento male al cuore e vorrei coricarmi.
+
+Cosa lasci a tua sorella, Lord Randal, figlio mio?
+Cosa lasci a tua sorella, mio bellissimo giovane uomo?
+Lascio a mia sorella oro e argento; madre, prepara il mio letto presto,
+sento male al cuore e vorrei coricarmi.
+
+Cosa lasci a tuo fratello, Lord Randal, figlio mio?
+Cosa lasci a tuo fratello, mio bellissimo giovane uomo?
+Lascio a mio fratello le mie case e le mie terre; madre, prepara il mio letto presto,
+sento male al cuore e vorrei coricarmi.
+
+Cosa lasci al tuo vero amore, Lord Randal, figlio mio?
+Cosa lasci al tuo vero amore, mio bellissimo giovane uomo?
+Lascio al mio vero amore l'inferno e le fiamme; madre, prepara il mio letto presto,
+sento male al cuore e vorrei coricarmi. 
+		</p>
+		
+		<script>
+		function applica()
+		{
+			var font = document.forms.form1.font.value;
+			var fontcolor = document.forms.form1.color.value;
+			var bgcolor = document.forms.form1.bgcolor.value;
+			var fontsize = document.forms.form1.sizefont.value;
+			
+			document.getElementById("visualizza").style.color = fontcolor;
+			document.getElementById("visualizza").style.backgroundColor = bgcolor;
+			document.getElementById("visualizza").style.fontSize = fontsize;
+			document.getElementById("visualizza").style.fontFamily = font;
+		}
+		</script>
+	</body>
+</html>

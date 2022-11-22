@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	<style>
+	td{
+		width: 10px;
+		height: 10px;
+	}
+	</style>
+	</head>
+	<body>
+		
+		<div>
+			<form id="form1">
+				<label for="nome">Nome: </label>
+				<input type="text" id="nome" name="nome"><br />
+				<label for="cognome">cognome: </label>
+				<input type="text" id="cognome" name="cognome"><br />
+				<label for="numero">Numero di Telefono: </label>
+				<input type="text" id="numero" name="numero"><br />
+				<input type="button" id="button" value="emetti biglietto" onclick="submit()">
+			</form>
+		</div>
+		
+		<div id="visualizza">
+		</div>
+		
+		<script>
+		// 0 = disponibile
+		// 1 = temp
+		// 2 = non disponibile
+		var c=0;
+		var sel = new Array(200);
+		var m;
+		m=new Array(10);
+		var ctr = 0;
+		for( var i = 0; i < m.length; i++ )
+		{
+			m[i] = new Array(20);
+		}
+		var dummy = "<table border=\"solid black 1px\">";
+		for( var i = 0; i < m.length; i++) 
+		{
+			dummy += "<tr>";
+			for( var j = 0; j < m[0].length; j++) 
+			{
+				dummy += "<td";
+				dummy += " id='"
+				dummy += ctr;
+				dummy += "' style=\"background-color:black\" onclick=\"check(";
+				dummy += i;
+				dummy += ",";
+				dummy += j;
+				dummy +=")\">";
+				dummy += "</td>";
+				ctr++;
+			}
+			dummy += "</tr>";
+		}
+		dummy += "</table>";
+		
+		document.getElementById("visualizza").innerHTML = dummy;
+		for( var i = 0; i < m.length; i++) 
+			for( var j = 0; j < m[0].length; j++) 
+				m[i][j]=0;
+		function check(i,j)
+		{
+			console.table(m);
+			var temp =i*20+j;
+			if(m[i][j]==0)
+			{
+				document.getElementById(temp).style.backgroundColor="red";
+				m[i][j] = 1;
+			} else if(m[i][j]==1)
+			{
+				document.getElementById(temp).style.backgroundColor="black";
+				m[i][j]=0;
+			} else if(m[i][j]==2)
+			{
+				document.getElementById(temp).style.backgroundColor="white";
+			}
+		}
+		function submit()
+		{
+			console.log("ciao");
+		}
+		</script>
+	</body>
+</html>
