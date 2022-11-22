@@ -1,3 +1,9 @@
+<!-- ERRORI:
+				- Spelling errato di "Palatino"
+				- Manca "px" alla fine del valore di "font-size"
+				- input type="text" al posto di type="number" per i campi di input del font-size
+-->
+
 <!DOCTYPE html>
 
 <html>
@@ -96,12 +102,12 @@
 				</tr>
 			</table>
 			<label for="fontsize">Font Size</label>
-			<input type="text" id="sizefont" name="sizefont"><br />
+			<input type="number" id="sizefont" name="sizefont"><br />
 			<input type="button" onclick="applica()" id="button" value="Applica">
 			</form>
 		</div>
 		
-		<p id="visualizza">
+		<pre id="visualizza">
 		O dove sei stato, Lord Randal, figlio mio?
 O dove sei stato, mio bellissimo giovane uomo?
 Sono stato nel bosco sacro; madre, prepara il mio letto presto,
@@ -151,7 +157,7 @@ Cosa lasci al tuo vero amore, Lord Randal, figlio mio?
 Cosa lasci al tuo vero amore, mio bellissimo giovane uomo?
 Lascio al mio vero amore l'inferno e le fiamme; madre, prepara il mio letto presto,
 sento male al cuore e vorrei coricarmi. 
-		</p>
+		</pre>
 		
 		<script>
 		function applica()
@@ -163,7 +169,7 @@ sento male al cuore e vorrei coricarmi.
 			
 			document.getElementById("visualizza").style.color = fontcolor;
 			document.getElementById("visualizza").style.backgroundColor = bgcolor;
-			document.getElementById("visualizza").style.fontSize = fontsize;
+			document.getElementById("visualizza").style.fontSize = fontsize + "px";
 			document.getElementById("visualizza").style.fontFamily = font;
 		}
 		</script>

@@ -1,3 +1,8 @@
+<!-- ERRORI:
+				- Spelling errato di "Ruota"
+				- input type="text" al posto di type="number" per i campi di input della riga e della colonna
+				- errore nella funzione "ribalta" usata la variabile len al posto della variabile len2
+-->
 <!DOCTYPE html>
 
 <html>
@@ -8,13 +13,13 @@
 		<div>
 			<form id="form1">
 				<label for="nrow">Righe: </label>
-				<input type="text" id="nrow" name="nrow"><br />
+				<input type="number" id="nrow" name="nrow"><br />
 				<label for="ncol">Colonne: </label>
-				<input type="text" id="ncol" name="ncol">
+				<input type="number" id="ncol" name="ncol">
 				<br />
 				<input type="button" value="Nuova" id="button" onclick="genera()">
 				<br />
-				<input type="button" value="Routa" id="button" onclick="routa()">
+				<input type="button" value="ruota" id="button" onclick="ruota()">
 				<br />
 				<input type="button" value="Ribalta" id="button" onclick="ribalta()">
 				<br />
@@ -78,7 +83,7 @@
 			document.getElementById("visualizza").innerHTML = dummy;
 		}
 		
-		function routa()
+		function ruota()
 		{
 			var temp = new Array(m.length);
 			var len = m.length;
@@ -108,8 +113,9 @@
 			var temp = new Array(m.length);
 			var len = m.length;
 			var temp = new Array(len);
-			// console.table(temp);
+
 			var len2 = m[0].length;
+			console.log(len2);
 			for( var i = 0; i < len; i++) 
 			{
 				temp[i] = new Array(len2);
@@ -125,10 +131,10 @@
 			
 			for( var i = 0; i < m.length; i++) 
 			{
-				for( var j = 0; j < m[0].length/2; j++)
+				for( var j = 0; j < m[0].length; j++)
 				{
-					m[i][j] = temp[i][len-j-1];
-					m[i][len-j-1] = temp[i][j];
+					m[i][j] = temp[i][len2-j-1];
+					m[i][len2-j-1] = temp[i][j];
 				}
 			}
 			visualizza();
