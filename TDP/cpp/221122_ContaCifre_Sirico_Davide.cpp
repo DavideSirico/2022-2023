@@ -25,6 +25,7 @@ int main(void)
     char dummy;
     if(!in.is_open())
     {
+        cout<<"Errore nell'apertura del file"<<endl;
         return 1;
     }
 
@@ -51,12 +52,31 @@ int main(void)
     {
         cout<<lettere[i]<<endl;
     }
-
+    in.close();
+    in.open("input.txt");
     ContaLettere *conta = new ContaLettere[contatore];
-    
 
+    for(int i = 0; i < contatore; i++)
+    {
+        conta[i].carattere = lettere[i];
+        conta[i].contatore = 0;
+    }
 
+    while(in>>dummy)
+    {
+        for(int i = 0; i < contatore; i++)
+        {
+            if(dummy == conta[i].carattere)
+            {
+                conta[i].contatore++;
+            }
+        }
+    }
 
+    for(int i = 0; i < contatore; i++)
+    {
+        cout<<conta[i].carattere<<":"<<conta[i].contatore<<endl;
+    }
     in.close();
     return 0;
 }
