@@ -1,0 +1,107 @@
+<!-- cosa vuol dire "editabile"-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>es2</title>
+  </head>
+  <body>
+    <form id="form1">
+      Nome:
+      <input type="text" id="nome" name="nome" maxlength="50" onchange="checkNome()"><br>
+      Cognome:
+      <input type="text" id="cognome" name="cognome" maxlength="50" onchange="checkCognome()"><br>
+      <hr>
+      Sesso:<br>
+      <input type="radio" id="sesso_maschio" name="sesso">
+      <label for="sesso_maschio">Maschio</label>
+      <input type="radio" id="sesso_femmina" name="sesso">
+      <label for="sesso_femmina">Femmina</label>
+      <hr>
+      <legend>Ateneo</legend>
+      <select name="ateneo" >
+      <option value="" selected="selected"></option>
+      <option value="Università_Mantova" >Università Mantova</option>
+      <option value="Università_Bologna">Università Bologna</option>
+      <option value="Politecnico_di_Milano">Politecnico di Milano</option>
+      </select>
+      <br>
+      <hr>
+      CAP: 
+      <input type="text" id="cap" maxlength="5" onchange="checkCAP()">
+      <br>
+      <hr>
+      <input type="checkbox" id="studente" name="studente_lavoratore">
+      Studente
+      <input type="checkbox" id="lavoratore" name="studente_lavoratore">
+      Lavoratore
+      <br>
+      <hr>
+      Descrizione lavoro svolto: 
+      <input type="text" id="descrizione" maxlength="80">
+      <br>
+      <hr>
+      <input type="button" value="invio" id="button_invio" onclick="invio()">
+      <input type="button" value="reset" id="button_reset" onclick="reset()">
+      </form>
+    <script>
+
+      function checkCAP()
+      {
+        var cap = document.getElementById("cap").value;
+        if(cap.length != 5 || isNaN(cap))
+        {
+          alert("CAP non valido");
+        }
+      }
+
+      function checkNome()
+      {
+        let str = String(document.forms.form1.nome.value);
+        for( let i = 0; i < str.length; i++){
+          if(!isNaN(str.charAt(i))){
+            alert("Nome non valido");
+          }
+        }
+        return false;
+      }
+
+      function checkCognome()
+      {
+        let str = String(document.forms.form1.cognome.value);
+        for( let i = 0; i < str.length; i++){
+          if(!isNaN(str.charAt(i))){
+            alert("Cognome non valido")
+          }
+        }
+        return false;
+      }
+
+      function invio()
+      {
+        nome = document.forms.form1.nome.value;
+        cognome = document.forms.form1.cognome.value;
+        sesso = document.forms.form1.sesso.value;
+        ateneo = document.forms.form1.ateneo.value;
+        studente = document.forms.form1.studente.checked;
+        lavoratore = document.forms.form1.lavoratore.checked;
+        descrizione = document.forms.form1.descrizione.value;
+        if(nome == "" || cognome == "")
+        {
+          alert("Nome o Cognome non validi");
+        }
+        if(sesso == "")
+        {
+          alert("Sesso non valido");
+        }
+        if(ateneo == "")
+        {
+          alert("Ateneo non valido");
+        }
+        if((studente == true || lavoratore == true) && descrizione == "")
+        {
+          alert("Descrizione non valida");
+        }
+      }
+    </script>
+  </body>  
+</html>
