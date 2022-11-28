@@ -44,6 +44,10 @@ class Dipendente
             this->lezioni = lezioni;
             this->stipendio = stipendio;
         }
+        void StampaDettagliDipendente()
+        {
+            cout<<"Nome: "<<nome<<"\nCognome: "<<cognome<<"\nCodice: "<<codice<<"\nLezioni: "<<lezioni<<"\nStipendio: "<<stipendio;
+        }
 
 };
 
@@ -63,6 +67,11 @@ class Dirigente : public Dipendente
             this->codice_meccanografico = codice_meccanografico;
             this->studenti = studenti;
         }
+        void StampaDettagliDipendente()
+        {
+            cout<<"Nome: "<<nome<<"\nCognome: "<<cognome<<"\nCodice: "<<codice<<"\nLezioni: "<<lezioni<<"\nStipendio: "<<stipendio<<"\nCodice meccanografico: "<<codice_meccanografico<<"\nStudenti: "<<studenti;
+        }
+
 };
 
 class Docente : public Dipendente
@@ -78,6 +87,10 @@ class Docente : public Dipendente
             this->lezioni = lezioni;
             this->stipendio = (50 * ore_recupero) + (22 * lezioni);
             this->ore_recupero = ore_recupero;
+        }
+        void StampaDettagliDipendente()
+        {
+            cout<<"Nome: "<<nome<<"\nCognome: "<<cognome<<"\nCodice: "<<codice<<"\nLezioni: "<<lezioni<<"\nStipendio: "<<stipendio<<"\nOre di recupero: "<<ore_recupero;
         }
 };
 
@@ -97,6 +110,10 @@ class Referente : public Docente
             this->ore_recupero = ore_recupero;
             this->dipartimento = dipartimento;
         }
+        void StampaDettagliDipendente()
+        {
+            cout<<"Nome: "<<nome<<"\nCognome: "<<cognome<<"\nCodice: "<<codice<<"\nLezioni: "<<lezioni<<"\nStipendio: "<<stipendio<<"\nOre di recupero: "<<ore_recupero<<"\nDipartimento: "<<dipartimento;
+        }
 };
 
 void stampaStipendioDipendente(Dipendente d1)
@@ -106,26 +123,18 @@ void stampaStipendioDipendente(Dipendente d1)
     cout << "Stipendio dipendente: " << d1.stipendio << endl;
 }
 
-void StampaDettagliDipendente(Dipendente d1)
-{
-    cout << "Nome: " << d1.nome << endl;
-    cout << "Cognome: " << d1.cognome << endl;
-    cout << "Codice: " << d1.codice << endl;
-    cout << "Lezioni settimanali: " << d1.lezioni << endl;
-    cout << "Stipendio dipendente: " << d1.stipendio << endl;
-}
-
 int main(void)
 {
     Dipendente dipendenti[5];
-
     for (int i = 0; i < 5; i++)
     {
         dipendenti[i] = Dipendente("Davide", "Sirico", i, 10, 1000);
     }
-    stampaStipendioDipendente(dipendenti[0]);
-    cout << endl;
-    StampaDettagliDipendente(dipendenti[0]);
+    for (int i = 0; i < 5; i++)
+    {
+        dipendenti[i].StampaDettagliDipendente();
+        cout<<endl<<endl;
+    }
 
     return 0;
 }
