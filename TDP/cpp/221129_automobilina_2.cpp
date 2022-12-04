@@ -96,7 +96,14 @@ void visualizza(int m[DIM][DIM], int c){
     putchar('\n');
     for(i=0;i<DIM;i++){
         for(j=0;j<DIM;j++){
-            printf("|%2d",m[i][j]);
+            if(m[i][j]==1)
+            {
+                printf("| ");
+                // printf("|%2d",m[i][j]);
+            } else
+            {
+                printf("|%2d",m[i][j]);
+            }
         }
         putchar('|');
         putchar('\n');
