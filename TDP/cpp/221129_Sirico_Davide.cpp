@@ -135,6 +135,7 @@ int main(void)
         dipendenti[i].StampaDettagliDipendente();
         cout<<endl<<endl;
     }
-
+    Dirigente dirigente("Prova","prova2",20,1,"IMM",10);
+    stampaStipendioDipendente(dirigente);
     return 0;
 }

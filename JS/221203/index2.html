@@ -1,0 +1,255 @@
+
+<!-- 221203_ztl_cognome_nome.html
+==============================
+Gestione Targhe ZTL Mantova
+
+Si realizzi un pagina web utilizzando HTML+CSS+JS
+per la gestione delle autorizzazione
+alla circolazione delle automobili nelle ZTL della città di Mantova
+
+NAVBAR (visualizzata in alto contenete le seguente opzioni)
+ Nuova  
+ Autorizza  
+ Revoca
+ Controlla  
+ Stampa  
+ chiudi  
+
+premendo una delle opzioni della NAVBAR verrà visualizzato il menu corrispondente
+
+
+Caratteristiche Menu
+
+  ----------------
+  Nuova Targa
+  ----------------
+  (permette di inserire i dati di un nuovo utente e della sua targa)
+
+  CAMPI INPUT *
+  -----------
+  Nome
+  Cognome
+  Luogo di nascita
+  Data di nascita
+  Indirizzo Residenza
+  Città Residenza
+  Targa
+  Pulsante "INSERISCI" che effettua un nuovo inserimento  
+
+  i dati dovranno essere memorizzati nel sistema in 2 oggetti
+  un array di oggetti targa dove targa = {userid,targa,ztl}; // dove ztl è vale "Y" o "N"
+  un array di oggetti user dove user ={userid,nome,cognome,natoa,natoil,addr,city)
+
+  assicurando che
+ 
+  userid sia un numero progressivo e che non ci siano 2 user con lo stesso userid
+  non ci siano due targhe uguali
+ 
+
+  ----------------
+  Autorizza Targa
+  ----------------
+  CAMPI INPUT *
+  -----------
+  Nome
+  Cognome
+  Targa
+  Pulsante "CERCA" una targa per nome o cognome o targa
+ 
+  visualizzi un elenco di targhe che rispondano ai criteri di ricerca con un bottone "AUTORIZZA" in linea per autorizzare la targa
+
+  ----------------
+  Revoca Targa
+  ----------------
+  CAMPI INPUT *
+  -----------
+  Nome
+  Cognome
+  Targa
+  Pulsante "CERCA" una targa per nome o cognome o targa
+ 
+  visualizzi un elenco di targhe che rispondano ai criteri di ricerca con un bottone "CANCELLARE" in linea per cancellare     l'autorizzazione  la targa
+
+  ----------------
+  Modifica Targa
+  ----------------
+  CAMPI INPUT *
+  -----------
+  Nome
+  Cognome
+  Targa
+  Pulsante "CERCA" una targa per nome o cognome o targa
+ 
+  visualizzi un elenco di targhe che rispondano ai criteri di ricerca con un bottone "modifica" in linea  che apre una nuova FORM
+
+ 
+  CAMPI INPUT modifica *
+  --------------------
+  Nome
+  Cognome
+  Luogo di nascita
+  Data di nascita
+  Indirizzo Residenza
+  Città Residenza
+  Targa
+  Pulsante "MODIFICA" che effettua la modifica dei dati
+
+  NB
+  i campi saranno tutti valorizzati all'apertura della sotto form e modificabili
+  prima di modificare nelle strutture interne accertarsi che :non ci siano due utenti con lo stesso id, due targe uguali
+
+  ----------------
+  Stampa Targhe
+  ----------------
+  stampa l'elenco di tutte le targhe usando il formato tabella HTML
+
+ 
+* NOTA CAMPI INPUT
+
+  chk data entry
+
+  Nome: non deve contenere numeri dimensione massima 20 caratteri
+  Cognome: non deve contenere numeri dimensione massima 20 caratteri
+  Luogo di nascita: non deve contenere numeri  dimensione massima 20 caratteri
+  Data di nascita: sia informato dd/mm/yy
+  Indirizzo Residenza non deve contenere numeri:  dimensione massima 40 caratteri
+  Città Residenza non deve contenere numeri:  dimensione massima 20 caratteri
+  Targa: contenga almeno 1 numero && contenga almenu un carattere e sia lunga non meno di 7 caratteri -->
+<!doctype html>
+<html>
+  <head>
+    <title>Gestione Targhe ZTL</title>
+  </head>
+  <body>
+    <div>
+      <input type="button" value="Nuova" onclick="display('form_nuova')">
+      <input type="button" value="Autorizza" onclick="display('form_autorizza')">
+      <input type="button" value="Revoca">
+      <input type="button" value="Controlla">
+      <input type="button" value="Stampa">
+      <input type="button" value="Chiudi">
+    </div>
+    <hr>
+    <form id="form_nuova" style="display:none">
+      <label for="input_nome">Nome: </label>
+      <input id="input_nome" type="text"> <br/>
+      <label for="input_cognome">Cognome: </label>
+      <input id="input_cognome" type="text"> <br/>
+      <label for="input_luogo_di_nascita">Luogo di nascita: </label>
+      <input id="input_luogo_di_nascita" type="text"> <br/>
+      <label id="input_data_nascita">Data di nascita: </label>
+      <input type="date" id="input_data_nascita"> <br/>
+      <label for="input_indirizzo">Indirizzo di residenza: </label>
+      <input id="input_indirizzo" type="text"> <br/>
+      <label for="input_citta">Città: </label>
+      <input id="input_citta" type="text"> <br/>
+      <label for="input_targa">Targa: </label>
+      <input type="text" id="input_targa"> <br/>
+      <input type="button" onclick="cerca()" value="INSERISCI">
+    </form>
+    <form id="form_autorizza" style="display:none">
+      <label for="input_nome">Nome: </label>
+      <input id="input_nome" type="text"> <br/>
+      <label for="input_cognome">Cognome: </label>
+      <input id="input_cognome" type="text"> <br/>
+      <label for="input_targa">Targa: </label>
+      <input type="text" id="input_targa"> <br/>
+      <input type="button" onclick="inserisci()" value="CERCA">
+      <div id="visualizza_div"></div>
+    </form>
+    <form id="form_revoca" style="display:none">
+      form2
+    </form>
+    <form id="form_controlla" style="display:none">
+      form2
+    </form>
+    <form id="form_stampa" style="display:none">
+      form2
+    </form>
+    <form id="form_chiudi" style="display:none">
+      form2
+    </form>
+  </body>
+  <script>
+    let users = [];
+    let targhe = [];
+
+    function inserisci()
+    {
+      form = document.forms.form_nuova;
+      
+      var dummy_userid;
+      if(targhe.length==0)
+      {
+        dummy_userid = 0;
+      } else 
+      {
+        dummy_userid = targhe[0].userid + 1;
+      }
+      
+      var dummy_targa = form.input_targa.value;
+
+      for(var i = 0; i < targhe.length; i++)
+      {
+        if(targhe[i].targa == dummy_targa)
+        {
+          alert("targa già inserita");
+          return;
+        }
+      }
+
+      var dummy_nome = form.input_nome.value;
+      var dummy_cognome = form.input_cognome.value;
+      var dummy_natoa = form.input_luogo_di_nascita.value;
+      var dummy_natoil = form.input_data_nascita.value;
+      var dummy_addr = form.input_indirizzo.value;
+      var dummy_citta = form.input_citta.value;
+      let targa = {
+        "userid": dummy_userid,
+        "targa": dummy_targa,
+        "ztl": "N",
+      }
+      let user = {
+        "userid": dummy_userid,
+        "nome": dummy_nome,
+        "cognome": dummy_cognome,
+        "natoa": dummy_natoa,
+        "natoil": dummy_natoil,
+        "addr": dummy_addr,
+        "city": dummy_citta
+      }
+
+      users.unshift(user);
+      targhe.unshift(targa);
+    }
+    
+    function cerca()
+    {
+      form = document.forms.form_autorizza;
+      form.input_nome.value;
+      dummy = "";
+
+      document.getElementById("visualizza_div").innerHTML = "por";
+    }
+    function autorizza()
+    {
+
+    }
+
+    function display(id)
+    {
+      console.log(id);
+      var ids=["form_nuova","form_autorizza","form_revoca","form_controlla","form_stampa","form_chiudi"];
+      for(var i = 0; i < ids.length; i++)
+      {
+        if(id!=ids[i])
+        {
+          document.getElementById(ids[i]).style = "display:none";
+        } else 
+        {
+          document.getElementById(ids[i]).style = "display:";
+        }
+      }
+    }
+  </script>
+</html>
