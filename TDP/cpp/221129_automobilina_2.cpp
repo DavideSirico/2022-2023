@@ -39,14 +39,9 @@ class Automobilina
         }
         bool checkSpostamento(int x, int y)
         {
-            if(x>DIM || y>DIM)
-            {
-                return false;
-            }
             int deltaX = abs(x);
             int deltaY = abs(y);
             int deltaTot = deltaX + deltaY;
-
 
             if(carica<deltaTot)
             {
@@ -54,8 +49,15 @@ class Automobilina
             }
 
             carica -= deltaTot;
-            this->x+=x;
-            this->y+=y;
+            int temp_x = this->x+x;
+            int temp_y = this->y+y;
+
+            if(temp_x>DIM-1 || temp_y>DIM-1 || temp_x<0 || temp_y<0)
+            {
+                return false;
+            }
+            this->x = temp_x;
+            this->y = temp_y;
 
             return true;
         }
@@ -121,6 +123,9 @@ int main()
     Automobilina auto1;
     Polizia poli1;
     int m[DIM][DIM]; 
+    azzera(m);
+    m[24][0] = 1;
+    visualizza(m,2);
     while(1)
     {
         cout<<"CARICA: "<<auto1.getCarica()<<endl;
@@ -129,28 +134,58 @@ int main()
         switch(dummy)
         {
             case 'w':
-                auto1.checkSpostamento(1,0);
+                if(auto1.checkSpostamento(1,0))
+                {
+                    azzera(m);
+                    m[24-(auto1.getX())][auto1.getY()] = 1;
+                    visualizza(m,2);
+                }
+                else
+                {
+                    cout<<"Non puoi andare in quella direzione"<<endl;
+                }
                 break;
             case 'a':
-                auto1.checkSpostamento(0, -1);
+                if(auto1.checkSpostamento(0, -1))
+                {
+                    azzera(m);
+                    m[24-(auto1.getX())][auto1.getY()] = 1;
+                    visualizza(m,2);
+                }
+                else
+                {
+                    cout<<"Non puoi andare in quella direzione"<<endl;
+                }
+                
                 break;
             case 's':
-                auto1.checkSpostamento(-1, 0);
+                if(auto1.checkSpostamento(-1, 0))
+                {
+                    azzera(m);
+                    m[24-(auto1.getX())][auto1.getY()] = 1;
+                    visualizza(m,2);
+                }
+                else
+                {
+                    cout<<"Non puoi andare in quella direzione"<<endl;
+                }
                 break;
             case 'd':
-                auto1.checkSpostamento(0, 1);
+                if(auto1.checkSpostamento(0, 1))
+                {
+                    azzera(m);
+                    m[24-(auto1.getX())][auto1.getY()] = 1;
+                    visualizza(m,2);
+                }
+                else
+                {
+                    cout<<"Non puoi andare in quella direzione"<<endl;
+                }
                 break;
             default:
-                cout<<"clang";
+                cout<<"clank"<<endl;
                 break;
         }
-        azzera(m);
-        int x = auto1.getX();
-        int y = auto1.getY();
-        m[24-x][y] = 1;
-        visualizza(m, 2); 
-
     }
-    
     return 0;
 }

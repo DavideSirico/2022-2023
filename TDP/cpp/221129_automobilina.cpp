@@ -87,8 +87,5 @@ int main()
     poli1.changeSirena();
     cout<<poli1.getCarica();
 
-
-
-
     return 0;
 }
