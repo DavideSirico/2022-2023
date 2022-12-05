@@ -145,7 +145,7 @@ Caratteristiche Menu
       <input id="input_citta" type="text"> <br/>
       <label for="input_targa">Targa: </label>
       <input type="text" id="input_targa"> <br/>
-      <input type="button" onclick="cerca()" value="INSERISCI">
+      <input type="button" onclick="inserisci()" value="INSERISCI">
     </form>
     <form id="form_autorizza" style="display:none">
       <label for="input_nome">Nome: </label>
@@ -154,11 +154,18 @@ Caratteristiche Menu
       <input id="input_cognome" type="text"> <br/>
       <label for="input_targa">Targa: </label>
       <input type="text" id="input_targa"> <br/>
-      <input type="button" onclick="inserisci()" value="CERCA">
+      <input type="button" onclick="cerca_autorizza()" value="CERCA">
       <div id="visualizza_div"></div>
     </form>
     <form id="form_revoca" style="display:none">
-      form2
+      <label for="input_nome">Nome: </label>
+      <input id="input_nome" type="text"> <br/>
+      <label for="input_cognome">Cognome: </label>
+      <input id="input_cognome" type="text"> <br/>
+      <label for="input_targa">Targa: </label>
+      <input type="text" id="input_targa"> <br/>
+      <input type="button" onclick="cerca_revoca()" value="CERCA">
+      <div id="visualizza_div"></div>
     </form>
     <form id="form_controlla" style="display:none">
       form2
@@ -174,9 +181,38 @@ Caratteristiche Menu
     let users = [];
     let targhe = [];
 
+    function check_nome()
+    {
+      
+    }
+    function check_cognome()
+    {
+
+    }
+    function check_luogo_di_nascita()
+    {
+
+    }
+    function check_data_di_nascita()
+    {
+
+    }
+    function check_indirizzo()
+    {
+
+    }
+    function check_citta()
+    {
+
+    }
+    function check_targa()
+    {
+
+    }
+
     function inserisci()
     {
-      form = document.forms.form_nuova;
+      var form = document.forms.form_nuova;
       
       var dummy_userid;
       if(targhe.length==0)
@@ -223,18 +259,72 @@ Caratteristiche Menu
       targhe.unshift(targa);
     }
     
-    function cerca()
+    function cerca_revoca()
     {
-      form = document.forms.form_autorizza;
-      form.input_nome.value;
-      dummy = "";
+      var form = document.forms.form_revoca;
+      var nome = form.input_nome.value;
+      var cognome = form.input_cognome.value;
+      var targa = form.input_targa.value;
 
-      document.getElementById("visualizza_div").innerHTML = "por";
+      var dummy = "<hr>";
+
+      for(user of users)
+      {
+        console.table(user);
+        console.table(targhe[user.userid]);
+        if(user.nome == nome || user.cognome == cognome || targhe[user.userid].targa == targa)
+        {
+          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='revoca(" + user.userid + ")' value='REVOCA'>" + "<br/>";
+        }
+      }
+      document.getElementById("visualizza_div").innerHTML = dummy;
     }
-    function autorizza()
+
+    
+    function cerca_autorizza()
     {
+      var form = document.forms.form_autorizza;
+      var nome = form.input_nome.value;
+      var cognome = form.input_cognome.value;
+      var targa = form.input_targa.value;
+      
+      var dummy = "<hr>";
 
+      for(user of users)
+      {
+        console.table(user);
+        console.table(targhe[user.userid]);
+        if(user.nome == nome || user.cognome == cognome || targhe[user.userid].targa == targa)
+        {
+          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='autorizza(" + user.userid + ")' value='AUTORIZZA'>" + "<br/>";
+        }
+      }
+      document.getElementById("visualizza_div").innerHTML = dummy;
     }
+
+    function autorizza(id)
+    {
+      for(targa of targhe)
+      {
+        if(targa.userid == id)
+        {
+          targa.ztl = "Y";
+        }
+      }
+    }
+    
+    function revoca()
+    {
+      for(targa of targhe)
+      {
+        if(targa.userid == id)
+        {
+          targa.ztl = "N";
+        }
+      }
+    }
+
+    
 
     function display(id)
     {
