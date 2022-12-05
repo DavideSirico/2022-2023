@@ -42,13 +42,6 @@ class Automobilina
             int deltaX = abs(x);
             int deltaY = abs(y);
             int deltaTot = deltaX + deltaY;
-
-            if(carica<deltaTot)
-            {
-                return false;
-            }
-
-            carica -= deltaTot;
             int temp_x = this->x+x;
             int temp_y = this->y+y;
 
@@ -56,6 +49,13 @@ class Automobilina
             {
                 return false;
             }
+
+            if(carica<deltaTot)
+            {
+                return false;
+            }
+
+            carica -= deltaTot;
             this->x = temp_x;
             this->y = temp_y;
 
@@ -98,7 +98,8 @@ void visualizza(int m[DIM][DIM], int c){
         for(j=0;j<DIM;j++){
             if(m[i][j]==1)
             {
-                printf("| ");
+                cout << "| " << "\033[32m" << "" << "\033[0m";
+                // printf("| ");
                 // printf("|%2d",m[i][j]);
             } else
             {
