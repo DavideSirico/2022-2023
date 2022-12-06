@@ -27,6 +27,7 @@ class Garage
             auto[i] = new Auto(marca,modello,cilindrata,costo,manuale);
         }
         costoMinimo = 0;
+        input.close();
     }
     public float getCostoMinimo()
     {

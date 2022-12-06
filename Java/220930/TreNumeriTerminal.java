@@ -1,5 +1,4 @@
 // 1b) Inserire 3 numeri in input da prompt con gestione delle eccezioni e calcolare la media
-import java.util.Scanner;
 public class TreNumeriTerminal{
 	public static void main(String[] args){
 		int a,b,c;

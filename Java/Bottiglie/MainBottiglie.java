@@ -27,7 +27,7 @@ class MainBottiglie
             System.out.println("Nome: " + b[i].getNome() + '\n');
 
         }
-
+        input.close();
     }
 }
 
