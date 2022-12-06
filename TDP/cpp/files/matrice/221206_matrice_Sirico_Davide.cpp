@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
 using namespace std;
 
 int main()
@@ -16,10 +15,17 @@ int main()
     int n,m;
     in>>n>>m;
     /* int a[n][m]; */
+    /*
     int **a = (int**)malloc(n*sizeof(int));
     for(int i = 0; i < m; i++)
     {
         a[i] = (int*)malloc(m*sizeof(int));
+    }*/
+
+    int **a = new int*[n];
+    for(int i = 0; i < m; i++)
+    {
+        a[i] = new int[m];
     }
     for(int i = 0; i < n; i++)
     {
@@ -36,6 +42,12 @@ int main()
     }
     out<<somma;
     
+
+    for(int i = 0; i < m; i++)
+    {
+        delete[] a[i];
+    }
+    delete[] a;
     in.close();
     out.close();
     return 0;
