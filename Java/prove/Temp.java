@@ -3,14 +3,13 @@ import java.util.Random;
 
 class Temp{
 	public static void main(String[] args){
-        int a;
         if(args.length!=1){
             System.out.println("Usage: java Temp <number>");
             System.exit(1);
         }
 
         try{
-            a = Integer.valueOf(args[0]).intValue();
+            Integer.valueOf(args[0]).intValue();
         }catch(Exception e){
             System.out.println("Usage: java Temp <number>");
             System.exit(1);
@@ -34,6 +33,6 @@ class Temp{
             }
             System.out.println();
         }
-
+        input.close();
 	}
 }				

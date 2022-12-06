@@ -4,7 +4,6 @@ class Temp2{
     public static void main(String[] args){
         Random rand = new Random();
         int[][] matrice = new int[10][10];
-        int[] tempVettore = new int[10];
         
 
         for(int i=0;i<matrice.length;i++){

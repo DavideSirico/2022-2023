@@ -23,5 +23,6 @@ class EsercizioInput
             System.out.print("Inserire " + i + " stringa: ");
             dummy = input.nextLine();
         }
+        input.close();
     }
 }

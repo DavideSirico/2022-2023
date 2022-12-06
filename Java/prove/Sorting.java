@@ -38,6 +38,6 @@ class Sorting{
             System.out.print(vettore[i] + " ");
         }
         System.out.println();
-         
+        input.close();     
     }
 }

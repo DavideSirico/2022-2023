@@ -14,5 +14,6 @@ class Maiuscolo{
             }
             somma += numero;
         }
+        input.close();
     }
 }
