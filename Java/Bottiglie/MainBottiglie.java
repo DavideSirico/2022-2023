@@ -16,7 +16,7 @@ class MainBottiglie
             String dummy;
             System.out.print("Inserire nome: ");
             dummy = input.nextLine();
-            b[i] = new Bottiglie(counter, rand.nextFloat(50), dummy); // istanzia l'oggetto b[i]
+            b[i] = new Bottiglie(counter, rand.nextFloat()*50, dummy); // istanzia l'oggetto b[i]
             counter++;
         }
 

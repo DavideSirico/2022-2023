@@ -6,10 +6,9 @@ public class MatriceZero{
 		Random random = new Random();
 		int matrice[][];
 		matrice = new int[10][10];
-		int i,j,k;
+		int i,j;
 		int numeroMinimo;
 		int rigaNumeroMinimo;
-		int numeroCifre;
 		for(i=0;i<matrice.length;i++){
 			for(j=0;j<matrice.length;j++){
 				matrice[i][j]=random.nextInt(1000)+1;
