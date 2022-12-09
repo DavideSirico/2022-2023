@@ -9,6 +9,7 @@ int main()
     
     if(in.is_open()==0 || out.is_open()==0)
     {
+        cout<<"Errore nell'apertura del file";
         return 0;
     }
 
@@ -23,7 +24,7 @@ int main()
     }*/
 
     int **a = new int*[n];
-    for(int i = 0; i < m; i++)
+    for(int i = 0; i < n; i++)
     {
         a[i] = new int[m];
     }
@@ -32,9 +33,9 @@ int main()
         for(int j = 0; j < m; j++)
         {
             in>>a[i][j];
-            cout<<a[i][j];
         }
     }
+
     int somma = 0;
     for(int i = 0; i < n && i < m; i++)
     {
@@ -42,7 +43,6 @@ int main()
     }
     out<<somma;
     
-
     for(int i = 0; i < m; i++)
     {
         delete[] a[i];
