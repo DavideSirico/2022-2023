@@ -124,10 +124,10 @@ Caratteristiche Menu
     <div>
       <input type="button" value="Nuova" onclick="display('form_nuova')">
       <input type="button" value="Autorizza" onclick="display('form_autorizza')">
-      <input type="button" value="Revoca">
-      <input type="button" value="Controlla">
-      <input type="button" value="Stampa">
-      <input type="button" value="Chiudi">
+      <input type="button" value="Revoca" onclick="display('form_revoca')">
+      <input type="button" value="Modifica" onclick="display('form_modifica')">
+      <input type="button" value="Stampa" onclick="display('form_stampa')">
+      <input type="button" value="Chiudi" onclick="display('form_chiudi')">
     </div>
     <hr>
     <form id="form_nuova" style="display:none">
@@ -155,7 +155,7 @@ Caratteristiche Menu
       <label for="input_targa">Targa: </label>
       <input type="text" id="input_targa"> <br/>
       <input type="button" onclick="cerca_autorizza()" value="CERCA">
-      <div id="visualizza_div"></div>
+      <div id="visualizza_div_1"></div>
     </form>
     <form id="form_revoca" style="display:none">
       <label for="input_nome">Nome: </label>
@@ -165,10 +165,19 @@ Caratteristiche Menu
       <label for="input_targa">Targa: </label>
       <input type="text" id="input_targa"> <br/>
       <input type="button" onclick="cerca_revoca()" value="CERCA">
-      <div id="visualizza_div"></div>
+      <div id="visualizza_div_2"></div>
     </form>
-    <form id="form_controlla" style="display:none">
-      form2
+    <form id="form_modifica" style="display:none">
+      <label for="input_nome">Nome: </label>
+      <input id="input_nome" type="text"> <br/>
+      <label>Cognome: </label>
+      <input id="input_cognome" type="text"> <br/>
+      <label>Targa: </label>
+      <input id="input_targa" type="text"> <br/>
+      <input type="button" onclick="cerca_modifica()" value="CERCA"> <br/>
+      <div id="visualizza_div_3"></div>
+      <br/>
+      <div id="visualizza_form"></div>
     </form>
     <form id="form_stampa" style="display:none">
       form2
@@ -277,10 +286,9 @@ Caratteristiche Menu
           dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='revoca(" + user.userid + ")' value='REVOCA'>" + "<br/>";
         }
       }
-      document.getElementById("visualizza_div").innerHTML = dummy;
+      document.getElementById("visualizza_div_2").innerHTML = dummy;
     }
 
-    
     function cerca_autorizza()
     {
       var form = document.forms.form_autorizza;
@@ -299,8 +307,67 @@ Caratteristiche Menu
           dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='autorizza(" + user.userid + ")' value='AUTORIZZA'>" + "<br/>";
         }
       }
-      document.getElementById("visualizza_div").innerHTML = dummy;
+      document.getElementById("visualizza_div_1").innerHTML = dummy;
     }
+
+    function cerca_modifica()
+    {
+      var form = document.forms.form_modifica;
+      var nome = form.input_nome.value;
+      var cognome = form.input_cognome.value;
+      var targa = form.input_targa.value;
+      
+      var dummy = "<hr>";
+
+      for(user of users)
+      {
+        console.table(user);
+        console.table(targhe[user.userid]);
+        if(user.nome == nome || user.cognome == cognome || targhe[user.userid].targa == targa)
+        {
+          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='show_modifica(" + user.userid + ")' value='MODIFICA'>" + "<br/>";
+        }
+      }
+      document.getElementById("visualizza_div_3").innerHTML = dummy;
+    }
+
+    function show_modifica(id)
+    {
+      user = users[id];
+      targa = targhe[id];
+
+      var nome = user.nome;
+      var cognome = user.cognome;
+      var luogo_di_nascita = user.natoa;
+      var data_di_nascita = user.natoil;
+      var indirizzo = user.addr;
+      var citta = user.city;
+      var targa = targa.targa;
+      var dummy = `
+          <form id="form_modifica_sel">
+          <label for="input_nome" >Nome: </label>
+          <input id="input_nome" value="${nome}" type="text"> <br/>
+          <label for="input_cognome">Cognome: </label>
+          <input id="input_cognome" value="${cognome}" type="text"> <br/>
+          <label for="input_luogo_di_nascita">Luogo di nascita: </label>
+          <input id="input_luogo_di_nascita" value="${luogo_di_nascita}" type="text"> <br/>
+          <label id="input_data_nascita">Data di nascita: </label>
+          <input type="date" value="${data_di_nascita}" id="input_data_nascita"> <br/>
+          <label for="input_indirizzo">Indirizzo di residenza: </label>
+          <input id="input_indirizzo" value="${indirizzo}" type="text"> <br/>
+          <label for="input_citta">Città: </label>
+          <input id="input_citta" value="${citta}" type="text"> <br/>
+          <label for="input_targa">Targa: </label>
+          <input type="text" value="${targa}" id="input_targa"> <br/>
+          <input type="button" value="MODIFICA" onclick="modifica()">
+          </form>`
+
+      document.getElementById("visualizza_form").innerHTML = dummy;
+    }
+    function modifica(id)
+    {
+    }
+
 
     function autorizza(id)
     {
@@ -324,12 +391,10 @@ Caratteristiche Menu
       }
     }
 
-    
-
     function display(id)
     {
       console.log(id);
-      var ids=["form_nuova","form_autorizza","form_revoca","form_controlla","form_stampa","form_chiudi"];
+      var ids=["form_nuova","form_autorizza","form_revoca","form_modifica","form_stampa","form_chiudi"];
       for(var i = 0; i < ids.length; i++)
       {
         if(id!=ids[i])
