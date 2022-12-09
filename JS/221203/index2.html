@@ -126,32 +126,32 @@ Caratteristiche Menu
       <input type="button" value="Autorizza" onclick="display('form_autorizza')">
       <input type="button" value="Revoca" onclick="display('form_revoca')">
       <input type="button" value="Modifica" onclick="display('form_modifica')">
-      <input type="button" value="Stampa" onclick="display('form_stampa')">
+      <input type="button" value="Stampa" onclick="display('form_stampa');stampa();">
       <input type="button" value="Chiudi" onclick="display('form_chiudi')">
     </div>
     <hr>
     <form id="form_nuova" style="display:none">
       <label for="input_nome">Nome: </label>
-      <input id="input_nome" type="text"> <br/>
+      <input id="input_nome" type="text" maxlength="20"> <br/>
       <label for="input_cognome">Cognome: </label>
-      <input id="input_cognome" type="text"> <br/>
+      <input id="input_cognome" type="text" maxlength="20"> <br/>
       <label for="input_luogo_di_nascita">Luogo di nascita: </label>
-      <input id="input_luogo_di_nascita" type="text"> <br/>
+      <input id="input_luogo_di_nascita" type="text" maxlength="20"> <br/>
       <label id="input_data_nascita">Data di nascita: </label>
       <input type="date" id="input_data_nascita"> <br/>
       <label for="input_indirizzo">Indirizzo di residenza: </label>
-      <input id="input_indirizzo" type="text"> <br/>
+      <input id="input_indirizzo" type="text" maxlength="40"> <br/>
       <label for="input_citta">Città: </label>
-      <input id="input_citta" type="text"> <br/>
+      <input id="input_citta" type="text" maxlength="20"> <br/>
       <label for="input_targa">Targa: </label>
       <input type="text" id="input_targa"> <br/>
       <input type="button" onclick="inserisci()" value="INSERISCI">
     </form>
     <form id="form_autorizza" style="display:none">
       <label for="input_nome">Nome: </label>
-      <input id="input_nome" type="text"> <br/>
+      <input id="input_nome" type="text" maxlength="20"> <br/>
       <label for="input_cognome">Cognome: </label>
-      <input id="input_cognome" type="text"> <br/>
+      <input id="input_cognome" type="text" maxlength="20"> <br/>
       <label for="input_targa">Targa: </label>
       <input type="text" id="input_targa"> <br/>
       <input type="button" onclick="cerca_autorizza()" value="CERCA">
@@ -159,9 +159,9 @@ Caratteristiche Menu
     </form>
     <form id="form_revoca" style="display:none">
       <label for="input_nome">Nome: </label>
-      <input id="input_nome" type="text"> <br/>
+      <input id="input_nome" type="text" maxlength="20"> <br/>
       <label for="input_cognome">Cognome: </label>
-      <input id="input_cognome" type="text"> <br/>
+      <input id="input_cognome" type="text" maxlength="20"> <br/>
       <label for="input_targa">Targa: </label>
       <input type="text" id="input_targa"> <br/>
       <input type="button" onclick="cerca_revoca()" value="CERCA">
@@ -169,9 +169,9 @@ Caratteristiche Menu
     </form>
     <form id="form_modifica" style="display:none">
       <label for="input_nome">Nome: </label>
-      <input id="input_nome" type="text"> <br/>
+      <input id="input_nome" type="text" maxlength="20"> <br/>
       <label>Cognome: </label>
-      <input id="input_cognome" type="text"> <br/>
+      <input id="input_cognome" type="text" maxlength="20"> <br/>
       <label>Targa: </label>
       <input id="input_targa" type="text"> <br/>
       <input type="button" onclick="cerca_modifica()" value="CERCA"> <br/>
@@ -179,44 +179,33 @@ Caratteristiche Menu
       <br/>
       <div id="visualizza_form"></div>
     </form>
-    <form id="form_stampa" style="display:none">
-      form2
-    </form>
-    <form id="form_chiudi" style="display:none">
-      form2
-    </form>
+    <div id="form_stampa" style="display:none">
+      
+    </div>
+    <div id="form_chiudi" style="display:none">
+    </div>
   </body>
   <script>
     let users = [];
     let targhe = [];
 
-    function check_nome()
+    function check_targa(string)
     {
-      
-    }
-    function check_cognome()
-    {
-
-    }
-    function check_luogo_di_nascita()
-    {
-
-    }
-    function check_data_di_nascita()
-    {
-
-    }
-    function check_indirizzo()
-    {
-
-    }
-    function check_citta()
-    {
-
-    }
-    function check_targa()
-    {
-
+      var regex = /[0-9]/;
+      if(!regex.test(string))
+      {
+        return false;
+      }
+      regex = /[a-zA-Z]/;
+      if(!regex.test(string))
+      {
+        return false;
+      }
+      if(string.length < 7)
+      {
+        return false;
+      }
+      return true;
     }
 
     function inserisci()
@@ -233,6 +222,11 @@ Caratteristiche Menu
       }
       
       var dummy_targa = form.input_targa.value;
+      if(!check_targa(dummy_targa))
+      {
+        alert("Targa non valida");
+        return;
+      }
 
       for(var i = 0; i < targhe.length; i++)
       {
@@ -244,11 +238,31 @@ Caratteristiche Menu
       }
 
       var dummy_nome = form.input_nome.value;
+      if(checkStringForNumbers(dummy_nome))
+      {
+        alert("Nome non valido");
+      }
       var dummy_cognome = form.input_cognome.value;
+      if(checkStringForNumbers(dummy_cognome))
+      {
+        alert("Cognome non valido");
+      }
       var dummy_natoa = form.input_luogo_di_nascita.value;
+      if(checkStringForNumbers(dummy_natoa))
+      {
+        alert("Luogo di nascita non valido");
+      }
       var dummy_natoil = form.input_data_nascita.value;
       var dummy_addr = form.input_indirizzo.value;
+      if(checkStringForNumbers(dummy_addr))
+      {
+        alert("Indirizzo non valido");
+      }
       var dummy_citta = form.input_citta.value;
+      if(checkStringForNumbers(dummy_citta))
+      {
+        alert("Città non valida");
+      }
       let targa = {
         "userid": dummy_userid,
         "targa": dummy_targa,
@@ -272,18 +286,28 @@ Caratteristiche Menu
     {
       var form = document.forms.form_revoca;
       var nome = form.input_nome.value;
+      if(checkStringForNumbers(dummy_nome))
+      {
+        alert("Nome non valido");
+      }
       var cognome = form.input_cognome.value;
+      if(checkStringForNumbers(dummy_cognome))
+      {
+        alert("Cognome non valido");
+      }
       var targa = form.input_targa.value;
+      if(!check_targa(targa))
+      {
+        alert("Targa non valida");
+      }
 
       var dummy = "<hr>";
 
       for(user of users)
       {
-        console.table(user);
-        console.table(targhe[user.userid]);
-        if(user.nome == nome || user.cognome == cognome || targhe[user.userid].targa == targa)
+        if(user.nome == nome || user.cognome == cognome || targhe[users.length-user.userid-1].targa == targa)
         {
-          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='revoca(" + user.userid + ")' value='REVOCA'>" + "<br/>";
+          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[users.length-user.userid-1].targa + "<input type='button' onclick='revoca(" + user.userid + ")' value='REVOCA'>" + "<br/>";
         }
       }
       document.getElementById("visualizza_div_2").innerHTML = dummy;
@@ -293,18 +317,28 @@ Caratteristiche Menu
     {
       var form = document.forms.form_autorizza;
       var nome = form.input_nome.value;
+      if(checkStringForNumbers(dummy_nome))
+      {
+        alert("Nome non valido");
+      }
       var cognome = form.input_cognome.value;
+      if(checkStringForNumbers(dummy_cognome))
+      {
+        alert("Cognome non valido");
+      }
       var targa = form.input_targa.value;
+      if(!check_targa(targa))
+      {
+        alert("Targa non valida");
+      }
       
       var dummy = "<hr>";
 
       for(user of users)
       {
-        console.table(user);
-        console.table(targhe[user.userid]);
-        if(user.nome == nome || user.cognome == cognome || targhe[user.userid].targa == targa)
+        if(user.nome == nome || user.cognome == cognome || targhe[users.length-user.userid-1].targa == targa)
         {
-          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='autorizza(" + user.userid + ")' value='AUTORIZZA'>" + "<br/>";
+          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[users.length-user.userid-1].targa + "<input type='button' onclick='autorizza(" + user.userid + ")' value='AUTORIZZA'>" + "<br/>";
         }
       }
       document.getElementById("visualizza_div_1").innerHTML = dummy;
@@ -314,18 +348,28 @@ Caratteristiche Menu
     {
       var form = document.forms.form_modifica;
       var nome = form.input_nome.value;
+      if(checkStringForNumbers(dummy_nome))
+      {
+        alert("Nome non valido");
+      }
       var cognome = form.input_cognome.value;
+      if(checkStringForNumbers(dummy_cognome))
+      {
+        alert("Cognome non valido");
+      }
       var targa = form.input_targa.value;
+      if(!check_targa(targa))
+      {
+        alert("Targa non valida");
+      }
       
       var dummy = "<hr>";
 
       for(user of users)
       {
-        console.table(user);
-        console.table(targhe[user.userid]);
-        if(user.nome == nome || user.cognome == cognome || targhe[user.userid].targa == targa)
+        if(user.nome == nome || user.cognome == cognome || targhe[users.length-user.userid-1].targa == targa)
         {
-          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[user.userid].targa + "<input type='button' onclick='show_modifica(" + user.userid + ")' value='MODIFICA'>" + "<br/>";
+          dummy += "Nome: " + user.nome + " Cognome: " + user.cognome + " Targa: " + targhe[users.length-user.userid-1].targa + "<input type='button' onclick='show_modifica(" + user.userid + ")' value='MODIFICA'>" + "<br/>";
         }
       }
       document.getElementById("visualizza_div_3").innerHTML = dummy;
@@ -333,16 +377,57 @@ Caratteristiche Menu
 
     function show_modifica(id)
     {
-      user = users[id];
-      targa = targhe[id];
+      var index_user;
+      for(i = 0; i < users.length; i++)
+      {
+        if(users[i].userid == id)
+        {
+          index_user = i;
+        }
+      }
+      user = users[index_user];
+
+      var index_targa;
+      for(i = 0; i < targhe.length; i++)
+      {
+        if(targhe[i].userid == id)
+        {
+          index_targa = i;
+        }
+      }
+      targa = targhe[index_targa];
 
       var nome = user.nome;
+      if(checkStringForNumbers(dummy_nome))
+      {
+        alert("Nome non valido");
+      }
       var cognome = user.cognome;
+      if(checkStringForNumbers(dummy_cognome))
+      {
+        alert("Cognome non valido");
+      }
       var luogo_di_nascita = user.natoa;
+      if(checkStringForNumbers(dummy_luogo_di_nascita))
+      {
+        alert("Luogo di nascita non valido");
+      }
       var data_di_nascita = user.natoil;
       var indirizzo = user.addr;
+      if(checkStringForNumbers(dummy_indirizzo))
+      {
+        alert("Indirizzo non valido");
+      }
       var citta = user.city;
+      if(checkStringForNumbers(dummy_citta))
+      {
+        alert("Città non valida");
+      }
       var targa = targa.targa;
+      if(!check_targa(targa))
+      {
+        alert("Targa non valida");
+      }
       var dummy = `
           <form id="form_modifica_sel">
           <label for="input_nome" >Nome: </label>
@@ -359,15 +444,84 @@ Caratteristiche Menu
           <input id="input_citta" value="${citta}" type="text"> <br/>
           <label for="input_targa">Targa: </label>
           <input type="text" value="${targa}" id="input_targa"> <br/>
-          <input type="button" value="MODIFICA" onclick="modifica()">
+          <input type="button" value="MODIFICA" onclick="modifica(${id})">
           </form>`
 
       document.getElementById("visualizza_form").innerHTML = dummy;
     }
+
     function modifica(id)
     {
+      var form = document.forms.form_modifica_sel;
+      var dummy_nome = form.input_nome;
+      if(checkStringForNumbers(dummy_nome))
+      {
+        alert("Nome non valido");
+      }
+      var dummy_cognome = form.input_cognome;
+      if(checkStringForNumbers(dummy_cognome))
+      {
+        alert("Cognome non valido");
+      }
+      var dummy_input_luogo_di_nascita = form.input_luogo_di_nascita;
+      if(checkStringForNumbers(dummy_luogo_di_nascita))
+      {
+        alert("Luogo di nascita non valido");
+      }
+      var dummy_data_nascita = form.input_data_nascita;
+      var dummy_indirizzo = form.input_indirizzo;
+      if(checkStringForNumbers(dummy_indirizzo))
+      {
+        alert("Indirizzo non valido");
+      }
+      var dummy_citta = form.input_citta;
+      if(checkStringForNumbers(dummy_citta))
+      {
+        alert("Città non valida");
+      }
+      var dummy_targa = form.input_targa;
+      if(!check_targa(targa))
+      {
+        alert("Targa non valida");
+      }
+
+      var user = users[id];
+
+      for(targa of targhe)
+      {
+        if(targa.targa = dummy_targa)
+        {
+          alert("Targa già inserita");
+        }
+      }
+      user.nome = dummy_nome;
+      user.cognome = dummy_cognome;
+      user.input_luogo_di_nascita = dummy_luogo_di_nascita;
+      user.data_nascita = dummy_data_nascita;
+      user.indirizzo = dummy_indirizzo;
+      user.citta = dummy_citta;
+      user.targa = dummy_targa;
     }
 
+    function stampa()
+    {
+      var dummy = "<table border=\"solid black 1px\">";
+
+      dummy += "<tr><td>USERID</td><td>TARGA</td><td>ZTL</td></tr>";
+      for(var i = 0; i < targhe.length; i++)
+      {
+        dummy += "<tr>";
+        dummy += `<td>${targhe[i].userid}</td><td>${targhe[i].targa}</td><td>${targhe[i].ztl}</td>`;
+        dummy += "</tr>";
+
+      }
+
+      dummy += "</table>";
+
+
+
+      document.getElementById("form_stampa").innerHTML = dummy;
+    }
 
     function autorizza(id)
     {
@@ -380,7 +534,7 @@ Caratteristiche Menu
       }
     }
     
-    function revoca()
+    function revoca(id)
     {
       for(targa of targhe)
       {
@@ -406,5 +560,15 @@ Caratteristiche Menu
         }
       }
     }
+    
+    function checkStringForNumbers(input){
+        let str = String(input);
+        for( let i = 0; i < str.length; i++){
+          if(!isNaN(str.charAt(i))){
+            return true;
+          }
+        }
+        return false;
+      }
   </script>
 </html>
