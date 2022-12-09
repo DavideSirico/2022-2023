@@ -3,7 +3,6 @@ class Main{
         Studenti studente1 = new Studenti();
         Studenti studente2 = new Studenti("Davide","Sirico",15);
         studente2.stampa();
-        studente1.tuaMadreMorta();
     }
 }
 
@@ -25,9 +24,5 @@ class Studenti{
 
     void stampa(){
         System.out.println(nome + " " + cognome + " " + eta);
-    }
-    int tuaMadreMorta(){
-        System.out.print("DIOCANE");
-        return -1;
     }
 }
