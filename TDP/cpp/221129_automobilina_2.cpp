@@ -73,14 +73,14 @@ class Polizia : public Automobilina
         {
             sirena=false;
         }
-        void changeSirena()
+        bool changeSirena()
         {
-            sirena = !sirena;
             if(carica>=2)
             {
                 carica -= 2;
                 sirena = !sirena;
             }
+            return sirena;
         }
 };
 
@@ -103,7 +103,7 @@ void visualizza(int m[DIM][DIM], int c){
                 // printf("|%2d",m[i][j]);
             } else
             {
-                printf("|%2d",m[i][j]);
+                cout << "|  ";
             }
         }
         putchar('|');
@@ -128,8 +128,7 @@ void azzera(int m[DIM][DIM])
 
 int main()
 {
-    Automobilina auto1;
-    Polizia poli1;
+    Polizia auto1;
     int m[DIM][DIM]; 
     azzera(m);
     m[24][0] = 1;
@@ -189,6 +188,19 @@ int main()
                 {
                     cout<<"Non puoi andare in quella direzione"<<endl;
                 }
+                break;
+            case 'e':
+                if(auto1.changeSirena())
+                {
+                    cout << "Sirena accesa" << endl;
+                } else 
+                {
+                    cout << "Sirena spenta" << endl;
+                }
+                
+                break;
+            case 'q':
+                return 0;
                 break;
             default:
                 cout<<"clank"<<endl;
