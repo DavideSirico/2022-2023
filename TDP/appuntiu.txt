@@ -1,0 +1,39 @@
+Parte di Benatti
+
+data una classe Animale (attributi: razza,annoNascita) definisci una sottoclasse Cane con attributi (peso e nome del cane) , costruttore e un metodo di stampa che visualizza tutti gli attributi se il peso>20
+- definizione di overload di operatori
+Con overloading di operatori si intente la proprietà di un linguaggio di programmazione ad oggetti che permette di cambiare i metodi standard che vengono chiamati quando si usano gli operatori tra classi.
+- Domanda sulle modalità di accesso ad un file
+Un file può essere in lettura, scrittura o entrambi.
+La scrittura può essere trunc (cancella il contenuto del file se esiste già), app (aggiunge testo alla fine del file).
+
+
+Class Animale
+{
+	private:
+	string razza;
+	int annoNascita;
+};
+
+Class Cane : public Animale
+{
+	private:
+	float peso;
+	string nome;
+	
+	public:
+	Cane()
+	{
+		razza = "";
+		annoNascita = 0;
+		peso = 0;
+		nome = "";
+	}
+	void stampa()
+	{
+		if(peso>20)
+		{
+			cout<<razza<<annoNascita<<peso<<nome;
+		}
+	}
+};

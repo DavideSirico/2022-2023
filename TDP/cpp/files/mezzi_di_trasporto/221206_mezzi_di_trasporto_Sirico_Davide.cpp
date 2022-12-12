@@ -112,7 +112,7 @@ class Autobus : public VeicoloAmotore
 
 int main()
 {
-    MezziTrasporto il_bus_di_fornite;
-    Autobus fortnite[10];
+    MezziTrasporto macchina;
+    Autobus giallo[10];
     return 0;
 }
