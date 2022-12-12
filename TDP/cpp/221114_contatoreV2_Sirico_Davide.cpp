@@ -16,6 +16,7 @@ Infine testa tutto con un opportuno main di prova.
 */
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 class contatoreV2
@@ -87,9 +88,16 @@ class contatoreV2
         void incrementa(){
             count++;
         }
+        friend ostream& operator <<(ostream &out, const contatoreV2& v);
 };
+ostream& operator <<(ostream &out, const contatoreV2& v)
+{
+    out<<v.count;
+    return out;
+}
 
 int main(){
+    /*
     contatoreV2 test(10);
     contatoreV2 test2(5);
     cout<<test.toString()<<endl;
@@ -106,5 +114,8 @@ int main(){
         cout<<"test è maggiore di test2"<<endl;
     else 
         cout<<"test è minore di test2"<<endl;
+    */
+    contatoreV2 test(10);
+    cout<<test;
     return 0;
 }
