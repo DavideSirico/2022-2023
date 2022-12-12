@@ -127,7 +127,7 @@ class Rombo:public Figura
 };
 
 
-float main(void)
+int main(void)
 {
     Figura f1(5,4);
     Cerchio c1(2);
