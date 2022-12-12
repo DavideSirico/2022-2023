@@ -36,10 +36,6 @@ class Contatore
             ++this->x;
         }*/
         
-
-
-
-
         Contatore operator++(int)
         {
             Contatore old = *this;
