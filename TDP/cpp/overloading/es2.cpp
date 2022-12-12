@@ -48,9 +48,27 @@ class Moto
         int cilindrata;
         string motorizzazione;
     public:
+        friend ostream& operator << (ostream& out, const Moto& m);
+};
+
+class Scooter : public Moto
+{
+    private: 
+        string bauletto;
+    public:
+        friend ostream& operator << (ostream& out, const Scooter& m);
+};
+
+class Strada : public Moto
+{
+    private:
+        string tipoCatena;
+    public:
+        friend ostream& operator << (ostream& out, const Strada& m);
 };
 
 int main()
 {
+    
     return 0;
 }
