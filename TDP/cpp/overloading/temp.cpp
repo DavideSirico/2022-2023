@@ -27,7 +27,8 @@ class Contatore
             // return dummy;
             return *this;
         }
-        /*void operator++(int)
+        /*
+        void operator++(int)
         {
             this->x++;
         }
