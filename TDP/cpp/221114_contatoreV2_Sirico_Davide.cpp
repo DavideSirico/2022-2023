@@ -59,9 +59,7 @@ class contatoreV2
             this->count=test.count;
             return *this;
         }
-         
-        
-
+     
         bool operator<(const contatoreV2& test)
         {
             if(this->count<test.count)
