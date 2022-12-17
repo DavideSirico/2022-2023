@@ -1,0 +1,12 @@
+#campo{
+    margin: auto;
+    width: 50%;
+}
+
+td{
+    color: black;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    vertical-align: center;
+}

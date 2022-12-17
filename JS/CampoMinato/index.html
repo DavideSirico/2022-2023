@@ -1,0 +1,52 @@
+<!-- campo_minato_221217_cognome_nome
+===============================================
+Scrivere una pagina  in HTML+CSS+JS
+
+per realizzare il gioco del campo campo minato
+
+il campo ha dimensioni 10x10 posizionato al centro orizzontalmente rispetto alla pagina
+
+Premendo il pulsante "NUOVA PARTITA"
+verrà generato un nuovo campo minato e riazzerati i contatori di gioco
+
+il campo conterra' 20 mine posizionate in modo casuale all'interno della matrice
+10x10
+
+le caselle che non contengono mine conterranno un numero indicante il numero delle mine adiacenti alla casella stessa (vedi file di esempio in allegato)
+
+tutte le caselle risulteranno coperte e di colore arancione alla partenza
+
+-il giocatore potrà scoprire le caselle con un click
+
+-una cella scoperta rimane tale fino ad una nuova partita
+
+-se un giocatore fa click sopra una mina perdera' una vita
+
+-se le vite arrivano a 0 verra' visualizzato al centro della pagina la scritta
+GAME OVER  con font size 40 e background color rosso.
+
+-il giocatore vince se riesce a scoprire tutte le celle che non contengono mine
+in tal caso visualzizzare al centro della pagina la scritta WINNER con font size 40 e background color giallo.
+
+Note
+Alla Partenza un giocatore ha 3 vite
+
+per riazzarare il conteggio delle vite si deve premere il pulsante
+"nuova partita" che oltre alle vite genererà un nuovo campo di gioco
+coperto
+ -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form id="form1">
+      <input type="button" onclick="nuovaPartita()" value="Nuova Partita">
+    </form>
+    <span id="vite"></span>
+    <div id="campo"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
