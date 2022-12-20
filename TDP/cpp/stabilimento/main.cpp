@@ -20,21 +20,54 @@ Periodicamente simula anche il loro rientro dalla pista, per ipotesi ogni access
 #include "bits/stdc++.h"
 using namespace std;
 
+class Ora
+{
+    private:
+        int hh;
+        int mm;
+        int ss;
+    public:
+        Ora()
+        {
+            hh = 0;
+            mm = 0;
+            ss = 0;
+        }
+        Ora(int hh, int mm, int ss)
+        {
+            this->hh = hh;
+            this->mm = mm;
+            this->ss = ss;
+            check();
+        }
+        void check()
+        {
+
+            hh += mm/60;
+            mm = mm%60;
+            mm += ss/60;
+            ss = ss%60;
+        }
+};
 class Pattini
 {
     private:
-        int numero;
+        int rimasti;
         int misura;
         bool disponibile;
     public:
-        Pattini(int numero, int misura, bool disponibile);
-        ~Pattini();
-        int getNumero();
-        int getMisura();
-        int getNumero();
-        int getMisura();
-        bool getDisponibile();
-        void setDisponibile(bool disponibile);
+        Pattini();
+        Pattini(int misura, int rimasti)
+        {
+            this->misura = misura;
+            this->rimasti = rimasti;
+            if(rimasti>0)
+            {
+                disponibile = true;
+            } else {
+                disponibile = false;
+            }
+        }
 };
 
 class Pista
@@ -43,12 +76,11 @@ class Pista
         int persone;
         int tempo;
     public:
-        Pista(int persone, int tempo);
-        ~Pista();
-        int getPersone();
-        int getTempo();
-        void setPersone(int persone);
-        void setTempo(int tempo);
+        Pista()
+        {
+            persone = 100;
+            tempo = 0;
+        }
 };
 
 class Persona
@@ -57,32 +89,35 @@ class Persona
         int misura;
         int tempo;
     public:
-        Persona() = default;
-        Persona(int numero);
-        ~Persona();
-        int getMisura();
-        int getTempo();
-        void setMisura(int misura);
-        void setTempo(int tempo);
+        Persona();
+        Persona(int misura, int tempo)
+        {
+            this->misura = misura;
+            this->tempo = tempo;
+        }
 };
 
 int main()
 {
-    Pista pista();
+    Pista pista = Pista();
     srand(time(NULL));
-    int *coda = (int*)malloc(sizeof(int)*5));
-    int numeroPersone = rand()%8+1;
+    vector<Persona> gruppo;
+    vector<Pattini> pattini(21);
+    for(int i = 0; i < 21; i++)
+    {
+        pattini[i] = Pattini(i+24,5);
+    }
+    Ora ora = Ora();
+    int numeroPersone;
     while(1)
     {
-        if(numeroPersone == 1)
+        numeroPersone = rand()%8+1;
+        cout<<"Numero di persone="<<numeroPersone<<endl;
+        for(int i = 0; i < numeroPersone; i++)
         {
-            Persona persona();
-        } else {
-            Persona gruppo[numeroPersone];
-        }
-        if(pista.getPersone() < 100)
-        {
-            
+            int randomMisura;
+            Persona persona = Persona(randomMisura,);
+            gruppo.push_back(persona);
         }
         sleep(1);
     }
