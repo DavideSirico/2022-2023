@@ -7,6 +7,8 @@ for(var i = 0; i < 10; i++)
 }
 function nuovaPartita()
 {
+    document.getElementById("campo").style.display = "block";
+    document.getElementById("alert").innerHTML = "";
     vite = 3;
     document.getElementById("vite").innerHTML = vite;
     nonMineRimaste = 80;
@@ -68,6 +70,7 @@ function scopri(x,y)
     } else if(campo[x][y] == 0)
     {
         current.innerHTML = " ";
+        nonMineRimaste--;
     } else
     {
         current.innerHTML = "" + campo[x][y];
@@ -75,12 +78,16 @@ function scopri(x,y)
     }
     if(vite == 0)
     {
-        // TODO
-        alert("Hai perso!");
+        document.getElementById("campo").style.display = "none";
+        document.getElementById("alert").style.display = "block";
+        document.getElementById("alert").innerHTML = "GAME OVER";
+        document.getElementById("alert").style.backgroundColor = "red";
     }
     if(nonMineRimaste==0)
     {
-        alert("Hai vinto!");
+        document.getElementById("alert").style.display = "block";
+        document.getElementById("campo").style.display = "none";
+        document.getElementById("alert").style.backgroundColor = "yellow";
     }
     
 }
