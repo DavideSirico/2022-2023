@@ -1,0 +1,15 @@
+Il modello a cascata è un modello in cui le azioni succedono una dopo l'altra.
+
+Esempio Fermi Notify:
+    - Progettazione (analisi)
+        - Analizzare il problema            |
+        - Faceva interviste                 | -> Ambigui
+        - Raccogliere documentazione        |
+        - Decidere gli input e gli output   |
+    - Progettazione (software)
+        - UML (Attività, sequenza)
+        - Diagrammi classi
+        - Documentazione Tecnica
+    - Implementazione
+    - Testing
+    - Installazione/Rilascio
