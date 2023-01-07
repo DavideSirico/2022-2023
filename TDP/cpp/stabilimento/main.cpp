@@ -20,11 +20,14 @@ Periodicamente simula anche il loro rientro dalla pista, per ipotesi ogni access
 */
 
 //TODOs
+// cambiare i pattini in una matrice di oggetti
 /* 
     * 1) Gestire il guadagno e il costo
     * 2) Manutenzione dei pattini
     * 3) Gestire le persone in coda
     * 4) Gestire il tempo
+    * 5) Gestire l'uscita dei gruppi
+    * 
 */
 #include "bits/stdc++.h"
 #include <unistd.h>
@@ -36,7 +39,7 @@ using namespace std;
 #define NUMERO_PATTINI (TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1)*NUMERO_PATTINI_PER_TAGLIA
 #define TARIFFA 0.1
 #define SCONTO 0.25
-#define PERSONE_PER_SCONTO 3
+#define MIN_PERSONE_SCONTO 3
 #define TEMPO_INCREMENTO 15
 #define COSTO_MANUTENZIONE 2
 
@@ -90,6 +93,10 @@ class Ora
             this->mm += mm;
             check();
         }
+        bool operator==(const Ora& o)
+        {
+            return (this->hh == o.hh && this->mm == o.mm);
+        }        
         friend ostream& operator<<(ostream& os, const Ora& o);
 };
 ostream& operator<<(ostream& os, const Ora& o)
@@ -105,35 +112,23 @@ class Pattini
     private:
         int taglia;
         bool disponibile;
-        int numeroNoleggi;
     public:
         Pattini(int taglia)
         {
             this->taglia = taglia;
             this->disponibile = true;
-            numeroNoleggi = NUMERO_PATTINI_PER_TAGLIA;
         }
         int getTaglia()
         {
             return taglia;
         }
-        int getNumeroNoleggi()
-        {
-            return numeroNoleggi;
-        }
         bool checkNoleggio()
         {
-            if(numeroNoleggi > 0 && disponibile)
-                return true;
-            else
-                return false;
+            return disponibile;
         }
         void noleggio()
         {
-            if(checkNoleggio())
-            {
-                numeroNoleggi--;
-            }
+            disponibile = false;
         }
         void manutenzione(){};
 };
@@ -168,9 +163,21 @@ class Pista
         {
             gruppi.erase(gruppi.begin());
         }
+        void removeGruppo(int i)
+        {
+            gruppi.erase(gruppi.begin()+i);
+        }
         void incrementaTempo()
         {
             orario_attuale.add(TEMPO_INCREMENTO);
+        }
+        int getNumeroGruppi()
+        {
+            return gruppi.size();
+        }
+        Gruppo getGruppo(int i)
+        {
+            return gruppi[i];
         }
 };
 
@@ -224,13 +231,13 @@ class Persona
         {
             this->orario_uscita = orario_uscita;
         }
-        bool checkPattini(vector<Pattini> pattini)
+        bool checkPattini(vector<vector<Pattini>> pattini)
         {
-            for(int j = 0; j < pattini.size(); j++)
+            for(int i = 0; i < NUMERO_PATTINI_PER_TAGLIA; i++)
             {
-                if(pattini[j].getTaglia() == taglia && pattini[j].checkNoleggio())
+                if(pattini[taglia-TAGLIA_PATTINI_MIN][i].checkNoleggio())
                 {
-                    pattini[j].noleggio();
+                    pattini[taglia-TAGLIA_PATTINI_MIN][i].noleggio();
                     return true;
                 }
             }
@@ -260,9 +267,9 @@ class Gruppo
             }
             this->inPista = false;
         }
-        bool checkPattini(vector<Pattini> pattini)
+        bool checkPattini(vector<vector<Pattini>> pattini)
         {
-            vector<Pattini> temp = pattini;
+            vector<vector<Pattini>> temp = pattini;
             for(int i = 0; i < numeroPersone; i++)
             {
                 if(persone[i].checkPattini(temp) == false)
@@ -283,6 +290,14 @@ class Gruppo
         {
             return numeroPersone;
         }
+        Ora getOrarioEntrata()
+        {
+            return orario_entrata;
+        }
+        Ora getOrarioUscita()
+        {
+            return Orario_uscita;
+        }
 
 
         friend ostream& operator<<(ostream& out, Gruppo& gruppo);
@@ -296,7 +311,6 @@ ostream& operator<<(ostream& out, Gruppo& gruppo)
     for(int i = 0; i < gruppo.numeroPersone; i++)
     {
         out<<"Persona "<<i<<endl;
-        out<<"Id="<<gruppo.persone[i].getId()<<endl;
         out<<"Taglia="<<gruppo.persone[i].getTaglia()<<endl;
     }
     return out;
@@ -313,12 +327,16 @@ int main()
     int id = 0;
 
     vector<Gruppo> coda;
-    vector<Pattini> pattini;
+    vector< vector<Pattini> > pattini;
 
-
+    // Creazione dei pattini
     for(int i = 0; i < TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1; i++)
     {
-        pattini.push_back(Pattini(i+TAGLIA_PATTINI_MIN));
+        for(int j = 0; j < NUMERO_PATTINI_PER_TAGLIA; j++)
+        {
+            Pattini pattino = Pattini(i+TAGLIA_PATTINI_MIN);
+            pattini[i][j] = pattino;
+        }
     }
 
     int numeroPersone;
@@ -346,6 +364,16 @@ int main()
         {
             cout<<"Non ci sono abbastanza pattini/non c'è posto in pista per il gruppo"<<endl;
         }
+
+        // Faccio uscire i gruppi che hanno finito il loro noleggio
+        for(int i = 0; i < pista.getNumeroGruppi(); i++)
+        {
+            if(pista.getGruppo(i).getOrarioUscita() == ora)
+            {
+                pista.removeGruppo(i);
+            }
+        }
+
 
 
         cout<<endl<<endl;
