@@ -32,6 +32,7 @@ using namespace std;
 #define MIN_PERSONE_SCONTO 3
 #define TEMPO_INCREMENTO 15
 #define COSTO_MANUTENZIONE 2
+#define MAX_PERSONE_PER_GRUPPO 8
 
 class Ora
 {
@@ -152,6 +153,10 @@ class Pattini
         bool isDisponibile()
         {
             return disponibile;
+        }
+        bool isManutenzione()
+        {
+            return manutenzione;
         }
         bool checkNoleggio()
         {
@@ -400,10 +405,10 @@ int main()
             {
                 if(pattini[i][j].getUtilizzi() >= 10)
                 {
-                    cout<<"PATTINI IN MANUTENZIONE FINO ALLE"<<ora+Ora(0,rand()%31+5,0)<<endl;
+                    cout<<"PATTINI IN MANUTENZIONE FINO ALLE"<<ora+Ora(0,15,0)<<endl;
                     pattini[i][j].inizioManutenzione(ora);
                 }
-                if(pattini[i][j].isDisponibile() == false && pattini[i][j].getOrarioFineManutenzione() <= ora)
+                if(pattini[i][j].isManutenzione() == false && pattini[i][j].getOrarioFineManutenzione() <= ora)
                 {
                     pattini[i][j].fineManutenzione();
                     soldi-=COSTO_MANUTENZIONE;
@@ -412,7 +417,7 @@ int main()
         }
 
         // Numero di persone che vogliono accedere alla pista
-        numeroPersone = rand()%8+1;
+        numeroPersone = rand()%MAX_PERSONE_PER_GRUPPO+1;
 
         Ora orario_uscita_random = ora + Ora(0,rand()%31+5,0);
 
@@ -447,7 +452,7 @@ int main()
                 Ora ora_uscita = pista.getGruppo(i).getOrarioUscita();
                 Ora ora_delta = ora_uscita - ora_entrata;
                 float temp_soldi = pista.getGruppo(i).getNumeroPersone() * TARIFFA * (ora_delta.getMinuti());
-                if(pista.getGruppo(i).getNumeroPersone()>=3)
+                if(pista.getGruppo(i).getNumeroPersone()>=MIN_PERSONE_SCONTO)
                 {
                     temp_soldi = temp_soldi * (1-SCONTO);
                 }
