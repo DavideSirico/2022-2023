@@ -7,7 +7,6 @@
 Se la pista non è in grado di ospitare tutte le persone o se le scarpe non sono disponibili le persone si mettono in coda di ingresso. (Ti consiglio un array circolare di oggetti per implementarlo).
 Al termine dell’accesso della pista viene registrata l’ora di uscita ed è fatta pagare una tariffa di 10 centesimi al minuto per persona . La tariffa è scontata del 25% se le persone erano almeno in gruppo di tre persone. La tariffa viene calcolata sul gruppo di persone. 
 Ogni 10 noleggi ogni paio di scarpe viene messo in manutenzione per 15 minuti per essere affilato. Ogni manutenzione costa 2 euro.
-La manutenzione della pista costa 20 cent al minuto.
 Scrivi un programma C++ che implementi tutte le classi necessarie per la gestione degli ingressi e delle uscite.
 Il programma oltre a questo calcola e stampa il totale dei costi e degli introiti della pista, con opportune funzioni che forniscano l’output.
 Il programma stampa anche quante persone sono nella pista e quali paia di scarpe sono occupate e quali disponibili.
@@ -19,16 +18,7 @@ Periodicamente simula anche il loro rientro dalla pista, per ipotesi ogni access
 // Documenta il pgm con il diagramma delle classi, e con un txt di spiegazioni che ti/ci aiuti a capire le tue scelte progettuali.
 */
 
-//TODOs
-// cambiare i pattini in una matrice di oggetti
-/* 
-    * 1) Gestire il guadagno e il costo
-    * 2) Manutenzione dei pattini
-    * 3) Gestire le persone in coda
-    * 4) Gestire il tempo
-    * 5) Gestire l'uscita dei gruppi
-    * 
-*/
+
 #include "bits/stdc++.h"
 #include <unistd.h>
 using namespace std;
@@ -78,6 +68,15 @@ class Ora
             if(hh >= 24)
                 hh %= 24;
         }
+        int getMinuti()
+        {
+            return hh*60+mm;
+        }
+        void add(int ss)
+        {
+            this->ss += ss;
+            check();
+        }
         bool operator==(const Ora& o)
         {
             if(this->hh == o.hh && this->mm == o.mm && this->ss == o.ss)
@@ -103,6 +102,15 @@ class Ora
             temp.check();
             return temp;
         }
+        Ora operator-(const Ora& o)
+        {
+            Ora temp;
+            temp.hh = this->hh - o.hh;
+            temp.mm = this->mm - o.mm;
+            temp.ss = this->ss - o.ss;
+            temp.check();
+            return temp;
+        }
         friend ostream& operator<<(ostream& os, const Ora& o);
 };
 ostream& operator<<(ostream& os, const Ora& o)
@@ -118,6 +126,7 @@ class Pattini
     private:
         int taglia;
         bool disponibile;
+        bool manutenzione;
         int utilizzi;
         Ora orarioManutenzione;
     public:
@@ -125,7 +134,8 @@ class Pattini
         {
             this->taglia = taglia;
             this->disponibile = true;
-            utilizzi = 0;
+            this->manutenzione = false;
+            this->utilizzi = 0;
         }
         int getTaglia()
         {
@@ -145,24 +155,24 @@ class Pattini
         }
         bool checkNoleggio()
         {
-            if(disponibile)
+            if(disponibile && !manutenzione)
                 return true;
             else 
                 return false;
         }
         void noleggio()
         {
-            disponibile = false;
+            disponibile = true;
             utilizzi++;
         }
-        void manutenzione(Ora ora)
+        void inizioManutenzione(Ora ora)
         {
-            disponibile = false;
+            manutenzione = false;
             orarioManutenzione = ora + Ora(0,0,15);
         }
         void fineManutenzione()
         {
-            disponibile = true;
+            manutenzione = false;
             orarioManutenzione = Ora(0,0,0);
         }
 };
@@ -353,6 +363,8 @@ int main()
 {
     srand(time(NULL));
 
+    float soldi = 0;
+
     Pista pista = Pista();
     Ora ora = Ora();
 
@@ -388,11 +400,13 @@ int main()
             {
                 if(pattini[i][j].getUtilizzi() >= 10)
                 {
-                    pattini[i][j].manutenzione(ora);
+                    cout<<"PATTINI IN MANUTENZIONE FINO ALLE"<<ora+Ora(0,rand()%31+5,0)<<endl;
+                    pattini[i][j].inizioManutenzione(ora);
                 }
                 if(pattini[i][j].isDisponibile() == false && pattini[i][j].getOrarioFineManutenzione() <= ora)
                 {
                     pattini[i][j].fineManutenzione();
+                    soldi-=COSTO_MANUTENZIONE;
                 }                
             }
         }
@@ -411,17 +425,16 @@ int main()
         coda.push_back(gruppo);
 
         // Controllo se il gruppo può accedere alla pista
-        if(!gruppo.checkPattini(pattini) || pista.getNumeroPersone()+gruppo.getNumeroPersone() > PERSONE_MAX)
+        if(!coda[0].checkPattini(pattini) || pista.getNumeroPersone()+coda[0].getNumeroPersone() > PERSONE_MAX)
         {
             cout<<"Non ci sono abbastanza pattini/non c'è posto in pista per il gruppo"<<endl;
         } else 
         {
             cout<<"Il gruppo può accedere alla pista"<<endl;
             pista.addGruppo(gruppo);
+            coda.erase(coda.begin());
             pattini = gruppo.noleggio(pattini);
         }
-
-
 
         // Faccio uscire i gruppi che hanno finito il loro noleggio
         for(int i = 0; i < pista.getNumeroGruppi(); i++)
@@ -430,10 +443,20 @@ int main()
             {
                 //TODO dare un id ai gruppi
                 cout<<"Il gruppo "<<i<<" ha finito il noleggio"<<endl;
+                Ora ora_entrata = pista.getGruppo(i).getOrarioEntrata();
+                Ora ora_uscita = pista.getGruppo(i).getOrarioUscita();
+                Ora ora_delta = ora_uscita - ora_entrata;
+                float temp_soldi = pista.getGruppo(i).getNumeroPersone() * TARIFFA * (ora_delta.getMinuti());
+                if(pista.getGruppo(i).getNumeroPersone()>=3)
+                {
+                    temp_soldi = temp_soldi * (1-SCONTO);
+                }
+                soldi += temp_soldi;
                 pista.removeGruppo(i);
             }
         }
 
+        cout<<"Soldi: "<<soldi<<endl;
         cout<<endl<<endl;
         // Incremento dell'orario attuale
         ora.add(TEMPO_INCREMENTO);
