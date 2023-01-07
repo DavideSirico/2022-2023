@@ -48,61 +48,67 @@ class Ora
     private:
         int hh;
         int mm;
+        int ss;
     public:
         Ora()
         {
             hh = 0;
             mm = 0;
+            ss = 0;
         }
-        Ora(int hh, int mm)
+        Ora(int hh, int mm, int ss)
         {
             this->hh = hh;
             this->mm = mm;
+            this->ss = ss;
             check();
         }
         void check()
         {
-
-            hh += mm/60;
-            mm = mm%60;
-        }
-        int getHh()
-        {
-            return hh;
-        }
-        int getMm()
-        {
-            return mm;
-        }
-        void setHh(int hh)
-        {
-            this->hh = hh;
-        }
-        void setMm(int mm)
-        {
-            this->mm = mm;
-        }
-        void add(int hh, int mm)
-        {
-            this->hh += hh;
-            this->mm += mm;
-            check();
-        }
-        void add(int mm)
-        {
-            this->mm += mm;
-            check();
+            if(ss >= 60)
+            {
+                mm += ss/60;
+                ss %= 60;
+            }
+            if(mm >= 60)
+            {
+                hh += mm/60;
+                mm %= 60;
+            }
+            if(hh >= 24)
+                hh %= 24;
         }
         bool operator==(const Ora& o)
         {
-            return (this->hh == o.hh && this->mm == o.mm);
-        }        
+            if(this->hh == o.hh && this->mm == o.mm && this->ss == o.ss)
+                return true;
+            return false;
+        }
+        bool operator<=(const Ora& o)
+        {
+            if(this->hh < o.hh)
+                return true;
+            else if(this->hh == o.hh && this->mm < o.mm)
+                return true;
+            else if(this->hh == o.hh && this->mm == o.mm && this->ss <= o.ss)
+                return true;
+            return false;
+        }
+        Ora operator+(const Ora& o)
+        {
+            Ora temp;
+            temp.hh = this->hh + o.hh;
+            temp.mm = this->mm + o.mm;
+            temp.ss = this->ss + o.ss;
+            temp.check();
+            return temp;
+        }
         friend ostream& operator<<(ostream& os, const Ora& o);
 };
 ostream& operator<<(ostream& os, const Ora& o)
 {
-    char dummy[6];
-    sprintf(dummy,"%02d:%02d",o.hh,o.mm);
+    char dummy[9];
+    sprintf(dummy,"%02d:%02d:%02d",o.hh,o.mm,o.ss);
     os<<dummy<<endl;
     return os;
 }
@@ -112,26 +118,183 @@ class Pattini
     private:
         int taglia;
         bool disponibile;
+        int utilizzi;
+        Ora orarioManutenzione;
     public:
         Pattini(int taglia)
         {
             this->taglia = taglia;
             this->disponibile = true;
+            utilizzi = 0;
         }
         int getTaglia()
         {
             return taglia;
         }
-        bool checkNoleggio()
+        int getUtilizzi()
+        {
+            return utilizzi;
+        }
+        Ora getOrarioFineManutenzione()
+        {
+            return orarioManutenzione;
+        }
+        bool isDisponibile()
         {
             return disponibile;
+        }
+        bool checkNoleggio()
+        {
+            if(disponibile)
+                return true;
+            else 
+                return false;
         }
         void noleggio()
         {
             disponibile = false;
+            utilizzi++;
         }
-        void manutenzione(){};
+        void manutenzione(Ora ora)
+        {
+            disponibile = false;
+            orarioManutenzione = ora + Ora(0,0,15);
+        }
+        void fineManutenzione()
+        {
+            disponibile = true;
+            orarioManutenzione = Ora(0,0,0);
+        }
 };
+class Persona
+{
+    private:
+        int taglia;
+        Ora orario_entrata;
+        Ora orario_uscita;
+    public:
+        Persona(int taglia)
+        {
+            this->taglia = taglia;
+            orario_entrata = Ora();
+            orario_uscita = Ora();
+        }
+        Persona(int taglia, Ora orario_entrata, Ora orario_uscita)
+        {
+            this->taglia = taglia;
+            this->orario_entrata = orario_entrata;
+            this->orario_uscita = orario_uscita;
+        }
+        int getTaglia()
+        {
+            return taglia;
+        }
+        Ora getOrarioEntrata()
+        {
+            return orario_entrata;
+        }
+        void setOrarioEntrata(Ora orario_entrata)
+        {
+            this->orario_entrata = orario_entrata;
+        }
+        Ora getOrarioUscita()
+        {
+            return orario_uscita;
+        }
+        void setOrarioUscita(Ora orario_uscita)
+        {
+            this->orario_uscita = orario_uscita;
+        }
+        bool checkPattini(vector<vector<Pattini>> pattini)
+        {
+            for(int i = 0; i < NUMERO_PATTINI_PER_TAGLIA; i++)
+            {
+                if(pattini[taglia-TAGLIA_PATTINI_MIN][i].checkNoleggio())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        vector<vector<Pattini>> noleggia(vector<vector<Pattini>> pattini)
+        {
+            for(int i = 0; i < NUMERO_PATTINI_PER_TAGLIA; i++)
+            {
+                if(pattini[taglia-TAGLIA_PATTINI_MIN][i].checkNoleggio())
+                {
+                    pattini[taglia-TAGLIA_PATTINI_MIN][i].noleggio();
+                    break;
+                }
+            }
+            return pattini;
+        }
+};
+class Gruppo
+{
+    private:
+        vector<Persona> persone;
+        int numeroPersone;
+        Ora orario_entrata;
+        Ora Orario_uscita;
+    public:
+        Gruppo(int numeroPersone, Ora orario_entrata, Ora orario_uscita)
+        {
+            this->numeroPersone = numeroPersone;
+            this->orario_entrata = orario_entrata;
+            this->Orario_uscita = orario_uscita;
+            for(int i = 0; i < numeroPersone; i++)
+            {
+                int taglia = rand() % (TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1) + TAGLIA_PATTINI_MIN;
+                Persona persona = Persona(taglia);
+                persone.push_back(persona);
+            }
+        }
+        bool checkPattini(vector<vector<Pattini>> pattini)
+        {
+            vector<vector<Pattini>> temp = pattini;
+            for(int i = 0; i < numeroPersone; i++)
+            {
+                if(persone[i].checkPattini(temp) == false)
+                    return false;
+            }
+            return true;
+        }
+        vector<vector<Pattini>> noleggio(vector<vector<Pattini>> pattini)
+        {
+            for(int i = 0; i < numeroPersone; i++)
+            {
+                pattini = persone[i].noleggia(pattini);
+            }
+            return pattini;
+        }
+        int getNumeroPersone()
+        {
+            return numeroPersone;
+        }
+        Ora getOrarioEntrata()
+        {
+            return orario_entrata;
+        }
+        Ora getOrarioUscita()
+        {
+            return Orario_uscita;
+        }
+
+
+        friend ostream& operator<<(ostream& out, Gruppo& gruppo);
+};
+ostream& operator<<(ostream& out, Gruppo& gruppo)
+{
+    out<<"Numero persone="<<gruppo.numeroPersone<<endl;
+    out<<"Orario entrata="<<gruppo.orario_entrata<<endl;
+    out<<"Orario uscita="<<gruppo.Orario_uscita<<endl;
+    for(int i = 0; i < gruppo.numeroPersone; i++)
+    {
+        out<<"Persona "<<i<<endl;
+        out<<"Taglia="<<gruppo.persone[i].getTaglia()<<endl;
+    }
+    return out;
+}
 
 class Pista
 {
@@ -143,10 +306,15 @@ class Pista
         {
             orario_attuale = Ora();
         }
-        //TODO
-        int getNumeroPersone();
-        //TODO
-        void setNumeroPersone(int numeroPersone);
+        int getNumeroPersone()
+        {
+            int numeroPersone = 0;
+            for(int i = 0; i < gruppi.size(); i++)
+            {
+                numeroPersone += gruppi[i].getNumeroPersone();
+            }
+            return numeroPersone;
+        }
         Ora getOrarioAttuale()
         {
             return orario_attuale;
@@ -181,142 +349,6 @@ class Pista
         }
 };
 
-class Persona
-{
-    private:
-        int taglia;
-        bool inPista;
-        Ora orario_entrata;
-        Ora orario_uscita;
-    public:
-        Persona(int taglia)
-        {
-            this->taglia = taglia;
-            inPista = false;
-            orario_entrata = Ora();
-            orario_uscita = Ora();
-        }
-        Persona(int taglia, bool inPista, Ora orario_entrata, Ora orario_uscita)
-        {
-            this->taglia = taglia;
-            this->inPista = inPista;
-            this->orario_entrata = orario_entrata;
-            this->orario_uscita = orario_uscita;
-        }
-        int getTaglia()
-        {
-            return taglia;
-        }
-        bool getInPista()
-        {
-            return inPista;
-        }
-        void setInPista(bool inPista)
-        {
-            this->inPista = inPista;
-        }
-        Ora getOrarioEntrata()
-        {
-            return orario_entrata;
-        }
-        void setOrarioEntrata(Ora orario_entrata)
-        {
-            this->orario_entrata = orario_entrata;
-        }
-        Ora getOrarioUscita()
-        {
-            return orario_uscita;
-        }
-        void setOrarioUscita(Ora orario_uscita)
-        {
-            this->orario_uscita = orario_uscita;
-        }
-        bool checkPattini(vector<vector<Pattini>> pattini)
-        {
-            for(int i = 0; i < NUMERO_PATTINI_PER_TAGLIA; i++)
-            {
-                if(pattini[taglia-TAGLIA_PATTINI_MIN][i].checkNoleggio())
-                {
-                    pattini[taglia-TAGLIA_PATTINI_MIN][i].noleggio();
-                    return true;
-                }
-            }
-            return false;
-        }
-};
-
-class Gruppo
-{
-    private:
-        vector<Persona> persone;
-        int numeroPersone;
-        Ora orario_entrata;
-        Ora Orario_uscita;
-        bool inPista;
-    public:
-        Gruppo(int numeroPersone, Ora orario_entrata, Ora orario_uscita)
-        {
-            this->numeroPersone = numeroPersone;
-            this->orario_entrata = orario_entrata;
-            this->Orario_uscita = orario_uscita;
-            for(int i = 0; i < numeroPersone; i++)
-            {
-                int taglia = rand() % (TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1) + TAGLIA_PATTINI_MIN;
-                Persona persona = Persona(taglia);
-                persone.push_back(persona);
-            }
-            this->inPista = false;
-        }
-        bool checkPattini(vector<vector<Pattini>> pattini)
-        {
-            vector<vector<Pattini>> temp = pattini;
-            for(int i = 0; i < numeroPersone; i++)
-            {
-                if(persone[i].checkPattini(temp) == false)
-                    return false;
-            }
-            pattini = temp;
-            return true;
-        }
-        void setInPista(bool inPista)
-        {
-            this->inPista = inPista;
-        }
-        bool getInPista()
-        {
-            return inPista;
-        }
-        int getNumeroPersone()
-        {
-            return numeroPersone;
-        }
-        Ora getOrarioEntrata()
-        {
-            return orario_entrata;
-        }
-        Ora getOrarioUscita()
-        {
-            return Orario_uscita;
-        }
-
-
-        friend ostream& operator<<(ostream& out, Gruppo& gruppo);
-};
-ostream& operator<<(ostream& out, Gruppo& gruppo)
-{
-    out<<"Numero persone="<<gruppo.numeroPersone<<endl;
-    out<<"Orario entrata="<<gruppo.orario_entrata.getHh()<<":"<<gruppo.orario_entrata.getMm()<<endl;
-    out<<"Orario uscita="<<gruppo.Orario_uscita.getHh()<<":"<<gruppo.Orario_uscita.getMm()<<endl;
-    out<<"In pista="<<gruppo.getInPista()<<endl;
-    for(int i = 0; i < gruppo.numeroPersone; i++)
-    {
-        out<<"Persona "<<i<<endl;
-        out<<"Taglia="<<gruppo.persone[i].getTaglia()<<endl;
-    }
-    return out;
-}
-
-
 int main()
 {
     srand(time(NULL));
@@ -327,7 +359,10 @@ int main()
     int id = 0;
 
     vector<Gruppo> coda;
-    vector< vector<Pattini> > pattini;
+    vector<vector<Pattini>> pattini;
+
+    pattini.resize(TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1);
+
 
     // Creazione dei pattini
     for(int i = 0; i < TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1; i++)
@@ -335,7 +370,7 @@ int main()
         for(int j = 0; j < NUMERO_PATTINI_PER_TAGLIA; j++)
         {
             Pattini pattino = Pattini(i+TAGLIA_PATTINI_MIN);
-            pattini[i][j] = pattino;
+            pattini[i].push_back(pattino);
         }
     }
 
@@ -344,11 +379,28 @@ int main()
     while(1)
     {
         // Visualizzo l'orario attuale
-        cout<<"Orario attuale="<<ora<<endl;
+        cout<<"Orario attuale="<<ora;
+
+        // metto in manutenzione i pattini che hanno superato il numero di utilizzi e li rendo nuovamente disponibili se la manutenzione è finita
+        for(int i = 0; i < pattini.size(); i++)
+        {
+            for(int j = 0; j < pattini[i].size(); j++)
+            {
+                if(pattini[i][j].getUtilizzi() >= 10)
+                {
+                    pattini[i][j].manutenzione(ora);
+                }
+                if(pattini[i][j].isDisponibile() == false && pattini[i][j].getOrarioFineManutenzione() <= ora)
+                {
+                    pattini[i][j].fineManutenzione();
+                }                
+            }
+        }
+
         // Numero di persone che vogliono accedere alla pista
         numeroPersone = rand()%8+1;
-        
-        Ora orario_uscita_random = Ora(ora.getHh(),ora.getMm()+(rand()%31+5));
+
+        Ora orario_uscita_random = ora + Ora(0,rand()%31+5,0);
 
         // Creazione del gruppo di persone che vogliono accedere alla pista
         Gruppo gruppo = Gruppo(numeroPersone,ora,orario_uscita_random);
@@ -357,24 +409,30 @@ int main()
         cout<<"Gruppo:"<<gruppo<<endl;
         
         coda.push_back(gruppo);
-        
 
         // Controllo se il gruppo può accedere alla pista
         if(!gruppo.checkPattini(pattini) || pista.getNumeroPersone()+gruppo.getNumeroPersone() > PERSONE_MAX)
         {
             cout<<"Non ci sono abbastanza pattini/non c'è posto in pista per il gruppo"<<endl;
+        } else 
+        {
+            cout<<"Il gruppo può accedere alla pista"<<endl;
+            pista.addGruppo(gruppo);
+            pattini = gruppo.noleggio(pattini);
         }
+
+
 
         // Faccio uscire i gruppi che hanno finito il loro noleggio
         for(int i = 0; i < pista.getNumeroGruppi(); i++)
         {
-            if(pista.getGruppo(i).getOrarioUscita() == ora)
+            if(pista.getGruppo(i).getOrarioUscita() <= ora)
             {
+                //TODO dare un id ai gruppi
+                cout<<"Il gruppo "<<i<<" ha finito il noleggio"<<endl;
                 pista.removeGruppo(i);
             }
         }
-
-
 
         cout<<endl<<endl;
         // Incremento dell'orario attuale
