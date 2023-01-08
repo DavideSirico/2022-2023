@@ -269,7 +269,7 @@ ostream& operator<<(ostream& out, Gruppo& gruppo)
 {
     out<<"Numero persone="<<gruppo.numeroPersone<<endl;
     out<<"Orario entrata="<<gruppo.orario_entrata<<endl;
-    out<<"Orario uscita="<<gruppo.Orario_uscita<<endl;
+    out<<"Orario uscita="<<gruppo.orario_uscita<<endl;
     for(int i = 0; i < gruppo.numeroPersone; i++)
     {
         out<<"Persona "<<i<<endl;
@@ -334,8 +334,8 @@ int main()
     vector<Gruppo> coda;
     vector<vector<Pattini>> pattini;
 
+    // Creazione del vettore di pattini
     pattini.resize(TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1);
-
 
     // Creazione dei pattini
     for(int i = 0; i < TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1; i++)
@@ -366,9 +366,10 @@ int main()
                 }
                 if(pattini[i][j].isManutenzione() == false && pattini[i][j].getOrarioFineManutenzione() <= ora)
                 {
+                    cout<<"PATTINI USCITI DALLA MANUTENZIONE"<<endl;
                     pattini[i][j].fineManutenzione();
                     soldi-=COSTO_MANUTENZIONE;
-                }                
+                }
             }
         }
 
@@ -403,7 +404,7 @@ int main()
             if(pista.getGruppo(i).getOrarioUscita() <= ora)
             {
                 //TODO dare un id ai gruppi
-                cout<<"Il gruppo "<<i<<" ha finito il noleggio"<<endl;
+                cout<<"Il gruppo "<<i/*posizione nella coda al momento dell'entrata*/<<" ha finito il noleggio"<<endl;
                 Ora ora_entrata = pista.getGruppo(i).getOrarioEntrata();
                 Ora ora_uscita = pista.getGruppo(i).getOrarioUscita();
                 Ora ora_delta = ora_uscita - ora_entrata;
