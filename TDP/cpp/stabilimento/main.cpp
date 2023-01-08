@@ -18,7 +18,6 @@ Periodicamente simula anche il loro rientro dalla pista, per ipotesi ogni access
 // Documenta il pgm con il diagramma delle classi, e con un txt di spiegazioni che ti/ci aiuti a capire le tue scelte progettuali.
 */
 
-
 #include "bits/stdc++.h"
 #include <unistd.h>
 using namespace std;
@@ -40,20 +39,6 @@ class Ora
         int hh;
         int mm;
         int ss;
-    public:
-        Ora()
-        {
-            hh = 0;
-            mm = 0;
-            ss = 0;
-        }
-        Ora(int hh, int mm, int ss)
-        {
-            this->hh = hh;
-            this->mm = mm;
-            this->ss = ss;
-            check();
-        }
         void check()
         {
             if(ss >= 60)
@@ -68,6 +53,20 @@ class Ora
             }
             if(hh >= 24)
                 hh %= 24;
+        }
+    public:
+        Ora()
+        {
+            hh = 0;
+            mm = 0;
+            ss = 0;
+        }
+        Ora(int hh, int mm, int ss)
+        {
+            this->hh = hh;
+            this->mm = mm;
+            this->ss = ss;
+            check();
         }
         int getMinuti()
         {
@@ -150,10 +149,6 @@ class Pattini
         {
             return orarioManutenzione;
         }
-        bool isDisponibile()
-        {
-            return disponibile;
-        }
         bool isManutenzione()
         {
             return manutenzione;
@@ -185,40 +180,14 @@ class Persona
 {
     private:
         int taglia;
-        Ora orario_entrata;
-        Ora orario_uscita;
     public:
         Persona(int taglia)
         {
             this->taglia = taglia;
-            orario_entrata = Ora();
-            orario_uscita = Ora();
-        }
-        Persona(int taglia, Ora orario_entrata, Ora orario_uscita)
-        {
-            this->taglia = taglia;
-            this->orario_entrata = orario_entrata;
-            this->orario_uscita = orario_uscita;
         }
         int getTaglia()
         {
             return taglia;
-        }
-        Ora getOrarioEntrata()
-        {
-            return orario_entrata;
-        }
-        void setOrarioEntrata(Ora orario_entrata)
-        {
-            this->orario_entrata = orario_entrata;
-        }
-        Ora getOrarioUscita()
-        {
-            return orario_uscita;
-        }
-        void setOrarioUscita(Ora orario_uscita)
-        {
-            this->orario_uscita = orario_uscita;
         }
         bool checkPattini(vector<vector<Pattini>> pattini)
         {
@@ -250,13 +219,13 @@ class Gruppo
         vector<Persona> persone;
         int numeroPersone;
         Ora orario_entrata;
-        Ora Orario_uscita;
+        Ora orario_uscita;
     public:
         Gruppo(int numeroPersone, Ora orario_entrata, Ora orario_uscita)
         {
             this->numeroPersone = numeroPersone;
             this->orario_entrata = orario_entrata;
-            this->Orario_uscita = orario_uscita;
+            this->orario_uscita = orario_uscita;
             for(int i = 0; i < numeroPersone; i++)
             {
                 int taglia = rand() % (TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1) + TAGLIA_PATTINI_MIN;
@@ -292,10 +261,8 @@ class Gruppo
         }
         Ora getOrarioUscita()
         {
-            return Orario_uscita;
+            return orario_uscita;
         }
-
-
         friend ostream& operator<<(ostream& out, Gruppo& gruppo);
 };
 ostream& operator<<(ostream& out, Gruppo& gruppo)
@@ -330,14 +297,6 @@ class Pista
             }
             return numeroPersone;
         }
-        Ora getOrarioAttuale()
-        {
-            return orario_attuale;
-        }
-        void setOrarioAttuale(Ora orario_attuale)
-        {
-            this->orario_attuale = orario_attuale;
-        }
         void addGruppo(Gruppo g)
         {
             gruppi.push_back(g);
@@ -349,10 +308,6 @@ class Pista
         void removeGruppo(int i)
         {
             gruppi.erase(gruppi.begin()+i);
-        }
-        void incrementaTempo()
-        {
-            orario_attuale.add(TEMPO_INCREMENTO);
         }
         int getNumeroGruppi()
         {
@@ -368,6 +323,7 @@ int main()
 {
     srand(time(NULL));
 
+    // Fatturato
     float soldi = 0;
 
     Pista pista = Pista();
