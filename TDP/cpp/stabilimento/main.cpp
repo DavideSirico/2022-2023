@@ -125,9 +125,13 @@ class Pattini
 {
     private:
         int taglia;
+        // Flag che descrive lo stato del pattino (In utilizzo da qualcuno o no)
         bool disponibile;
+        // Flag che descrive lo stato del pattino (E' in manutenzione o no)
         bool manutenzione;
+        // Contatore che descrive quante volte il pattino è stato utilizzato
         int utilizzi;
+        // Orario in cui il pattino sarà disponibile dopo la manutenzione
         Ora orarioManutenzione;
     public:
         Pattini(int taglia)
@@ -155,6 +159,7 @@ class Pattini
         }
         bool checkNoleggio()
         {
+            // Se lo stato del pattino è disponibile e non è in manutenzione allora è possibile noleggiarlo
             if(disponibile && !manutenzione)
                 return true;
             else 
@@ -162,12 +167,16 @@ class Pattini
         }
         void noleggio()
         {
-            disponibile = true;
+            disponibile = false;
             utilizzi++;
+        }
+        void fineNoleggio()
+        {
+            disponibile = true;
         }
         void inizioManutenzione(Ora ora)
         {
-            manutenzione = false;
+            manutenzione = true;
             orarioManutenzione = ora + Ora(0,0,15);
         }
         void fineManutenzione()
@@ -189,6 +198,7 @@ class Persona
         {
             return taglia;
         }
+        // Se e' presente almeno un pattino disponibile per la taglia della persona allora ritorna true
         bool checkPattini(vector<vector<Pattini>> pattini)
         {
             for(int i = 0; i < NUMERO_PATTINI_PER_TAGLIA; i++)
@@ -200,6 +210,7 @@ class Persona
             }
             return false;
         }
+        // Noleggia il primo pattino disponibile per la taglia della persona
         vector<vector<Pattini>> noleggia(vector<vector<Pattini>> pattini)
         {
             for(int i = 0; i < NUMERO_PATTINI_PER_TAGLIA; i++)
@@ -212,13 +223,29 @@ class Persona
             }
             return pattini;
         }
+        vector<vector<Pattini>> fineNoleggia(vector<vector<Pattini>> pattini)
+        {
+            for(int i = 0; i < NUMERO_PATTINI_PER_TAGLIA; i++)
+            {
+                if(pattini[taglia-TAGLIA_PATTINI_MIN][i].checkNoleggio())
+                {
+                    pattini[taglia-TAGLIA_PATTINI_MIN][i].fineNoleggio();
+                    break;
+                }
+            }
+            return pattini;
+        }
 };
 class Gruppo
 {
     private:
+        // Vettore che contiene tutte le persone del gruppo
         vector<Persona> persone;
+        // Numero di persone del gruppo
         int numeroPersone;
+        // Orario di entrata del gruppo
         Ora orario_entrata;
+        // Orario di uscita del gruppo
         Ora orario_uscita;
     public:
         Gruppo(int numeroPersone, Ora orario_entrata, Ora orario_uscita)
@@ -226,6 +253,7 @@ class Gruppo
             this->numeroPersone = numeroPersone;
             this->orario_entrata = orario_entrata;
             this->orario_uscita = orario_uscita;
+            // Generazione delle persone con taglie random del gruppo
             for(int i = 0; i < numeroPersone; i++)
             {
                 int taglia = rand() % (TAGLIA_PATTINI_MAX-TAGLIA_PATTINI_MIN+1) + TAGLIA_PATTINI_MIN;
@@ -233,6 +261,7 @@ class Gruppo
                 persone.push_back(persona);
             }
         }
+        // Controlla se tutti i membri del gruppo possono noleggiare un pattino
         bool checkPattini(vector<vector<Pattini>> pattini)
         {
             vector<vector<Pattini>> temp = pattini;
@@ -243,11 +272,21 @@ class Gruppo
             }
             return true;
         }
+        // Noleggia un pattino per ogni membro del gruppo
         vector<vector<Pattini>> noleggio(vector<vector<Pattini>> pattini)
         {
             for(int i = 0; i < numeroPersone; i++)
             {
                 pattini = persone[i].noleggia(pattini);
+            }
+            return pattini;
+        }
+        // Restituisce i pattini noleggiati da ogni membro del gruppo
+        vector<vector<Pattini>> fineNoleggio(vector<vector<Pattini>> pattini)
+        {
+            for(int i = 0; i < numeroPersone; i++)
+            {
+                pattini = persone[i].fineNoleggia(pattini);
             }
             return pattini;
         }
@@ -281,7 +320,9 @@ ostream& operator<<(ostream& out, Gruppo& gruppo)
 class Pista
 {
     private:
+        // Orario attuale della simulazione
         Ora orario_attuale;
+        // Vettore che contiene tutti i gruppi presenti nella pista
         vector<Gruppo> gruppi;
     public:
         Pista()
@@ -364,7 +405,7 @@ int main()
                     cout<<"PATTINI IN MANUTENZIONE FINO ALLE"<<ora+Ora(0,15,0)<<endl;
                     pattini[i][j].inizioManutenzione(ora);
                 }
-                if(pattini[i][j].isManutenzione() == false && pattini[i][j].getOrarioFineManutenzione() <= ora)
+                if(pattini[i][j].isManutenzione() == true && pattini[i][j].getOrarioFineManutenzione() <= ora)
                 {
                     cout<<"PATTINI USCITI DALLA MANUTENZIONE"<<endl;
                     pattini[i][j].fineManutenzione();
@@ -403,8 +444,8 @@ int main()
         {
             if(pista.getGruppo(i).getOrarioUscita() <= ora)
             {
-                //TODO dare un id ai gruppi
                 cout<<"Il gruppo "<<i/*posizione nella coda al momento dell'entrata*/<<" ha finito il noleggio"<<endl;
+                // Calcolo il fatturato
                 Ora ora_entrata = pista.getGruppo(i).getOrarioEntrata();
                 Ora ora_uscita = pista.getGruppo(i).getOrarioUscita();
                 Ora ora_delta = ora_uscita - ora_entrata;
@@ -414,10 +455,13 @@ int main()
                     temp_soldi = temp_soldi * (1-SCONTO);
                 }
                 soldi += temp_soldi;
+                // Fine noleggio
+                pista.getGruppo(i).fineNoleggio(pattini);
+                // Rimozione del gruppo dalla pista
                 pista.removeGruppo(i);
             }
         }
-
+        // Visualizzo il fatturato
         cout<<"Soldi: "<<soldi<<endl;
         cout<<endl<<endl;
         // Incremento dell'orario attuale
