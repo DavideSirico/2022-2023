@@ -1,0 +1,2 @@
+L'ingegneria del SW --> studia la progettazione tutto ciò che riguarda la creazione di un software
+ES: modello a cascata
