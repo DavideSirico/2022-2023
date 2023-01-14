@@ -1,0 +1,17 @@
+Rete con 1 hub e 3 pc
+- Cosa succede quando si fa il ping tra 2 pc?
+Quando si fa il ping tra 2 pc il pacchetto raggiunge l'hub che manda il pacchetto a tutti gli altri pc sulla rete. Il pc destinatario rimanda il pacchetto all'hub e lo rimanda indietro. I pc che ricevono il pacchetto ma non sono i destinatario il pacchetto viene ignorato.
+- Cosa succede quando si fa il ping su 192.168.1.255 
+Quando si fa il ping su 192.168.1.255 si manda un messaggio broadcast (a tutti i pc sulla rete) i pacchetti vengono mantati a tutti i PC correttamente ma al ritorno i pacchetti collidono e una parte di essi viene persa. 
+- Descrivi la tabella ARP di un pc (com’è prima della simulazione e dopo la simulazione)
+La tabella ARP prima della simulazione è vuola e dopo la simulazione si riempie con gli indirizzi MAC associati agli indirizzi IP dei PC.
+
+
+Rete con 2 hub e 3 pc
+- Cosa succede quando si fa il ping tra 2 pc collegati sullo stesso hub? 
+Quando si fa il ping tra 2 pc collegati sullo stesso hub il pacchetto viene mandato a tutti i pc.
+- Cosa succede quando si fa il ping tra 2 pc collegati sullo diversi hub?
+
+- Cosa succede quando si fa il ping su 192.168.1.255
+
+- Descrivi la tabella ARP di un pc (com’è prima della simulazione e dopo la simulazione
