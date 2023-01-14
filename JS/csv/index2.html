@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+</head>
+
+<body>
+  <form id="form1">
+    <input type="file" id="file1">
+    <br>
+    <input type="radio" id="radio1" name="radio" value=",">
+    <label for="radio1">,</label>
+    <input type="radio" id="radio2" name="radio" value=";">
+    <label for="radio1">;</label>
+  </form>
+  <button onclick="leggiFile()">Leggi</button>
+  <div id="visualizza"></div>
+  <script>
+    function leggiFile() {
+      const myForm = document.getElementById("form1");
+      const myFile = document.getElementById("file1");
+      const input = myFile.files[0];
+      const reader = new FileReader();
+
+      reader.readAsText(input);
+
+      reader.onload = function (e) {
+        var text = e.target.result;
+        // console.log(text);
+        text = text.split("\n");
+        // console.log(text);
+        for (var i = 0; i < text.length; i++) {
+          text[i] = text[i].split(myForm.radio.value);
+        }
+        var somma = 0.0;
+        for (var i = 0; i < text.length; i++) {
+          var temp = text[i][4].replace(".","").replace(",", ".");
+          temp = parseFloat(temp);
+          console.log(temp);
+          if(!isNaN(temp))
+            somma += temp;
+        }
+        console.log("Somma: " + somma);
+        var dummy = "<table border=\"1px solid black\">";
+        for (var i = 0; i < text.length; i++) {
+          dummy += "<tr>";
+          for (var j = 0; j < text[i].length; j++) {
+            dummy += "<td>" + text[i][j] + "</td>";
+          }
+          dummy += "</tr>";
+        }
+        dummy += "</table>";
+
+        document.getElementById("visualizza").innerHTML = dummy;
+      }
+
+    }
+  </script>
+</body>
+
+</html>

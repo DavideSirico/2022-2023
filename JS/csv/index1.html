@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <form id="form1">
+      <input type="file" id="file1">
+    </form>
+    <button onclick="leggiFile()">Leggi</button>
+    <div id="visualizza"></div>
+    <script>
+        function leggiFile(){
+          const myForm = document.getElementById("form1");
+          const myFile = document.getElementById("file1");
+          const input = myFile.files[0];
+          const reader = new FileReader();
+
+          reader.readAsText(input);
+
+          reader.onload = function (e)
+          {
+            var text = e.target.result;
+            // console.log(text);
+            text = text.split("\n");
+            // console.log(text);
+            for (var i = 0; i < text.length; i++) {
+              text[i] = text[i].split(",");
+              var somma = 0;
+              if(i>=2)
+              {
+                for( var j = 0; j < 6; j++)
+                {
+                  somma += Number(text[i][j+3]);
+                }
+                var media = Number(somma / 6);
+                text[i][9] = media.toFixed(2);
+              }
+            }
+            text[0][9] = "";
+            text[1][9] = "Media";
+            console.log(text);
+            // text[text.length] = 
+            var dummy = "<table border=\"1px solid black\">";
+            for(var i = 0; i < text.length; i++){
+              dummy += "<tr>";
+              for(var j = 0; j < text[i].length; j++){
+                dummy += "<td>" + text[i][j] + "</td>";
+              }
+              dummy += "</tr>";
+            }
+            dummy += "</table>";
+  
+            document.getElementById("visualizza").innerHTML = dummy;
+
+          }
+
+        }
+    </script>
+  </body>
+</html>
