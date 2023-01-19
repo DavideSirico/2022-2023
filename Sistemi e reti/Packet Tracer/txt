@@ -11,7 +11,8 @@ Rete con 2 hub e 3 pc
 - Cosa succede quando si fa il ping tra 2 pc collegati sullo stesso hub? 
 Quando si fa il ping tra 2 pc collegati sullo stesso hub il pacchetto viene mandato a tutti i pc.
 - Cosa succede quando si fa il ping tra 2 pc collegati sullo diversi hub?
-
+Quando si fa il ping tra 2 pc collegati sul diversi hub il messaggio viene mandato all'hub e poi mantado a tutti i device collegati ad esso tra cui il 2° hub che a sua volta manda a tutti i pc collegati ad esso il messaggio (compreso il pc destinatario).
 - Cosa succede quando si fa il ping su 192.168.1.255
-
+Quando si fa il ping su 192.168.1.255 il pacchetto viene mandato all'hub e viene reinderizzato agli altri device ma le varie risposte collidono tra di loro.
 - Descrivi la tabella ARP di un pc (com’è prima della simulazione e dopo la simulazione
+La tabella ARP di un pc prima della simulazione è vuota e dopo la simulazione contiene il nome del pc con l'IP e il MAC address.
