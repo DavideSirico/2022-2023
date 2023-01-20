@@ -5,7 +5,7 @@ public class MainProdotti {
         Prodotti p = new Prodotti();
         ProdottiNonAlimentari p1 = new ProdottiNonAlimentari();
         ProdottiAlimentari p2 = new ProdottiAlimentari();
-        p.descrizione = "Banana";
+        // p.descrizione = "Banana";
         
     }
     
