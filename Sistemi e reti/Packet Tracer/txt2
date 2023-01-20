@@ -1,0 +1,2 @@
+Se 2 pc devono comunicare nella stessa sottorete (insieme di pc divisi da uno switch) il pacchetto si ferma fino allo switch più vicino (blocca il passaggio)
+Invece se il pacchetto deve passare ad un'altra sottorete esso lascierà passare il pacchetto.
