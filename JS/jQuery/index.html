@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+		<title>Registration Form</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="javascript2.js"></script>
+		</head>
+		<body>
+			<section>
+				<header><h1>Verifica password</h1></header>
+				<article>
+					<form metod="GET" action="#" class="register_form" id="register_form">
+						<ul>
+						<li>
+						<label for="password">Password:</label>
+						<input type="password" name="password" id="password" required oninput="checkPasswords()">
+						</li>
+						<li>
+						<label for="re password">Retype
+						Password:</label>
+						<input type="password" name="re password" id="password2" required oninput="checkPasswords()">
+						</li>
+                        <li>
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" required oninput="checkEmail()">
+                        </li>
+						<li>
+						<div id="check">
+						<p>Risultato:</p>
+						</div>
+						</li>
+						</ul>
+					</form>
+				</article>
+			</section>
+			<footer>
+			</footer>
+		</body>
+</html>

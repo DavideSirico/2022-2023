@@ -22,7 +22,7 @@ void loop()
 
   Serial.print("Potenziometro: ");
   Serial.println(analogRead(POTENTIOMETER_PIN));
-
+'3'
   int potenziometro = analogRead(POTENTIOMETER_PIN);
 
 
