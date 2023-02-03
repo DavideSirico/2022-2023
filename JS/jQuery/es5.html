@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>es5</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <div>
+    <form id="form1">
+      <label for="nrow">Righe: </label>
+      <input type="number" id="nrow" name="nrow"><br />
+      <label for="ncol">Colonne: </label>
+      <input type="number" id="ncol" name="ncol">
+      <br />
+      <input type="button" value="Nuova" id="button" onclick="genera()">
+      <br />
+      <input type="button" value="ruota" id="button" onclick="ruota()">
+      <br />
+      <input type="button" value="Ribalta" id="button" onclick="ribalta()">
+      <br />
+      <input type="button" value="Evidenziando" id="button" onclick="evidenziando()">
+    </form>
+  </div>
+
+  <div id="visualizza">
+  </div>
+
+  <script>
+    var m;
+    function genera() {
+      m = new Array(row);
+      var row = $("#nrow").val();
+      var col = $("#ncol").val();
+      if (col <= 0 || row <= 0) {
+        $("#visualizza").html("Errore");
+        return;
+      }
+      for (var i = 0; i < row; i++) {
+        m[i] = new Array(col);
+      }
+
+      for (var i = 0; i < row; i++) {
+        for (var j = 0; j < col; j++) {
+          m[i][j] = parseInt(Math.random() * (91 - 21 + 1) + 21);
+        }
+      }
+
+      visualizza();
+
+    }
+
+    function visualizza() {
+      var dummy = "<table id=\"tabella\" border=\"solid black 1px\">";
+      var ctr = 0;
+      for (var i = 0; i < m.length; i++) {
+        dummy += "<tr>";
+        for (var j = 0; j < m[0].length; j++) {
+          dummy += "<td id=\"";
+          dummy += ctr;
+          dummy += "\">";
+          dummy += m[i][j];
+          dummy += "</td>";
+          ctr++;
+        }
+        dummy += "</tr>";
+      }
+      dummy += "</table>";
+
+      $("#visualizza").html(dummy);
+    }
+
+    function ruota() {
+      m.reverse();
+      visualizza();
+    }
+    
+    function ribalta() {
+      for(var i = 0; i < m.length; i++)
+      {
+        m[i].reverse();
+      }
+      visualizza();
+    }
+    function evidenziando() {
+      var max = 0;
+      var imax = 0;
+      for (var i = 0; i < m.length; i++) {
+        max = 0;
+        imax = 0;
+        for (var j = 0; j < m[0].length; j++) {
+          if (m[i][j] > max) {
+            imax = j;
+            max = m[i][j];
+          }
+        }
+        var temp = (i * m.length) + imax;
+        $("#"+temp).css("background-color", "yellow");
+      }
+    }
+  </script>
+</body>
+
+</html>
