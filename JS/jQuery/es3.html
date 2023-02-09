@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>es3</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <form id="form1">
+    Nome:
+    <input type="text" id="nome" name="nome" maxlength="50" onchange="checkNome()"><br>
+    Cognome:
+    <input type="text" id="cognome" name="cognome" maxlength="50" onchange="checkCognome()"><br>
+    <hr>
+    Sesso:<br>
+    <input type="radio" id="sesso_maschio" name="sesso" value="Maschio">
+    <label for="sesso_maschio">Maschio</label>
+    <input type="radio" id="sesso_femmina" name="sesso" value="Femmina">
+    <label for="sesso_femmina">Femmina</label>
+    <hr>
+    <legend>Ateneo</legend>
+    <select name="ateneo">
+      <option value="" selected="selected"></option>
+      <option value="Università_Mantova">Università Mantova</option>
+      <option value="Università_Bologna">Università Bologna</option>
+      <option value="Politecnico_di_Milano">Politecnico di Milano</option>
+    </select>
+    <br>
+    <hr>
+    CAP:
+    <input type="text" id="cap" maxlength="5" onchange="checkCAP()">
+    <br>
+    <hr>
+    <input type="checkbox" id="studente" name="studente_lavoratore">
+    Studente
+    <input type="checkbox" id="lavoratore" name="studente_lavoratore">
+    Lavoratore
+    <br>
+    <hr>
+    Descrizione lavoro svolto:
+    <input type="text" id="descrizione" maxlength="80">
+    <br>
+    <hr>
+    <input type="button" value="invio" id="button_invio" onclick="invio()">
+    <input type="button" value="reset" id="button_reset" onclick="reset()">
+  </form>
+  <script>
+
+    function checkCAP() {
+      var cap = $("#cap").val();
+      if (cap.length != 5 || isNaN(cap)) {
+        alert("CAP non valido");
+      }
+    }
+
+    function checkNome() {
+      let str = String($("#nome").val());
+      for (let i = 0; i < str.length; i++) {
+        if (!isNaN(str.charAt(i))) {
+          alert("Nome non valido");
+        }
+      }
+      return false;
+    }
+
+    function checkCognome() {
+      let str = String($("#cognome").val());
+      for (let i = 0; i < str.length; i++) {
+        if (!isNaN(str.charAt(i))) {
+          alert("Cognome non valido")
+        }
+      }
+      return false;
+    }
+
+    function invio() {
+      nome = $("#nome").val();
+      cognome = $("#cognome").val();
+      sesso = $('form input[type=radio]:checked').val() == undefined ? "" : $('form input[type=radio]:checked').val();
+      ateneo = $("#ateneo").is(":selected");
+      studente = $("#studente").is(":checked");
+      lavoratore = $("#lavoratore").is(":checked");
+      descrizione = $("#descrizione").val();
+      if (nome == "" || cognome == "") {
+        alert("Nome o Cognome non validi");
+      }
+      if (sesso == "") {
+        alert("Sesso non valido");
+      }
+      if (ateneo == "") {
+        alert("Ateneo non valido");
+      }
+      if ((studente == true || lavoratore == true) && descrizione == "") {
+        alert("Descrizione non valida");
+      }
+    }
+  </script>
+</body>
+
+</html>
