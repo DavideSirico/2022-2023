@@ -1,0 +1,23 @@
+Stack in C
+x64 stack meno utilizzato --> più registri
+inizio --> esp --> punta cima
+fine --> ebp --> punta alla base
+
+r/m32 --> o un registro o un valore a 4 byte
+
+pop r/m32 incrementa (dall'alto verso il basso)
+push r/m32 decrementa
+
+
+alla chiamata di una funzione avvengono 3 passaggi:
+ - passaggio del controllo
+ - passare dei dati (valori di ritorno dentro il registro eax) (i parametri (ebp + offset) spinti da destra verso sinistra dentro lo stack)
+ - allocare e deallocare memoria
+
+
+call --> push e jump
+ret --> pop e jump
+stack frame --> porzione dello stack creata per ogni funzione (cambiare il base pointer (ebp))
+
+stack vs heap
+

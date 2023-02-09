@@ -1,0 +1,11 @@
+Classi Astratte:
+    -ha i prototipi dei metodi/strutture dati ma non l'implementazione
+    -usabile tramite extends
+    -
+
+
+Interfacce:
+    -supportano l'ereditarietà multipla
+    -ha i prototipi dei metodi/strutture dati ma non l'implementazione
+    -per utilizzare un interfaccia si usa una classe che fa implements dell'interfaccia
+    -class oggetto implements A
