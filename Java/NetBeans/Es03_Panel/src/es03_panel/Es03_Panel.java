@@ -6,7 +6,7 @@ public class Es03_Panel {
         JPanel panel = new JPanel();
         
         panel.add(new JLabel("Ciao"));
-        panel.add(new JLabel("adw,nhkdfhsadasfjadshbkjdsahhsjhbfsadbkfhdbjhf"));
+        panel.add(new JLabel("Prova"));
         window.add(panel);
         
         window.setSize(100,100);
