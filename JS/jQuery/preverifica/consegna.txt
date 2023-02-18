@@ -1,0 +1,53 @@
+<!--
+Esercizio1
+===========
+
+Prima parte
+-----------
+-create una matrice in javascript leggendo i dati dal file
+ tabella.csv
+
+-visualizzate nella pagina :
+
+ 1 bottone: "visualizza"
+ che se premuto visualizza la matrice come una TABLE.HTML
+
+ 1 campo di input "RIGA" con a fianco 1 bottone: "cancella"
+   se il bottone viene premuto verrà cancellata la riga della matrice    specificata  nel campo di input
+
+NB
+ Per visualizzare la matrice modificata si dovrà premere nuovamente
+ sul bottone "visualizza"-->
+
+Seconda Parte
+-------------
+aggiungete a fianco del bottone "cancella" un checkbox "conferma"
+e scrivete un codice usando jquery affinche' il bottone "cancella"
+risulti disabilitato se il checkbox "conferma" non è stato premuto
+
+
+Esercizio 2
+===========
+Eseguite i seguenti compiti utilizzando jquery
+
+1>selezionare tutti i tag P e aggiungere una classe css a tutti quanti
+
+$("p").addClass();
+
+2>selezionare tutte le tabelle e specificare per tutte le tabelle lo stesso bordo
+$("table").css("border","1px")
+
+3>selezionare tutte le tabelle e visualizzare le righe con sfondo bianco e nero alternato (tabelle zebrate)
+$("table tr:odd").css("background-color","white")
+$("table tr:even").css("background-color","black")
+
+4>selezionate con jquery un elemento con un particolare ID
+evidenziate con un bordo rosso gli ancestor dell'elemento
+evidenziate con un bordo blu i "siblings" (i pari livello o "fratelli")
+evidenziate con un bordo verde gli elementi child ("figli")
+$("#id *").css("border","red")
+$("#id ~ *").css("border","blue")
+$("#id > *").css("border","green")
+
+5>Selezionate tutti i tag che hanno l'attributo href="index.html" e modificatene il testo associato in "Casa"
+$("[href='index.html']").html("Casa");

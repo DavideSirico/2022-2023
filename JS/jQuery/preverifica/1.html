@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="jquery-3.6.3.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <input type="file" id="mioFile" />
+  <button onclick="leggi_file()">leggi file</button>
+  <br />
+  <form id="form1">
+    <input type="button" id="b_visualizza" value="visualizza" onclick="visualizza()">
+    <input type="text" id="t_riga">
+    <br />
+    <input type="button" id="b_cancella" value="cancella" onclick="cancella()" disabled>
+    <input type="checkbox" id="conferma" name="conferma" onclick="disabilita()">
+    <label for="conferma">Conferma</label>
+  </form>
+
+  <p id="visualizza_table">
+  </p>
+</body>
+
+</html>
