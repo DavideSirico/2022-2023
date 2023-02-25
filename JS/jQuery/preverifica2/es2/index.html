@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<!-- TODO fare l'input del file e tutto il resto -->
+
+<body>
+  <div id="inputs">
+    <input type="file" id="mioFile" />
+    <button onclick="leggiFile()">Leggi</button>
+    <br/>
+    <input type="text" name="text_datainizio" id="text_datainizio">
+    <label for="text_datainizio">DATA_INIZIO</label>
+    <input type="text" name="text_datafine" id="text_datafine">
+    <label for="text_datafine">DATA FINE</label>
+    <input type="text" name="text_testo" id="text_testo">
+    <label for="text_testo">TESTO</label>
+    <input type="button" value="CERCA" onclick="cerca()">
+  </div>
+  <div id="visualizza"></div>
+  <script src="script.js"></script>
+  <script src="jquery-3.6.3.js"></script>
+</body>
+
+</html>

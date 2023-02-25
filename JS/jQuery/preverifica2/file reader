@@ -1,0 +1,17 @@
+file reader
+buffer reader
+
+imparare a leggere un file contenente solo numeri ( 1 per riga )
+solo char
+solo stringa
+numeri o char o stringhe separate da uno space
+file con dei record
+es:
+123, rossi, mario, 47
+123, rossi, mario, 47
+123, rossi, mario, 47
+123, rossi, mario, 47
+
+.split()
+scrivere 5 numeri in un file numeri.txt
+leggere il file con java
