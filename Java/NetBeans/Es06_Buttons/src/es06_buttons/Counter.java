@@ -8,7 +8,6 @@ public class Counter implements ActionListener {
     private JLabel label;
     public Counter()
     {
-        
     }
     public Counter(JLabel label)
     {
@@ -24,5 +23,6 @@ public class Counter implements ActionListener {
         dummy = Integer.toString(counter);
         label.setText(dummy);
     }
+    
 }
 

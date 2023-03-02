@@ -17,13 +17,11 @@ public class Es06_Buttons {
         JButton jButton2 = new JButton("Reset");
         JLabel jLContatore = new JLabel("0");
         
-        Counter listener1 = new Counter(jLContatore,jButton1,jButton2);
-//        Reset listener2 = new Reset(jLContatore);
+        Counter listener1 = new Counter(jLContatore,jButton1);
+        Counter listener2 = new Counter(jLContatore,jButton2);
         
         jButton1.addActionListener(listener1);
-//        jButton2.addActionListener(listener2);
-        jButton2.addActionListener(listener1);
-        
+        jButton2.addActionListener(listener2);
         
         panel.add(jButton1);
         panel.add(jButton2);
@@ -33,6 +31,5 @@ public class Es06_Buttons {
         window.setSize(1000,1000);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
-
     }    
 }

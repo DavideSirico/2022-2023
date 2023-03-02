@@ -17,6 +17,10 @@ P2 [5,4,3,2,1,15]
 
 import java.util.Stack;
 import java.util.Random;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
 public class Stack01 {
     public static void main(String[] args) {
         Random random = new Random();

@@ -19,5 +19,4 @@ public class Reset implements ActionListener {
     {   
         label.setText("0");
     }
-    
 }
