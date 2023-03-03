@@ -6,15 +6,15 @@ public class MainVettore
 		Random random = new Random();
 		// int[] v = {1,2,3,54,56,57,58,59,4,5,65};
 		// int[] v = {1,2,3,4,5};
-		int[] v = {12,4,66,7,89};
-		
-		getMaggiore(v,5);
+		// int[] v = {12,4,66,7,89};
+	    int[] v = {1,2,3,1,2,3,4};
+		getMaggiore(v,7);
 		
 		
 	}
 	static void getMaggiore(int[] v, int DIM)
 	{
-		int c = 0;
+		int c = 1;
 		int cMax = 0;
 		int iMaxInizio = 0;
 		int iMaxFine = 0;
@@ -39,13 +39,14 @@ public class MainVettore
 				iMaxFine = iFine;
 				cMax = c;
 			}
-			c = 0;
+			c = 1;
 		}
-		// System.out.println("iMaxInizio: " + iMaxInizio);
-		// System.out.println("iMaxFine: " + iMaxFine);
+		System.out.println("iMaxInizio: " + iMaxInizio);
+		System.out.println("iMaxFine: " + iMaxFine);
+		System.out.println("cMax: " + cMax);
 		
 		
-		int[] ris = new int[iMaxFine-iMaxInizio+1];
+		int[] ris = new int[cMax];
 		
 		for(int i = iMaxInizio; i < iMaxFine; i++)
 		{
@@ -55,7 +56,7 @@ public class MainVettore
 		{
 			ris[0] = v[0];
 		}
-		for(int i = 0; i < iMaxFine-iMaxInizio+1; i++)
+		for(int i = 0; i < cMax; i++)
 		{
 			System.out.print(ris[i] + " ");
 		}
