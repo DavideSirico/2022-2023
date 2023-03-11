@@ -1,32 +1,25 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JTextField;
-
-public class MyListenter implements ActionListener {
-    private JTextField textFieldDec;
-    private JTextField textFieldBin;
-
-    public MyListenter()
+import java.awt.*;
+import javax.swing.*;
+import java.util.Random;
+public class MyListener implements ActionListener {
+    private MyJPanel jPanel;
+    private JFrame jFrame;
+    public MyListener()
     {
     }
-
-    public MyListenter(JTextField textFieldDec, JTextField textFieldBin)
-    {
-        this.textFieldDec = textFieldDec;
-        this.textFieldBin = textFieldBin;
+    public MyListener(MyJPanel jPanel, JFrame jFrame) {
+        this.jPanel = jPanel;
+        this.jFrame = jFrame;
     }
-
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        String dummy = textFieldDec.getText();
-        try{
-            dummy = Integer.toBinaryString(Integer.parseInt(dummy));
-            textFieldBin.setText(dummy);
-        } catch (NumberFormatException ex)
-        {
-            textFieldBin.setText("Lol \"" + textFieldDec.getText() + "\" non è un numero");
-        }
+        Random r = new Random();
+        int n = r.nextInt(6)+1;
+        Graphics2D g2 = (Graphics2D) jPanel.getGraphics();
+        jPanel.setNumber(n,g2);
     }
 }
 

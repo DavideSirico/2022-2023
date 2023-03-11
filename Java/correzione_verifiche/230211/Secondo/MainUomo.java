@@ -53,15 +53,13 @@ public class MainUomo
 			s[i] = new Stagista(dummyNome,dummyCognome,dummyCodiceFiscale,dummySesso.charAt(0),dummyCitta,random.nextInt(41)+10,i+1);
 		}
 		
-		/*
 		for(int i = 0; i < 10; i++)
 		{
 			s[i].stampa();
 		}
-		*/
 		
 		System.out.println("Piu giovane: ");
-		// s[getGiovane(s,DIM)].stampa();
+		s[getGiovane(s,DIM)].stampa();
 		
 		System.out.println("Citta piu popolare: " + getCittaPreferita(s,DIM));
 	}

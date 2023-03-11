@@ -54,7 +54,6 @@ class Uomo
 	
 	static boolean validateCodiceFiscale(String codiceFiscale)
 	{
-		/*
 		int[] numbers = new int[10];
 		for(int i = 0; i < 10; i++)
 		{
@@ -175,8 +174,6 @@ class Uomo
 			return false;
 		}
 		return true;
-		*/
-		 return true;
 	}
 	
 	int annoNascita()
@@ -210,11 +207,9 @@ class Uomo
 	
 	
 	
-	/*
 	void stampa()
 	{
 		System.out.println("Persona [CodiceFiscale=" + codiceFiscale + ", Nome=" + nome + ", Cognome=" + cognome + "]");
 	}
-	* */
 	
 }

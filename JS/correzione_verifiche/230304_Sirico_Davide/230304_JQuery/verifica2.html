@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<HTML>
+	<HEAD>
+		<TITLE>Tabelle con rowspan e colspan</TITLE>
+		<META charset="UTF-8">
+	</HEAD>
+	<BODY>
+		<!--html aggiunto-->
+		<script src="jquery-3.6.3.js"></script>
+		<script src="script.js"></script>
+		<input type="button" value="ES1" id="button1" onclick="es1()">
+		<input type="button" value="ES2" id="button2" onclick="es2()">
+		<input type="button" value="ES3" id="button3" onclick="es3()">
+		<!--fine html aggiuto-->
+		<H3>Check Box</H3>
+			<input type="checkbox" id="id_bianco" value="bianco">
+			<label for="id_bianco" name="FermiCol">Bianco</label><br>
+				
+			<input type="checkbox" name="Finale" id="id_rosso" value="rosso">
+			<label for="id_rosso">Rosso</label><br>
+			
+			<input type="checkbox" name="colori" id="id_verde" value="verde">
+			<label for="id_verde">Verde</label><br>
+	    <H3>Prima Tabella</H3>
+		<TABLE  width="50%" border="3" cellpadding="10" cellspacing="10">
+			<TBODY>
+				</TH><TH width="25%">Bianchi</TH><TH width="25%">Rossi</TH><TH width="25%">Verdi</TH></TR>
+				<TR><TD>10</TD><TD>8</TD><TD>0</TD></TR>
+				<TR><TD>8</TD><TD>3</TD><TD>5</TD></TR>
+				<TR><TD>8</TD><TD>6</TD><TD>2</TD></TR>
+				<TR><TD>9</TD><TD>8</TD><TD>1</TD></TR>
+				<TR><TD>10</TD><TD>5</TD><TD>1</TD></TR>
+			</TBODY>
+		</TABLE>
+		<BR>
+		<H3>Seconda Tabella</H3>
+		<TABLE name="FermiTabLiceo" border="3" >
+			<TR> 
+				<TD> <I>Nominativo</I> </TD> <TD>Ich</TD> <TD>du</TD> <TD>er</TD> <TD>es</TD> <TD>sie</TD>
+			</TR>
+			<TR>
+				<TD> <I>Accusativo</I></TD> <TD>mich</TD> <TD>dich</TD> <TD>ihn</TD> <TD>es</TD> <TD>sie</TD>
+			</TR> 
+			<TR> 
+				<TD> <I>Dativo</I></TD> <TD>mir</TD> <TD>dir</TD> <TD>ihm</TD> <TD>ihm</TD> <TD>ihr</TD>
+			</TR>
+		</TABLE> 
+</HTML>
