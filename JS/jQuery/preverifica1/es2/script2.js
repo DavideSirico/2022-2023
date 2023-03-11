@@ -13,4 +13,3 @@ $(document).ready(function(){
     
     $("[href='index.html']").html("Casa");
 });
-  
