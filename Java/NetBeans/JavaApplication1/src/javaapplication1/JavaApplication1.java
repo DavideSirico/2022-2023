@@ -23,5 +23,3 @@ class Rettangolo
         return (base + altezza) * 2;
     }
 }
-
-class Bagai

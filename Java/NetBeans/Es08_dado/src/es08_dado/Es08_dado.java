@@ -1,5 +1,6 @@
+package es08_dado;
 import javax.swing.*;
-public class Main {
+public class Es08_dado {
     public static void main(String[] args) {
         JFrame window = new JFrame("Dados");
         MyJPanel panel = new MyJPanel();
