@@ -22,6 +22,7 @@ public class Main {
             cerchio.repaint();
         });
 
+
         window.add(cerchio);
         window.setSize(500, 500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

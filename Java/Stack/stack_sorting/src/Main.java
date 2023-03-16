@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<Integer>();
         Stack<Integer> stackTemp = new Stack<Integer>();
+
         File file = new File("src/input2.txt");
 
         try {
