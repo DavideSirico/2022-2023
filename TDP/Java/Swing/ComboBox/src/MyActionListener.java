@@ -13,6 +13,7 @@ public class MyActionListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("Action performed");
         String choice = (String) cb.getSelectedItem();
         // draw a circle
         switch(choice)
