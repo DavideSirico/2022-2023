@@ -10,9 +10,7 @@ public class Main {
         JComboBox<String> cb = new JComboBox<String>(choices);
         JTextField textField = new JTextField(10);
 
-
         cb.addActionListener(new MyActionListener(cb,panel,textField));
-
 
         panel.add(textField);
         panel.add(label);
