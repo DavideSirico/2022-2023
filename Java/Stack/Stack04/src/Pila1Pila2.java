@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Stack;
 
-public class Main {
+public class Pila1Pila2 {
 
     public static void main (String[] args) {
         Stack<Integer> P1 = new Stack<>();
@@ -22,19 +22,20 @@ public class Main {
                 fileLeggi.close();
                 return;
             }
-            int counter = 0;
+            boolean flag = true;
             while(linea != null)
             {
                 int numero = Integer.parseInt(linea);
-                System.out.println(numero);
-                if(counter%2==0)
+
+                if(flag==true)
                 {
                     P1.push(numero);
+                    flag = false;
                 } else
                 {
                     P2.push(numero);
+                    flag = true;
                 }
-                counter++;
                 linea = in.readLine();
             }
             stampa(P1);

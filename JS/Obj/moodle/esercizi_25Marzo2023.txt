@@ -1,0 +1,23 @@
+zoomando.html
+==========================
+Realizzate una pagina HTML+CSS+JS
+Con 
+-titolo H6 "Zoomando"
+-l'immagine es1.jpg
+-un testo (da copiare dal file es1.txt)
+-due bottoni affiancati "+" e "-"
+
+funzionalità:
+ad ogni pressione del bottone "+"
+1)aumenta la dimensione del font di 10px
+2)aumenta la dimensione del titolo (da h6->h5->h4->h3->h2->h1) 
+  (NB Max titolo h1)
+3)aumenta l'altezza e la larghezza dell'immagine di 50px
+
+ad ogni pressione del bottone "-"
+1)diminuisce la dimensione del font di 10px (NB min 10 px)
+2)diminuisce la dimensione del titolo (da h1->h2->h3->h4->h5->h6)
+  (NB min h6)
+3)diminuisce l'altezza e la larghezza dell'immagine di 50px
+  (NB min H 50px W 50px)
+

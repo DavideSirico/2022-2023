@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<body>
+		<h1>Array OBJ</h1>
+
+
+		<script>
+				//making array of book object
+				var books = [];
+					var new_book = {id: "book1", name: "twilight", category: "Movies", price: 10};
+					books.push(new_book);
+					new_book = {id: "book2", name: "The_call", category: "Movies", price: 17};
+					books.push(new_book);
+					console.log(books[0].id);
+					console.log(books[0].name);
+					console.log(books[0].category);
+					console.log(books[0].price);
+					books[3]=new_book;
+
+				// also we have array of albums
+				var albums = []    
+					var new_album = {id: "album1", name: "Ahla w Ahla", category: "Music", price: 15};
+					albums.push(new_album);
+					new_album = {id: "album2", name: "El-leila", category: "Music", price: 29};
+					albums.push(new_album);
+				//Now, content [0] contains all books & content[1] contains all albums
+				var content = [];
+				content.push(books);
+				content.push(albums);
+				var my_books = content[0];
+				var my_albums = content[1];
+				console.log(my_books[0].name);
+				console.log(my_books[1].name); 
+
+				console.log(my_albums[0].name);
+				console.log(my_albums[1].name); 
+			</script>
+
+
+
+	</body>
+</html>

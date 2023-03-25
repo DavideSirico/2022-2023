@@ -1,21 +1,24 @@
-#include <SoftwareSerial.h>
-SoftwareSerial EEBlue(0, 1); // RX | TX
- 
-void setup()
-{
+char  buttonOld;
+char  SerialBuffer;
+int LEDState;
+#define LED_PIN 13
+
+void setup() {
   Serial.begin(9600);
-  EEBlue.begin(38400);  //Baud Rate for command Mode. 
-  Serial.println("Enter AT commands!");
+  pinMode(LED_PIN, OUTPUT);
 }
- 
-void loop()
-{
- 
-  // Feed any data from bluetooth to Terminal.
-  if (EEBlue.available())
-    Serial.write(EEBlue.read());
- 
-  // Feed all data from termial to bluetooth
-  if (Serial.available())
-    EEBlue.write(Serial.read());
+
+void loop() {
+  SerialBuffer = Serial.read();
+  
+  if(SerialBuffer == '0')
+  {
+    Serial.write("acceso");
+    digitalWrite(LED_PIN, HIGH);
+  }
+  if(SerialBuffer == '1')
+  {
+    Serial.write("spento");
+    digitalWrite(LED_PIN, LOW);
+  }
 }

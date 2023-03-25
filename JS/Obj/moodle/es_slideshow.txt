@@ -1,0 +1,27 @@
+Prima versione
+==============
+
+A partire dalla Home page del Museo 
+create una pagina HTML+CSS+JS
+con una sezione che dovrà contenere una galleria 
+di 3 immagini da visualizzare, in modo circolare, utilizzando le freccette < >.
+Come immagini utilizzate quelle del sito HTML del Museo.
+
+l'immagine centrale:
+- dovrà apparire con una dimensione più grande del 20% rispetto alle altre 2
+-dovrà avere un titolo dell'immagine
+-dovrà avere una descrizione dell'immagine
+
+
+I nomi delle immagini, il titolo e la descrizione devono essere inserite in un array di oggetti
+
+Seconda Versione
+================
+
+Creare la stessa pagina, con le stesse immagini, ma anziché comandare la visualizzazione attraverso le frecce < >, farete in modo che le immagini cambino automaticamente ad intervalli regolari. Per fare ciò potete usare il metodo setInterval in questo modo:
+
+ <body onLoad="setInterval(cambiaFoto, 2000)">  
+
+setInterval è un metodo esegue una funzione ogni n millesecondi
+
+la funzione cambiafoto() sarà definita prima, in una sezione script, e conterrà le istruzioni che permettono di visualizzare una nuova foto sempre presa in modo circolare da un array di foto 

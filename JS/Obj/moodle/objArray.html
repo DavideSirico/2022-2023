@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<body>
+		<h1>Array OBJ</h1>
+
+
+		<script>
+			
+				var registro = new Array();
+				var alunno;
+				for(let i=0;i<25;i++){
+					alunno = {classe:"4CIIN",reg_id: "Alunno"+i, nome: "Pippo"+i};
+					registro[i] = alunno;
+				}
+				console.log(registro);
+				for(let i=0;i<25;i++){
+					alunno = {classe:"4CIIN",reg_id: "Alunno"+i, nome: "Pippo"+i};
+					document.write("Classe="+registro[i].classe+" nome="+registro[i].nome+"<BR>");
+				}
+
+		</script>
+
+
+
+	</body>
+</html>
