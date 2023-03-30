@@ -1,7 +1,7 @@
 import java.util.Stack;
 import java.util.Queue;
 import java.util.LinkedList;
-public class Main {
+public class ReverseRicorsivo {
     public static void main(String[] args)
     {
         Stack<Integer> P1 = new Stack<>();

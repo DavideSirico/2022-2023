@@ -1,6 +1,6 @@
 import java.util.Queue;
 import java.util.LinkedList;
-public class Main {
+public class EsQueue {
     public static void main(String[] args)
     {
         Queue<Integer> Q1 = new LinkedList<>();
