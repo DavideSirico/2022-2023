@@ -43,7 +43,7 @@ public class Main3 {
         } catch (IOException e) {
             System.out.println("File non trovato");
             return;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             System.out.println("Sono numeri");
             return;
         }

@@ -106,32 +106,6 @@ public class Main2 {
         }
         return Q;
     }
-
-    // TODO
-    public static Stack<Integer> recursiveReverse(Stack<Integer> S)
-    {
-        if(S.isEmpty())
-        {
-            return S;
-        }
-        int dummy = S.pop();
-        S = recursiveReverse(S);
-        S.push(dummy);
-        return S;
-    }
-
-    public static Queue<Integer> recursiveReverse(Queue<Integer> Q)
-    {
-        if(Q.isEmpty())
-        {
-            return Q;
-        }
-        int dummy = Q.remove();
-        Q = recursiveReverse(Q);
-        Q.add(dummy);
-        return Q;
-    }
-
     public static void stampaRicorsiva(Stack<Integer> S)
     {
         if(S.isEmpty())
@@ -153,16 +127,6 @@ public class Main2 {
         }
         System.out.print(Q.remove());
         stampaRicorsiva(Q);
-    }
-
-    public static void stampaRicorsivaDiversi(Stack<Integer> S)
-    {
-
-    }
-
-    public static void stampaRicorsivaDiversi(Queue<Integer> Q)
-    {
-
     }
 
     public static Stack<Integer> merge(Stack<Integer> S1,Stack<Integer> S2)
