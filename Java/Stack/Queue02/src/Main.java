@@ -1,6 +1,6 @@
 import java.util.Queue;
 import java.util.LinkedList;
-public class EsQueue {
+public class Main {
     public static void main(String[] args)
     {
         Queue<Integer> Q1 = new LinkedList<>();
@@ -18,7 +18,6 @@ public class EsQueue {
     public static void stampa(Queue<Integer> Q1, int head) {
         int current = Q1.remove();
         Q1.add(current);
-
         System.out.println(current);
         if((Q1.peek()) == head)
         {

@@ -12,7 +12,7 @@ dell'ultimo elemento(top) presenti nella pila. Visualizzare P2.
 Es:
 P1 [1,2,3,4,5]
 P2 [5,4,3,2,1]
-P2 [5,4,3,2,1,15]
+P2 [5,4,3,2,1,6]
 * */
 
 import java.util.Stack;
