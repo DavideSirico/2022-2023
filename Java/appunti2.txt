@@ -1,0 +1,36 @@
+solo binary tree
+
+lista lineare -> stack/queue
+
+lista di liste -> graphs
+
+visita anticipata: prima vado a guardare la root poi Left e Right
+vista posticipata: prima vado a guardare sinistra e destra, root;
+vista simmetrica: sinitra root destra
+
+value
+-> dx address
+-> sx address
+
+
+49-10-76-34-5-98-22
+
+<= pushLeft
+> pushRight
+
+       49
+  10      76
+5   34       98 -> foglia
+   22
+
+ramo: connessione tra elementi
+
+ant = 49 10 5 34 22 76 98
+pos = 5 22 34 10 98 76 49
+sim = 5 10 22 34 49 76 98 -> i valori sono ordinati se si segue la politica di caricamento <= pushLeft; > pushRight
+
+se riusciamo a bilanciare un tree possiamo ridurre la ricerca O(logn)
+
+search
+insert
+balance
