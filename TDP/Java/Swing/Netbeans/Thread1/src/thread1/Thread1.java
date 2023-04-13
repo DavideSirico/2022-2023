@@ -1,4 +1,5 @@
-public class Main {
+package thread1;
+public class Thread1 {
     public static void main(String[] args)
     {
         Counter[] m = new Counter[10];
@@ -12,3 +13,4 @@ public class Main {
 
     }
 }
+

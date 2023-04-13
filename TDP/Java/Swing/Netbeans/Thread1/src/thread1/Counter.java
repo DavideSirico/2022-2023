@@ -1,4 +1,5 @@
-public class Counter implements Runnable /* extends Thread */{
+package thread1;
+public class Counter extends Thread {
     @Override
     public void run()
     {
@@ -10,3 +11,4 @@ public class Counter implements Runnable /* extends Thread */{
         System.out.println();
     }
 }
+

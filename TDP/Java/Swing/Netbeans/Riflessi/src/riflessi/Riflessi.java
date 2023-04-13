@@ -4,10 +4,10 @@ Riflessi. Scrivi un programma che disegni una griglia 3x3 di quadrati dove un so
 Dopo 10 click dell’utente il gioco finisce e deve essere detto all’utente quanto ha impiegato.
 
 Devi inoltre prevedere due bottoni: uno per far partire il gioco, un altro per dire la classifica del gioco. Nella classifica del gioco viene memorizzato il nome dell’utente e il suo “record” di tempo del gioco.*/
-
+package riflessi;
 import java.awt.*;
 import javax.swing.*;
-public class Main {
+public class Riflessi {
     public static void main(String[] args)
     {
         JFrame window = new JFrame();
