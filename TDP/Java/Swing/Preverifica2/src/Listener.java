@@ -66,7 +66,6 @@ public class Listener implements ActionListener {
                 }
             }
         }
-
         matrice2.setMatrice(matrice);
         matrice2.carica();
         // only for debug matrice2.visualizza();
