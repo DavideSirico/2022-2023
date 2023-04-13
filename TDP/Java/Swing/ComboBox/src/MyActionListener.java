@@ -6,11 +6,13 @@ public class MyActionListener implements ActionListener {
     private JComboBox<String> cb;
     private MyPanel panel;
     private JTextField textField;
+
     public MyActionListener(JComboBox<String> cb,MyPanel panel,JTextField textField) {
         this.cb = cb;
         this.panel = panel;
         this.textField = textField;
     }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Action performed");

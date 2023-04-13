@@ -54,8 +54,6 @@ public class MyPanel extends JPanel {
             default:
                 g.fillOval(100, 100, 100, 100);
                 break;
-
-
         }
     }
 
