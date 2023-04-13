@@ -1,0 +1,359 @@
+html {
+    font-family: "Open Sans", sans-serif;
+    color: #333;
+    /* scroll-behavior: smooth; */
+}
+
+body {
+    margin: 0;
+    font-size: 1.2rem;
+    overflow-x: hidden;
+}
+
+section {
+    margin-top: 10px;
+}
+
+code {
+    font-family: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
+}
+
+p {
+    line-height: 1.5em;
+    margin: 2px;
+}
+
+li {
+    line-height: 1.5em;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+h1,h2,h3 {
+    margin-bottom: 0.5em;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+
+.play-button.hidden {
+    display: none;
+}
+
+h4,
+h5 {
+    margin-top: 2em;
+}
+
+.header+.header h3,
+.header+.header h4,
+.header+.header h5 {
+    margin-top: 1em;
+}
+
+table {
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 3px 20px;
+    border: 1px solid;
+}
+
+table thead td {
+    font-weight: 700;
+}
+
+ul {
+    margin-top: 0.5em;
+}
+
+.container-table table {
+    margin: 0;
+    margin-left: 16.7em;
+}
+
+
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    overflow-y: auto;
+    padding: 10px 10px;
+    font-size: 0.875em;
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1413px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+.container {
+    margin: auto;
+    width: 50%;
+    padding: 10px;	
+}
+
+.fotter{
+    align-items: center;
+    bottom: -10px;
+    padding: 5px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    position: fixed;
+    text-align: center;
+    border-radius: 10px;
+    border-color: #7e7e7e;
+    border-style: solid;
+}
+
+.fotter button:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.chapter {
+    list-style: none outside none;
+    padding-left: 0;
+    line-height: 2.2em;
+}
+
+.chapter li a {
+    display: block;
+    padding: 5px 0;
+    text-decoration: none;
+}
+
+.chapter li a:hover {
+    text-decoration: none;
+}
+
+
+.light {
+    color: #333;
+    background-color: #fff;
+}
+
+.light .sidebar {
+    background-color: #fafafa;
+    color: #364149;
+}
+
+.light .chapter li {
+    color: #aaa;
+}
+
+.light .chapter li a {
+    color: #364149;
+}
+
+.light .chapter li .active,
+.light .chapter li a:hover {
+    color: #008cff;
+}
+
+.light :not(pre) > .hljs {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    color: #6e6b5e;
+}
+
+.light .chapter .spacer {
+    background-color: #f4f4f4;
+}
+
+.section {
+    list-style: none outside none;
+    padding-left: 20px;
+    line-height: 1.9em;
+}
+
+.section li {
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.light .icon-button {
+    border: none;
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+.light .icon-button i {
+    margin: 0;
+}
+
+.content {
+    box-sizing: border-box; 
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 850px;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+.content a {
+    text-decoration: none;
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
+
+.content img {
+    max-width: 100%;
+}
+
+.light svg {
+    fill: #000000;
+}
+.light .content .header:link,
+.light .content .header:visited {
+    color: #333;
+    pointer: cursor;
+}
+.header+.header h3,
+.header+.header h4,
+.header+.header h5 {
+    margin-top: 1em;
+}
+
+
+.ayu {
+    color: #c5c5c5;
+    background-color: #0f1419;
+}
+
+.ayu .content .header:link,
+.ayu .content .header:visited {
+    color: #c5c5c5;
+    pointer: cursor;
+}
+
+.ayu svg {
+    fill: #ffffff;
+}
+
+.ayu .sidebar {
+    background-color: #14191f;
+    color: #c8c9db;
+}
+
+.ayu .chapter li {
+    color: #5c6773;
+}
+
+.ayu .chapter li a {
+    color: #c8c9db;
+}
+
+.ayu :not(pre) > .hljs {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    color: #ffb454;
+  }
+.ayu .chapter li .active,
+.ayu .chapter li a:hover {
+    /* Animate color change */
+    color: #ffb454;
+}
+
+.ayu .chapter .spacer {
+    background-color: #2d334f;
+}
+
+.ayu .nav-chapters,
+.ayu .nav-chapters:visited a i {
+    color: #737480;
+}
+
+.icon-button:hover,
+.ayu .nav-chapters:hover {
+    color: #b7b9cc;
+}
+
+
+.ayu .content a:link,
+.ayu a:visited,
+.ayu a>.hljs {
+    color: #0096cf;
+}
+
+.ayu table td {
+    border-color: #182028;
+}
+
+.ayu table tbody tr:nth-child(2n) {
+    background: #141b22;
+}
+
+.ayu table thead {
+    background: #324354;
+}
+
+.ayu table thead td {
+    border: none;
+}
+
+.ayu table thead tr {
+    border: 1px #324354 solid;
+}
+
+.ayu .icon-button {
+    border: none;
+    background: none;
+    padding: 0;
+    color: inherit;
+}
+
+.ayu .icon-button i {
+    margin: 0;
+}
+.light table td {
+    border-color: #f2f2f2;
+}
+.light table tbody tr:nth-child(2n) {
+    background: #f7f7f7;
+}
+.light table thead {
+    background: #ccc;
+}
+.light table thead td {
+    border: none;
+}
+.light table thead tr {
+    border: 1px #ccc solid;
+}

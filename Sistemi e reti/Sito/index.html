@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Protocollo TCP/IP</title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="./CSS/font.css">
+  <link rel="stylesheet" href="./CSS/ayu-highlight.css">
+  <link rel="stylesheet" href="./CSS/highlight.css">
+  <link rel="stylesheet" href="./CSS/style.css">
+
+  <script src="./JS/jQuery.js"></script>
+
+</head>
+
+<body class="light">
+  <nav id="sidebar" class="sidebar">
+    <ol class="chapter">
+      <li><a href="#" class="active">TCP/IP</a></li>
+      <li>
+        <ol class="section">
+          <li><a href="#network_communication"><strong>1.</strong> Network e comunicazione</a></li>
+          <li><a href="#TCP_UDP"><strong>2.</strong> TCP vs UDP</a></li>
+          <li><a href="#messaggio"><strong>3.</strong> Messaggio tra 2 computer</a></li>
+          <li><a href="#Livelli"><strong>4.</strong> Caratteristiche di ogni livello</a></li>
+          <li>
+            <ol>
+              <li><a href="#Physical"><strong>4.1.</strong> Livello Physical</a></li>
+              <li><a href="#Data_link"><strong>4.2.</strong> Livello Data link</a></li>
+              <li><a href="#Network"><strong>4.4.</strong> Livello Network</a></li>
+              <li><a href="#Transport"><strong>4.3.</strong> Livello Transport</a></li>
+              <li><a href="#Application"><strong>4.4.</strong> Livello applicativo</a></li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li><a href="HTML/credits.html">Credits</a></li>
+    </ol>
+    <div class="container">
+      <div class="fotter">
+        <button id="theme-toggle" class="icon-button" type="button" onclick="changeTheme()">
+          Cambia tema
+          <svg width="15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+            <path
+              d="M339.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L568.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S517.7-4.4 499.1 9.6L262.4 187.2c-24 18-38.2 46.1-38.4 76.1L339.3 367.1zm-19.6 25.4l-116-104.4C143.9 290.3 96 339.6 96 400c0 3.9 .2 7.8 .6 11.6C98.4 429.1 86.4 448 68.8 448H64c-17.7 0-32 14.3-32 32s14.3 32 32 32H208c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <main>
+      <section id="">
+        <h1>Relazione TCP/IP</h1>
+      </section>
+
+      <hr>
+
+      <section id="network_communication">
+        <h2>Network e comunicazione</h2>
+        <p>Cosa si intende per network e cosa si intende per communication?</p>
+        <p>Con network si intende un insieme di computer collegati tra loro tramite un cavo LAN che condivide
+          informazioni con l’aiuto di schede di rete.
+          Invece con communication si intende il processo di inviare messaggi da un luogo ad un altro tramite una
+          connessione con o senza cavi.
+        </p>
+        <img src="IMG/scheda_di_rete.jpg" alt="Scheda di rete">
+      </section>
+      <hr>
+      <section id="TCP_UDP">
+        <h2>TCP vs UDP</h2>
+        <p>Il protocollo TCP frammenta il messaggio in piccoli pezzi chiamati segmenti che vengono passati al protocollo IP
+          che gestisce il trasferimento dei segmenti tra i network per farli arrivare al destinatario. Una volta arrivato il
+          TCP rimette insieme i segmenti per formare il messaggio finale.
+          Invece il l’UDP non frammenta il pacchetto e i suoi pacchetti si chiamano UDP datagram.
+          Infatti le due grandi differenze tra il TCP e l’UDP sono la velocità e l’affidabilità.
+          Il TCP è più affidabile ma più lento dell’UDP che è utilizzato per le comunicazioni che richiedono un
+          trasferimento veloce di dati.
+          Sia il TCP che l’UDP utilizzano il protocollo IP per gestire la trasmissione del messaggio tra mittente e
+          destinatario.</p>
+        <table>
+          <tr>
+            <td>TCP</td>
+            <td>UDP</td>
+          </tr>
+          <tr>
+            <td>Affidabile</td>
+            <td>Non affidabile</td>
+          </tr>
+          <tr>
+            <td>Segmen</td>
+            <td>Datagram</td>
+          </tr>
+          <tr>
+            <td>Connesso</td>
+            <td>Non connesso</td>
+          </tr>
+          <tr>
+            <td>Segmentato</td>
+            <td>Non segmentato</td>
+          </tr>
+          <tr>
+            <td>Controllo degli errori</td>
+            <td>Senza controllo degli errori</td>
+          </tr>
+          <tr>
+            <td>Lento</td>
+            <td>Veloce</td>
+          </tr>
+          <tr>
+            <td>Consegna ordinata</td>
+            <td>Consegna non ordinata</td>
+          </tr>
+        </table>
+      </section>
+      <hr>
+      <section id="messaggio">
+        <h2>Messaggio tra 2 computer</h2>
+        <p>Per inviare un messaggio tra 2 computer bisogna passare dai livelli superiori a quelli inferiori prendendo il
+          pacchetto del livello superiore, incapsularlo e mandarlo al livello inferiore. Quindi il pacchetto
+          diventerà sempre più grande fino a quando non arriverà al livello più basso. Poi il destinatario effettuerà i
+          passaggi al contrario per riavere il messaggio originario.
+          Il livello più alto è l’Application che genera il messaggio e il livello più basso è il Physical che manda il
+          pacchetto.
+        </p>
+
+        <img src="IMG/TCP_IP.png" alt="TCP_IP">
+      </section>
+      <hr>
+      <section id="Livelli">
+        <h2>Caratteristiche di ogni livello</h2>
+      </section>
+      <section id="Physical">
+        <h3>Physical</h3>
+        <p>
+          Nel livello physical il messaggio viene davvero spedito sul canale. Infatti si occupa di trasformare gli zeri
+          e uni in segnali. Questi segnali possono essere tensioni, onde radio o segnali di luce.
+        </p>
+        <img style="width: 30%;" src="IMG/physical1.jpg" alt="ethernet">
+        <img style="width: 30%;" src="IMG/physical2.jpg" alt="radio">
+        <img style="width: 30%;" src="IMG/physical3.jpg" alt="fibra">
+      </section>
+      <section id="Data_link">
+        <h3>Data Link</h3>
+        <p>
+          Nel livello Data Link le PDU sono chiamate Ethernet frame.
+          Il livello si suddivide in 2 livelli:
+        </p>
+        <ul>
+          <li>Sotto-livello MAC</li>
+          <li>Sotto-livello LLC</li>
+        </ul>
+        <p style="font-weight: bold;">
+          Sotto-livello MAC
+        </p>
+        <p>
+          Il sotto-livello MAC si occupa di:
+        </p>
+        <ul>
+          <li>Incapsulare il messaggio</li>
+          <li>Accedere al canale di trasmissione</li>
+        </ul>
+        <p>Quando incapsula il messaggio il livello MAC aggiunge un header e un trailer al pacchetto IP che riceve dal
+          livello network.
+          Nell’header sono presenti l’indirizzo MAC e del mittente e del destinatario. Invece il trailer contiene 4 byte
+          per il controllo degli errori.
+        </p>
+        <img class="center" src="IMG/MAC.jpg" alt="MAC">
+        <p style="font-weight: bold;">
+          Sotto-livello LLC
+        </p>
+        <p>
+          Il sotto-livello LLC offre:
+        </p>
+        <ol>
+          <li>flow control</li>
+          <li>error control</li>
+        </ol>
+        <p>
+          Con flow control si intente la tecnica con la quale il mittente e il destinatario si mettono d’accordo per
+          evitare di mandare in sovraccarico uno dei due end-point o di perdere dei pacchetti per dei limiti di memoria.
+          Invece con error control di intende l’utilizzo dei byte nel trailer del pacchetto per controllare se il
+          pacchetto ha subito delle trasformazioni non volute durante la trasmissione e il controllo della corretta
+          ricezione del pacchetto.
+        </p>
+        <p>
+          Infatti per capire se il pacchetto è arrivato al destinatario correttamente il ricevitore manda un pacchetto
+          di conferma chiamato ACK. Se l’ACK non viene ricevuto dal mittente esso rispedisce il pacchetto ad esso
+          associato al destinatario.
+        </p>
+        <p>
+          Il livello LLC può inoltre cambiare la dimensione dei pacchetti che riceve per fare in modo da farli stare nel
+          livello Data Link.
+        </p>
+        <img class="center" src="IMG/data_link.png" alt="data_link">
+      </section>
+      <section id="Network">
+        <h3>Network</h3>
+        <p>Le funzioni del livello network sono:</p>
+        <ol>
+          <li>Logical Addressing</li>
+          <li>Routing</li>
+          <li>Path determination</li>
+        </ol>
+        <p style="font-weight: bold;">Logical Addressing</p>
+        <p>
+          Ogni computer in un network ha un indirizzo IP unico. Il livello network inserisce nel pacchetto l’IP del PC
+          mittente e destinatario per formare un pacchetto IP.
+        </p>
+        <img class="center" src="IMG/logical_addressing.png" alt="Logical Addressing">
+        <p style="font-weight: bold;">Routing</p>
+        <p>Se i due computer sono nella stessa rete il routing non è necessario.
+          Infatti il routing è un processo in cui i pacchetti IP vengono mandati da una rete ad un’altra.
+        </p>
+        <img class="center" src="IMG/routing.jpg" alt="Routing">
+        <p style="font-weight: bold;">Path determination</p>
+        <p>
+          La scelta del miglior percorso possibile per la consegna dei dati dall'origine alla destinazione si chiama
+          Path determination. I dispositivi di livello 3 utilizzano protocolli come OSPF (Open Shortest Path First), BGP
+          (Border Gateway Protocol), IS-IS (Intermediate System to Intermediate System) per determinare il miglior
+          percorso possibile per la consegna dei dati.
+        </p>
+        <img class="center" src="IMG/path.jpg" alt="path">
+      </section>
+      <section id="Transport">
+        <h3>Transport</h3>
+        <p>
+          Quando il messaggio raggiunge il livello transport, si scegli di usare o il TCP o l’UDP.
+          Il TCP supporta la segmentazione. Quindi, se il messaggio è grande, il protocollo TCP lo divide in parti più
+          piccole e aggiunge un header per formare un TCP segment.
+          Invece, UDP non supporta la segmentazione, quindi le applicazioni che utilizzano UDP dovrebbero inviare
+          messaggi sufficientemente brevi da rientrare in un UDP datagram.
+          Gli UDP datagram sono considerati inaffidabili perché non vi è alcuna garanzia che tutti i datagram inviati
+          vengano ricevuti dal destinatario e nell'ordine corretto, e perché non effettua il controllo e la correzione
+          degli errori.
+          Il TCP, invece, è più affidabile e garantisce la consegna nell’ordine corretto dei dati dal mittente al
+          destinatario. La trasmissione dei dati via TCP prevede tre fasi:
+        </p>
+        <ol>
+          <li>Stabilimento della connessione</li>
+          <li>Trasferimento dati</li>
+          <li>Terminazione della connessione</li>
+        </ol>
+        <p style="font-weight: bold;">Fase di creazione della connessione</p>
+        <p>Nella fase di creazione della connessione, il TCP o il client del mittente invia un pacchetto al TCP o al
+          server del destinatario richiedendo una connessione in cui il client e il server si riconoscono.
+          Dato che viene creata una connessione si parla di protocollo orientato alla connessione e il processo di
+          creazione della connessione è chiamato Handshake.
+        </p>
+        <p style="font-weight: bold;">Trasferimento dati</p>
+        <p>Una volta stabilita la connessione, la fase successiva è il trasferimento dei dati. Durante il trasferimento
+          dei dati, TCP offre alcune funzionalità chiave che UDP non fornisce e include:</p>
+        <ul>
+          <li>Trasferimento dati senza errori</li>
+          <li>Trasferimento dati ordinato</li>
+          <li>Ritrasmissione dei dati persi</li>
+          <li>Eliminazione di pacchetti duplicati e</li>
+          <li>Limitazione della congestione</li>
+          <li>Cerchiamo di discutere ogni caratteristica uno per uno.</li>
+        </ul>
+        <p>Trasferimento dati senza errori
+          Per il controllo degli errori si usa il Checksum. Se il Checksum del mittente è diverso da quello del
+          destinatario non viene mandato l’ACK.</p><br>
+          
+        <p>Trasferimento dati ordinato
+          TCP aggiunge un codice sequenziale nei segmenti TCP. Il destinatario utilizza i numeri di sequenza per
+          ricostruire il messaggio dell'applicazione nell'ordine corretto.
+        </p><br>
+        <p>Ritrasmissione di segmenti persi
+          Per ogni TCP segment viene mandato un ACK. Se non viene ricevuto l’ACK viene rimandato il segment associato
+          all’ACK non ricevuto.
+        </p><br>
+        <p>
+          Scartare i segmenti duplicati
+          Se il destinatario riceve 2 pacchetti con lo stesso codice sequenziale ne viene cancellato uno per evitare di
+          avere delle copie.
+        </p><br>
+        <p>
+          Congestione Limitazione o controllo del flusso
+          Il protocollo TCP invia le PDU sempre più velocemente fino a quando non si accorge che le ACK arrivano fuori
+          tempo. Quando si accorge che ci sono dei ritardi da parte del ricevente diminuisce la velocità della
+          trasmissione.
+        </p><br>
+        <p style="font-weight: bold;">Chiusura della connessione.</p>
+        <p>Quando un endpoint desidera interrompere la connessione, invia un messaggio di chiusura all'altro endpoint.
+          L'altra estremità riconosce il messaggio. Entrambe le estremità eseguono questo processo di handshake.
+        </p>
+        <img class="center" src="IMG/transport.jpg" alt="transport">
+      </section>
+      <section id="Application">
+        <h3>Application</h3>
+        <p>Il livello Application viene utilizzato dalle applicazioni che mandano messaggi da un computer all'altro in
+          una rete. Ad esempio, Internet Explorer, Google Chrome, Firefox, Microsoft Outlook, etc.
+          Quindi, il livello dell'applicazione fornisce i mezzi per accedere alle informazioni sulla rete.
+        </p>
+        <img class="center" src="IMG/application.png" alt="application">
+      </section>
+    </main>
+  </div>
+
+  <script src="JS/changeTheme.js"></script>
+</body>
+
+</html>
