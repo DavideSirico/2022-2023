@@ -75,3 +75,6 @@ A livello Kernel:
 Creare driver
 basso livello
 
+
+Thread a livello utente - ciclo di vita(2)
+[qui](obsidian://open?vault=Appunti&file=TDP%2FProgrammazione%20concorrente%2FFlusso.canvas)
