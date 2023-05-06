@@ -1,3 +1,5 @@
+package pkg230417_b.tree.pdf;
+
 class Node {
     int value;
     Node left;
@@ -11,7 +13,14 @@ class Node {
 
 class BinaryTree {
     Node root;
-    private int depth;
+    BinaryTree()
+    {
+        root = new Node(0);
+    }
+    BinaryTree(int x)
+    {
+        root = new Node(x);
+    }
     private boolean search(Node nodo, int value)
     {
         if(nodo.value == value)
@@ -33,67 +42,7 @@ class BinaryTree {
         return search(root,value);
     }
 
-    private Node remove (Node node, int value) {
-        if (value == node.value) {
 
-            // node with only one child or no child
-            if (node.left == null)
-                return node.right;
-            else if (node.right == null)
-                return node.left;
-
-            // node with two children: Get the inorder
-            // successor (smallest in the right subtree)
-            // node.value = minValue(node.right);
-
-            // Delete the inorder successor
-            node.right = remove(node.right, node.value);
-        } else {
-
-        }
-        return node;
-    }
-
-    private int valorePiuPiccolo(Node node)
-    {
-        if (node.left == null)
-            return node.value;
-        return valorePiuPiccolo(node.left);
-    }
-
-    public void remove(int value)
-    {
-        root = remove(root,value);
-    }
-
-    public void removeLeafs()
-    {
-        root = removeLeafs(root);
-    }
-
-    private Node removeLeafs(Node node)
-    {
-        if (node == null) {
-            return null;
-        }
-        if (node.left == null && node.right == null) {
-            return null;
-        }
-
-        node.left = removeLeafs(node.left);
-        node.right = removeLeafs(node.right);
-
-        return node;
-    }
-
-    private boolean isLeaf(Node node)
-    {
-        if(node.left == null && node.right == null)
-        {
-            return true;
-        }
-        return false;
-    }
     private Node insert(Node current, int value)
     {
         if (current == null)
@@ -159,43 +108,73 @@ class BinaryTree {
         postOrdine(root);
         System.out.println();
     }
-    private int getLongestNumber()
+    public int getMaxDepth()
     {
-        return -1;
+        return getMaxDepth(root);
     }
-    public void getMaxDepth()
+    private int getMaxDepth(Node node)
     {
-        getMaxDepth(root,1);
-    }
-    private void getMaxDepth(Node node, int current)
-    {
-        if(node != null) {
-
-            if (node.left == null && node.right == null) {
-                current = 1;
+        if(node==null)
+        {
+            return 0;
+        } else {
+            int leftDepth = getMaxDepth(node.left);
+            int rightDepth = getMaxDepth(node.right);
+            
+            if(leftDepth>rightDepth)
+            {
+                return leftDepth+1;
             } else {
-                current = current + 1;
-                if (current > depth) {
-                    depth = current;
-                }
+                return rightDepth+1;
             }
-            getMaxDepth(node.left, current);
-            getMaxDepth(node.right, current);
+            
         }
+        
     }
-
-    private void print(Node node)
+    
+    public int getDepth(int x)
     {
-
+        return getDepth(root, x);
     }
-
+    
+    private int getDepth(Node node,int x)
+    {
+        if(node == null)
+        {
+            return -1;
+        }
+        /*
+        if(node.value == x)
+        {
+            int leftDist = getDepth(node.left,x);
+            int rightDist = getDepth(node.right,x);
+            if(leftDist>=0 || rightDist>=0)
+            {
+               return rightDist+1;
+            }
+        }
+        
+        return -1;
+        */
+        int dist = -1;
+        if((node.value == x) || (dist = getDepth(node.left,x))>=0 || (dist = getDepth(node.right,x))>=0)
+        {
+            return dist+1;
+        }
+        return dist;
+    }
+    
+    public int getMax()
+    {
+        return getMax(root);
+    }
+    private int getMax(Node node)
+    {
+        if(node == null)
+        {
+            return -1;
+        }
+        
+    }
 }
 
-
-/*
-if(value < node.value) {
-    node.left = remove(node.left,value);
-} else {
-    node.right = remove(node.right, value);
-}
-*/

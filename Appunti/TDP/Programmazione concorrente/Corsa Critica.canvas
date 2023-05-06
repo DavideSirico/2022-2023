@@ -1,0 +1,24 @@
+{
+	"nodes":[
+		{"type":"text","text":"Thread Main","id":"c9d3d608a828bb59","x":-220,"y":-300,"width":250,"height":60},
+		{"type":"text","text":"1","id":"ce32cad034218479","x":-220,"y":-60,"width":50,"height":50},
+		{"type":"text","text":"2","id":"b13997990861821a","x":-170,"y":-60,"width":50,"height":50},
+		{"type":"text","text":"3","id":"27e9016a75851e5b","x":-120,"y":-60,"width":50,"height":50},
+		{"type":"text","text":"4","id":"26916798fbaedab8","x":-70,"y":-60,"width":50,"height":50},
+		{"type":"text","text":"5","id":"b25373f45e6d4dac","x":-20,"y":-60,"width":50,"height":50},
+		{"type":"text","text":"T1","id":"8d0e527959dfe5e0","x":175,"y":-440,"width":100,"height":60},
+		{"type":"text","text":"T2","id":"f813d4ea6b290ba8","x":335,"y":-440,"width":100,"height":60},
+		{"type":"text","text":"this.array = array","id":"cdfb4658b4db6cd2","x":185,"y":-300,"width":250,"height":60},
+		{"type":"text","text":"T1\n```\nint valore = array[0];\nthread.sleep(3000);\nSystem.out.println(array[0]);\n```","id":"d27ac335cd8a4a80","x":100,"y":-60,"width":420,"height":205},
+		{"type":"text","text":"T2\n```\nint valore = array[0];\nvalore = valore + 1;\nthread.sleep(2000);\narray[0] = valore;\n```","id":"fccbbec1b3760862","x":100,"y":145,"width":420,"height":205},
+		{"type":"text","text":"Array","id":"8f50e307ae4cf9a8","x":-220,"y":43,"width":105,"height":60},
+		{"id":"daf10c463a34ebc1","x":-395,"y":380,"width":250,"height":147,"type":"text","text":"Synchronized\nmutex -> semafori\navoid race condition"},
+		{"id":"c106bb8ae7e70a12","x":71,"y":556,"width":589,"height":421,"type":"text","text":"1) Rifare l'esercizio della ricerca parallela facendo l'esecuzione con N thread inserito dall'utente (>2)\n1b) Rifare l'esercizio della ricerca parallela come nell'esercizio 1 con un array di K elementi. K è maggiore di 10. Fare il data entry.\n2) Digitati 2 numeri K e Y, con K > 2 e Y > 1000, calcola tutti i numeri primi tra 0 e Y dividendo l'esecuzione tra K thread.\n3) Scirvi un programma che generi tre thread. Ogni thread genera 100 elementi compresi tra 0 e 10000. Il programma deve fondere in un unico array i tre array senza ripetizione.\n"}
+	],
+	"edges":[
+		{"id":"cc2e2bde7e657c7e","fromNode":"c9d3d608a828bb59","fromSide":"bottom","toNode":"27e9016a75851e5b","toSide":"top"},
+		{"id":"35bbe787f9d72f23","fromNode":"8d0e527959dfe5e0","fromSide":"bottom","toNode":"cdfb4658b4db6cd2","toSide":"top"},
+		{"id":"071266926a8d565c","fromNode":"cdfb4658b4db6cd2","fromSide":"bottom","toNode":"ce32cad034218479","toSide":"top"},
+		{"id":"f2d783f07844cd4b","fromNode":"f813d4ea6b290ba8","fromSide":"bottom","toNode":"cdfb4658b4db6cd2","toSide":"top"}
+	]
+}
