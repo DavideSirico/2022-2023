@@ -1,4 +1,6 @@
 public class BinaryTree {
+    static final int COUNT = 7;
+
     public static class Node{
         int data;
         Node left;
@@ -9,7 +11,7 @@ public class BinaryTree {
             this.right=null;
             }
         }
-    private Node root;
+    public Node root;
     public BinaryTree(){
         root=null;
     }
@@ -96,9 +98,99 @@ public class BinaryTree {
         } else {
             return find(node.right, value);
         }
+    }
+    /*
+    public void print() {
+        print(root, 1);
+    }
+
+    private void print(Node node, int height) {
+        if(node != null) {
+            System.out.println(node.data);
+            for(int i = 0; i < height-1; i++) {
+                System.out.print("├──");
+            }
+            System.out.print("├──");
+            print(node.left,height+1);
+            print(node.right,height+1);
+        }
+    }
+    */
+    public void minMaxLeaf() {
+        int left = minMaxLeaf(root.left,0);
+        int right = minMaxLeaf(root.right,0);
+        if(left > right) {
+            System.out.println("La somma delle foglie del ramo di sinistra è maggiore");
+        } else if(left < right) {
+            System.out.println("La somma delle foglie del ramo di destra è maggiore");
+        } else {
+            System.out.println("La somma delle foglie del ramo di destra è uguale a quella del ramo di sinistra");
+        }
 
     }
 
 
+
+    private int minMaxLeaf(Node node, int somma) {
+        if(node == null) {
+            return somma;
+        }
+        if(node.left == null && node.right == null) {
+            somma += node.data;
+            return somma;
+        }
+        int sommaLeft = minMaxLeaf(node.left, somma);
+        int sommaRight = minMaxLeaf(node.right, somma);
+        return sommaLeft + sommaRight;
+    }
+    /*
+    dato un albero restituire un sotto albero formato solo dai nodi di sinistra
+    */
+    public BinaryTree leftTree() {
+        BinaryTree left = new BinaryTree();
+        left.root = leftTree(root);
+        return left;
+    }
+    private Node leftTree(Node node) {
+        if(node == null) {
+            return null;
+        }
+        if(node.left == null && node.right == null) {
+            return node;
+        }
+        Node left = new Node(node.data);
+        left.left = leftTree(node.left);
+        left.right = null;
+        return left;
+    }
+
+    private void print2DUtil(Node root, int space)
+    {
+        // Base case
+        if (root == null)
+            return;
+
+        // Increase distance between levels
+        space += COUNT;
+
+        // Process right child first
+        print2DUtil(root.right, space);
+
+        // Print current node after space
+        // count
+        System.out.print("\n");
+        for (int i = COUNT; i < space; i++)
+            System.out.print(" ");
+        System.out.print(root.data + "\n");
+
+        // Process left child
+        print2DUtil(root.left, space);
+    }
+
+    // Wrapper over print2DUtil()
+    public void print2D()
+    {
+        print2DUtil(root, 0);
+    }
 
 }

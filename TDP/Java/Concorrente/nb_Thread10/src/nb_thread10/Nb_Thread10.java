@@ -1,16 +1,11 @@
 /*
-1)
 2) Prendere l'esercizio dei numeri primi (8), confrontare il tempo tra l'esecuzione parallela
 e l'esecuzione con un thread.
 */
-/*
-2) Digitati due numeri K e Y, con K > 2 e Y > 1000
-calcola tutti i numeri primi tra 0 e Y dividendo l'esecuzione tra K thread. K è maggiore di 2.
-*/
+package nb_thread10;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-public class Main {
+public class Nb_Thread10 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 

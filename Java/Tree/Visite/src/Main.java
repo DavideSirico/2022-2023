@@ -1,8 +1,6 @@
 import java.util.Scanner;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         try {
@@ -12,6 +10,9 @@ public class Main {
             String dummy = bufferedReader.readLine();
             if (dummy == null) {
                 System.out.println("File vuoto");
+                input.close();
+                bufferedReader.close();
+                fileReader.close();
                 return;
             }
 
@@ -19,15 +20,15 @@ public class Main {
 
             while (dummy != null) {
                 int number = Integer.parseInt(dummy);
-                System.out.println(number);
                 bt.insert(number);
                 dummy = bufferedReader.readLine();
             }
-
             /*
             boolean flag = true;
             while(flag) {
-                System.out.println("'A' 'P' 'S' ('Q'): ");
+                System.out.println("-visita Anticipata\n-visita Posticipata\n-visita Simmetrica\n" +
+                "-Quit\n-Find\n-Rimuovi foglie");
+
                 char choice = input.nextLine().charAt(0);
                 switch (choice) {
                     case 'A':
@@ -42,13 +43,30 @@ public class Main {
                     case 'Q':
                         flag = false;
                         break;
+                    case 'R':
+                        bt.removeLeaf();
+                        break;
+                    case 'F':
+                        System.out.print("Inserisci il valore da cercare: ");
+                        int value;
+                        try {
+                            value = input.nextInt();
+                        } catch (Exception e) {
+                            System.out.println("Inserisci un valore valido\n\n\n\n\n");
+                            break;
+                        }
+                        System.out.println(bt.find(value));
+                        break;
                     default:
-                        System.out.println("Opzione non valida");
+                        System.out.println("Opzione non valida\n\n\n");
                 }
             }*/
-            bt.visitaSimmetrica();
-            System.out.println(bt.find(10));
 
+            bt.visitaSimmetrica();
+            System.out.println();
+            BinaryTree left = bt.leftTree();
+            bt.print2D();
+            left.print2D();
             input.close();
             bufferedReader.close();
             fileReader.close();
@@ -57,3 +75,7 @@ public class Main {
         }
     }
 }
+
+/* caricare un albero da un file txt
+    Stabilire se è maggiore la somma delle foglie di sinistra o quella di destra o se sono uguali
+* */
