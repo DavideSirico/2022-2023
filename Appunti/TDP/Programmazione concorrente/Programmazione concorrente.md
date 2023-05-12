@@ -1,19 +1,15 @@
 Motivazioni
 - Fino ad ora si è utilizzato il paradigma di programmazione **sequenziale**
 - ogni programma ha un **singolo** flusso di esecuzione
-- una solo funzione alla volta
+- una sola funzione alla volta
 - anche i problemi complessi hanno un solo flusso
 
 Al termine di ogni istruzione l'esecutore passa l'istruzione successiva (ordine sequenziale)
 1 istruzione alla volta
 
-
-
 Applicazioni complesse
 l'input esterno non blocca il programma
 fruttare i thread e i core della cpu
-
-
 
 Programmazione parallela:
 - processi

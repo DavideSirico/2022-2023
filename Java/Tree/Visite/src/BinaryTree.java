@@ -1,3 +1,4 @@
+
 public class BinaryTree {
     static final int COUNT = 7;
 
@@ -18,11 +19,11 @@ public class BinaryTree {
     public void insert(int value) {
         root = insert(root,value);
     }
+
     private Node insert(Node node, int value) {
         if (node == null) {
             return new Node(value);
         }
-
         if (value < node.data) {
             node.left = insert(node.left, value);
         } else if (value > node.data) {
@@ -166,28 +167,20 @@ public class BinaryTree {
 
     private void print2DUtil(Node root, int space)
     {
-        // Base case
         if (root == null)
             return;
 
-        // Increase distance between levels
         space += COUNT;
-
-        // Process right child first
         print2DUtil(root.right, space);
 
-        // Print current node after space
-        // count
         System.out.print("\n");
         for (int i = COUNT; i < space; i++)
             System.out.print(" ");
         System.out.print(root.data + "\n");
 
-        // Process left child
         print2DUtil(root.left, space);
     }
 
-    // Wrapper over print2DUtil()
     public void print2D()
     {
         print2DUtil(root, 0);

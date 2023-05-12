@@ -8,11 +8,19 @@ public class Main {
         double somma = 0;
         Semaphore semaphore = new Semaphore(maxPosti);
 
-        Auto a;
+        Auto[] a = new Auto[macchineTotali];
         for(int i = 0; i < macchineTotali; i++) {
-            a = new Auto(semaphore);
-            a.setName("Auto " + Integer.toString(i+1));
-            a.start();
+            a[i] = new Auto(semaphore);
+            a[i].setName("Auto " + Integer.toString(i+1));
+            a[i].start();
+        }
+        try {
+            for(int i = 0; i < macchineTotali; i++) {
+                a[i].join();
+                somma += a[i].getCosto();
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Errore nel join");
         }
         System.out.println("somma: " + somma);
 
