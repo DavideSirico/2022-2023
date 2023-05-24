@@ -41,8 +41,7 @@ public class Main {
         int start = 0;
         int numbersForThread = DIM / numberThread;
         int mod = DIM % numberThread;
-        for(int i = 0; i < numberThread-1; i++)
-        {
+        for(int i = 0; i < numberThread-1; i++) {
             r[i] = new RunnableClass(array, k, start, start + numbersForThread);
             start += numbersForThread;
         }

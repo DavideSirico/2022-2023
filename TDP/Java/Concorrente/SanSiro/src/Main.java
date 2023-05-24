@@ -22,6 +22,10 @@ public class Main {
         } catch (InterruptedException e) {
             System.out.println("Errore nel join");
         }
+
+        for(int i = 0; i < macchineTotali; i++) {
+            somma += a[i].getCosto();
+        }
         System.out.println("somma: " + somma);
 
     }

@@ -5,8 +5,6 @@ class CounterThread implements Runnable {
         secondiPassati = 0;
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                // TODO
-                System.out.println("");
                 Thread.sleep(1000);
                 secondiPassati++;
             } catch (InterruptedException e) {

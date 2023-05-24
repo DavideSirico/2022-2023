@@ -22,7 +22,7 @@ public class Auto extends Thread {
             tempo += r.nextInt(1900);
             // System.out.println(tempo);
             Thread.sleep(tempo);
-            costo = tempo*0.5;
+            costo = (tempo/1000)*0.5;
         } catch (InterruptedException e) {
             System.out.println("Errore nello Sleep");
         }

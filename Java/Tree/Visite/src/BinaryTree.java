@@ -1,189 +1,132 @@
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class BinaryTree {
-    static final int COUNT = 7;
-
-    public static class Node{
-        int data;
+    public static class Node {
+        int val;
         Node left;
         Node right;
-        public Node(int data){
-            this.data=data;
-            this.left=null;
-            this.right=null;
-            }
+
+        public Node(int val) {
+            this.val = val;
+            this.left = null;
+            this.right = null;
         }
-    public Node root;
-    public BinaryTree(){
-        root=null;
+    }
+
+    Node root; // radice dell'albero
+
+    public BinaryTree() {
+        root = null;
+    }
+
+    public void insertFile(String filename) { // Metodo per leggere i dati da un file e inserirli nell'albero binario
+        try{
+            BufferedReader in = new BufferedReader(new FileReader(filename));
+            String line;
+            if((line = in.readLine()) == null){
+                System.out.println("Errore file vuoto");
+                return;
+            }
+            do{
+                insert(Integer.parseInt(line));
+            }while((line = in.readLine()) != null);
+        }catch(FileNotFoundException ex){
+            System.out.println("Errore apertura file (File non trovato)");
+        }catch(IOException ex){
+            System.out.println("Errore lettura file");
+        }
+    }
+
+    private void printNode(Node node, String prefix, boolean isTail) { // Metodo per stampare un nodo dell'albero in
+        // modo ricorsivo
+        if (node == null) { // Se il nodo è nullo, esce dal metodo
+            return;
+        }
+        if (node.right != null) { // Se il nodo ha un figlio destro, chiama il metodo printNode per stampare il
+            // figlio destro
+            printNode(node.right, prefix + (isTail ? "│   " : "    "), false);
+        }
+        System.out.print(prefix); // Stampa il prefisso
+        System.out.print(isTail ? "└── " : "┌── "); // Stampa il carattere di connessione
+        System.out.println(node.val); // Stampa il valore del nodo
+        if (node.left != null) { // Se il nodo ha un figlio sinistro, chiama il metodo printNode per stampare il
+            // figlio sinistro
+            printNode(node.left, prefix + (isTail ? "    " : "│   "), true);
+        }
+    }
+
+    public void print() { // Metodo per stampare l'albero in formato testuale
+        printNode(root, "", true); // Chiama il metodo printNode per stampare il nodo radice dell'albero
     }
     public void insert(int value) {
         root = insert(root,value);
     }
-
-    private Node insert(Node node, int value) {
-        if (node == null) {
+    private Node insert(Node node,int value) {
+        if(node == null) {
             return new Node(value);
         }
-        if (value < node.data) {
-            node.left = insert(node.left, value);
-        } else if (value > node.data) {
-            node.right = insert(node.right, value);
+        if(value < node.val) {
+            node.left = insert(node.left,value);
         } else {
-            return node;
+            node.right = insert(node.right,value);
         }
         return node;
     }
-
-    public void visitaAnticipata() {
-        visitaAnticipata(root);
+    public int getDepth() {
+        return getDepth(root,0);
     }
-    private void visitaAnticipata(Node node) {
-        if(node != null)
-        {
-            System.out.println(node.data);
-            visitaAnticipata(node.left);
-            visitaAnticipata(node.right);
+    private int getDepth(Node node, int depth) {
+        if(node == null) {
+            return depth;
         }
-    }
-
-    public void visitaPosticipata() {
-        visitaPosticipata(root);
-    }
-    private void visitaPosticipata(Node node) {
-        if(node != null)
-        {
-            visitaPosticipata(node.left);
-            visitaPosticipata(node.right);
-            System.out.println(node.data);
+        depth++;
+        int max1 = getDepth(node.left,depth);
+        int max2 = getDepth(node.right,depth);
+        if(max1 > max2) {
+            return max1;
         }
+        return max2;
     }
-    public void visitaSimmetrica() {
-        visitaSimmetrica(root);
+    public void delete(int value) {
+        root = delete(root, value);
     }
-    private void visitaSimmetrica(Node node) {
-        if(node != null) {
-            visitaSimmetrica(node.left);
-            System.out.println(node.data);
-            visitaSimmetrica(node.right);
-        }
-    }
-
-    public void removeLeaf() {
-        root = removeLeaf(root);
-    }
-
-    private Node removeLeaf(Node node) {
+    private Node delete(Node node, int value) {
         if(node == null) {
             return null;
         }
-        if(node.left == null && node.right == null) {
-            return null;
-        }
-        node.left = removeLeaf(node.left);
-        node.right = removeLeaf(node.right);
-        return node;
-    }
-
-    public boolean find(int value) {
-        return find(root, value);
-    }
-    private boolean find(Node node, int value) {
-        if(node == null) {
-            return false;
-        }
-        if(node.data == value) {
-            return true;
-        }
-        if(node.data > value) {
-            return find(node.left, value);
+        if(value < node.val) {
+            node.left = delete(node.left,value);
+        } else if(value > node.val) {
+            node.right = delete(node.right,value);
         } else {
-            return find(node.right, value);
-        }
-    }
-    /*
-    public void print() {
-        print(root, 1);
-    }
-
-    private void print(Node node, int height) {
-        if(node != null) {
-            System.out.println(node.data);
-            for(int i = 0; i < height-1; i++) {
-                System.out.print("├──");
+            if(node.right == null) {
+                return node.left;
             }
-            System.out.print("├──");
-            print(node.left,height+1);
-            print(node.right,height+1);
+            if(node.left == null) {
+                return node.right;
+            }
+            node.val = minVal(node.right);
+            node.right = delete(node.right, node.val);
         }
+        return node;
     }
-    */
-    public void minMaxLeaf() {
-        int left = minMaxLeaf(root.left,0);
-        int right = minMaxLeaf(root.right,0);
-        if(left > right) {
-            System.out.println("La somma delle foglie del ramo di sinistra è maggiore");
-        } else if(left < right) {
-            System.out.println("La somma delle foglie del ramo di destra è maggiore");
-        } else {
-            System.out.println("La somma delle foglie del ramo di destra è uguale a quella del ramo di sinistra");
+    private int minVal(Node node) {
+        int minv = node.val;
+        while(node.left != null) {
+            minv = node.left.val;
+            node = node.left;
         }
-
+        return minv;
     }
-
-
-
-    private int minMaxLeaf(Node node, int somma) {
-        if(node == null) {
-            return somma;
-        }
-        if(node.left == null && node.right == null) {
-            somma += node.data;
-            return somma;
-        }
-        int sommaLeft = minMaxLeaf(node.left, somma);
-        int sommaRight = minMaxLeaf(node.right, somma);
-        return sommaLeft + sommaRight;
-    }
-    /*
-    dato un albero restituire un sotto albero formato solo dai nodi di sinistra
-    */
-    public BinaryTree leftTree() {
-        BinaryTree left = new BinaryTree();
-        left.root = leftTree(root);
-        return left;
-    }
-    private Node leftTree(Node node) {
-        if(node == null) {
-            return null;
-        }
-        if(node.left == null && node.right == null) {
-            return node;
-        }
-        Node left = new Node(node.data);
-        left.left = leftTree(node.left);
-        left.right = null;
-        return left;
-    }
-
-    private void print2DUtil(Node root, int space)
-    {
-        if (root == null)
-            return;
-
-        space += COUNT;
-        print2DUtil(root.right, space);
-
-        System.out.print("\n");
-        for (int i = COUNT; i < space; i++)
-            System.out.print(" ");
-        System.out.print(root.data + "\n");
-
-        print2DUtil(root.left, space);
-    }
-
-    public void print2D()
-    {
-        print2DUtil(root, 0);
-    }
-
 }
+
+// imparare a memoria
+// insert
+// find
+// delete
+// le visite
+// removeLeaves
+

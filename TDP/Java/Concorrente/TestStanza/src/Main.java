@@ -4,6 +4,7 @@ public class Main {
         int personeTotali = 10000;
 
         Semaphore semaphore = new Semaphore(personeMassime);
+
         Persona T;
         for(int i = 0; i < personeTotali; i++) {
             T = new Persona(semaphore);
