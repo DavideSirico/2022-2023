@@ -45,12 +45,9 @@ void loop()
     }
   }
   buttonOld=buttonNew;
-  if(LEDState == 1)
-  {
+  if(LEDState == 1) {
     analogWrite(MOTORCONTROL, potenziometro/4);
-  } else 
-  {
-
+  } else {
     analogWrite(MOTORCONTROL, 0);
   }
 

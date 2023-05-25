@@ -124,6 +124,7 @@ public class BinaryTree {
 		
 		int somma1 = somma(node.left, sommaTot);
 		int somma2 = somma(node.right, sommaTot);
+		
 		return somma1+somma2+node.data;
 	}
 	

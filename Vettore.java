@@ -30,6 +30,8 @@ public class Vettore {
                 flag = 1;
             }
         }
+        
+
         int[] v2 = new int[DIM-ctr];
         k = 0;
         flag = 1;
